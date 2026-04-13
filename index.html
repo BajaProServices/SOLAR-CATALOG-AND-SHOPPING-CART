@@ -1,111 +1,108 @@
 <index.html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Catálogo BAJA PRO-SERVICES</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--sun:#f59e0b;--sund:#d97706;--sunl:#fef3c7;--grn:#16a34a;--grnl:#dcfce7;--dark:#1c2b1a;--txt:#111827;--muted:#6b7280;--surface:#f9fafb;--card:#ffffff;--border:rgba(0,0,0,0.08)}
-body{font-family:'DM Sans',sans-serif;color:var(--txt);background:#f0fdf4;min-height:100vh}
-.hdr{background:var(--dark);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
-.logo{display:flex;flex-direction:column}
-.logo-main{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;color:#4ade80;letter-spacing:-0.01em}
-.logo-sub{font-size:0.65rem;color:#86efac;letter-spacing:0.1em;text-transform:uppercase}
-.cart-btn{background:var(--sun);border:none;color:#1c1c1c;padding:0.5rem 1rem;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;gap:6px}
-.cart-btn:hover{background:var(--sund);color:#fff}
-.cart-count{background:#1c1c1c;color:var(--sun);border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;min-width:18px}
-.tabs-wrap{background:#fff;border-bottom:1px solid var(--border);overflow-x:auto;white-space:nowrap}
-.tabs{display:inline-flex;gap:0;padding:0 1rem}
-.tab{padding:0.7rem 0.9rem;font-size:0.75rem;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;color:var(--muted);background:none;border-top:none;border-left:none;border-right:none;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all 0.2s}
-.tab.active{color:var(--sun);border-bottom-color:var(--sun)}
-.tab:hover{color:var(--sun)}
-.cat-badge{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;padding:2px 7px;border-radius:20px;display:inline-block}
-.b-mod{background:#ecfdf5;color:#065f46;border:1px solid #bbf7d0}
-.b-inv{background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe}
-.b-bat{background:#fdf4ff;color:#6b21a8;border:1px solid #e9d5ff}
-.b-mon{background:#fff1f2;color:#9f1239;border:1px solid #fecdd3}
-.b-est{background:#f0fdf4;color:#14532d;border:1px solid #bbf7d0}
-.b-acc{background:#fffbeb;color:#78350f;border:1px solid #fde68a}
-.b-cal{background:#fff7ed;color:#9a3412;border:1px solid #fed7aa}
-.b-ref{background:#f0f9ff;color:#075985;border:1px solid #bae6fd}
-.b-bom{background:#f5f3ff;color:#4c1d95;border:1px solid #ddd6fe}
-.b-lum{background:#fefce8;color:#854d0e;border:1px solid #fef08a}
-.b-ctl{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;padding:1rem 1.2rem}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:0.85rem;cursor:pointer;transition:all 0.18s;position:relative;display:flex;flex-direction:column;gap:6px}
-.card:hover{border-color:var(--sun);box-shadow:0 3px 16px rgba(245,158,11,0.12);transform:translateY(-1px)}
-.card.selected{border-color:var(--sun);background:#fffbeb;box-shadow:0 0 0 2px var(--sun)}
-.card-icon{width:100%;height:60px;border-radius:8px;background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:1.6rem}
-.card-name{font-size:0.72rem;font-weight:500;color:var(--txt);line-height:1.3;font-family:'Syne',sans-serif}
-.card-model{font-size:0.65rem;color:var(--muted);font-family:'DM Sans',sans-serif}
-.card-cat{margin-top:auto}
-.card-check{position:absolute;top:7px;right:7px;width:18px;height:18px;background:var(--sun);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;opacity:0;transition:opacity 0.2s}
-.card.selected .card-check{opacity:1}
-.qty-ctrl{display:flex;align-items:center;gap:5px;margin-top:4px}
-.qty-btn{width:22px;height:22px;border-radius:6px;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center;color:var(--sun);font-weight:700;flex-shrink:0}
-.qty-btn:hover{background:var(--sunl)}
-.qty-num{font-size:0.8rem;font-weight:600;min-width:18px;text-align:center;color:var(--sun)}
-.hint{font-size:0.65rem;color:var(--muted);margin-top:2px}
-.panel{padding:1rem 1.2rem}
-.sum-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:10px}
-.sum-section{font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);padding:0.6rem 0 0.3rem;border-top:1px solid var(--border);margin-top:0.5rem}
-.sum-section:first-child{border-top:none;margin-top:0;padding-top:0}
-.sum-row{display:flex;justify-content:space-between;align-items:flex-start;padding:0.4rem 0;border-bottom:1px solid var(--border);font-size:0.8rem}
-.sum-row:last-child{border-bottom:none}
-.sum-name{color:var(--txt);font-weight:500;flex:1;padding-right:8px}
-.sum-model{font-size:0.65rem;color:var(--muted);display:block}
-.sum-qty{color:var(--muted);font-size:0.75rem;margin:0 8px;white-space:nowrap}
-.tot-box{background:var(--dark);border-radius:12px;padding:1.1rem;color:#fff}
-.tot-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.tot-label{font-size:0.7rem;color:#86efac;text-transform:uppercase;letter-spacing:0.06em;font-weight:500}
-.tot-val{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:#fbbf24}
-.wa-btn{width:100%;padding:0.8rem;border-radius:10px;border:none;font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;margin-top:10px;transition:all 0.2s;letter-spacing:0.02em}
-.wa-btn.pri{background:var(--sun);color:#1c1c1c}
-.wa-btn.pri:hover{background:var(--sund)}
-.wa-btn.sec{background:#fff;color:var(--sun);border:1.5px solid var(--sun)}
-.wa-btn.sec:hover{background:var(--sunl)}
-.empty{text-align:center;padding:2.5rem 1rem;color:var(--muted)}
-.empty-ico{font-size:2rem;margin-bottom:0.75rem}
-.empty p{font-size:0.85rem;line-height:1.6}
-.note{font-size:0.68rem;color:var(--muted);text-align:center;margin-top:8px}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo SOLAR BAJA PRO-SERVICES</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{--sun:#f59e0b;--sund:#d97706;--sunl:#fef3c7;--grn:#16a34a;--grnl:#dcfce7;--dark:#1c2b1a;--txt:#111827;--muted:#6b7280;--surface:#f9fafb;--card:#ffffff;--border:rgba(0,0,0,0.08)}
+    body{font-family:'DM Sans',sans-serif;color:var(--txt);background:#f0fdf4;min-height:100vh}
+    .hdr{background:var(--dark);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+    .logo{display:flex;flex-direction:column}
+    .logo-main{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;color:#4ade80;letter-spacing:-0.01em}
+    .logo-sub{font-size:0.65rem;color:#86efac;letter-spacing:0.1em;text-transform:uppercase}
+    .cart-btn{background:var(--sun);border:none;color:#1c1c1c;padding:0.5rem 1rem;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;gap:6px}
+    .cart-btn:hover{background:var(--sund);color:#fff}
+    .cart-count{background:#1c1c1c;color:var(--sun);border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;min-width:18px}
+    .tabs-wrap{background:#fff;border-bottom:1px solid var(--border);overflow-x:auto;white-space:nowrap}
+    .tabs{display:inline-flex;gap:0;padding:0 1rem}
+    .tab{padding:0.7rem 0.9rem;font-size:0.75rem;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;color:var(--muted);background:none;border-top:none;border-left:none;border-right:none;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all 0.2s}
+    .tab.active{color:var(--sun);border-bottom-color:var(--sun)}
+    .tab:hover{color:var(--sun)}
+    .cat-badge{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;padding:2px 7px;border-radius:20px;display:inline-block}
+    .b-mod{background:#ecfdf5;color:#065f46;border:1px solid #bbf7d0}
+    .b-inv{background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe}
+    .b-bat{background:#fdf4ff;color:#6b21a8;border:1px solid #e9d5ff}
+    .b-mon{background:#fff1f2;color:#9f1239;border:1px solid #fecdd3}
+    .b-est{background:#f0fdf4;color:#14532d;border:1px solid #bbf7d0}
+    .b-acc{background:#fffbeb;color:#78350f;border:1px solid #fde68a}
+    .b-cal{background:#fff7ed;color:#9a3412;border:1px solid #fed7aa}
+    .b-ref{background:#f0f9ff;color:#075985;border:1px solid #bae6fd}
+    .b-bom{background:#f5f3ff;color:#4c1d95;border:1px solid #ddd6fe}
+    .b-lum{background:#fefce8;color:#854d0e;border:1px solid #fef08a}
+    .b-ctl{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;padding:1rem 1.2rem}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:0.85rem;cursor:pointer;transition:all 0.18s;position:relative;display:flex;flex-direction:column;gap:6px}
+    .card:hover{border-color:var(--sun);box-shadow:0 3px 16px rgba(245,158,11,0.12);transform:translateY(-1px)}
+    .card.selected{border-color:var(--sun);background:#fffbeb;box-shadow:0 0 0 2px var(--sun)}
+    .card-icon{width:100%;height:60px;border-radius:8px;background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+    .card-name{font-size:0.72rem;font-weight:500;color:var(--txt);line-height:1.3;font-family:'Syne',sans-serif}
+    .card-model{font-size:0.65rem;color:var(--muted);font-family:'DM Sans',sans-serif}
+    .card-cat{margin-top:auto}
+    .card-check{position:absolute;top:7px;right:7px;width:18px;height:18px;background:var(--sun);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;opacity:0;transition:opacity 0.2s}
+    .card.selected .card-check{opacity:1}
+    .qty-ctrl{display:flex;align-items:center;gap:5px;margin-top:4px}
+    .qty-btn{width:22px;height:22px;border-radius:6px;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center;color:var(--sun);font-weight:700;flex-shrink:0}
+    .qty-btn:hover{background:var(--sunl)}
+    .qty-num{font-size:0.8rem;font-weight:600;min-width:18px;text-align:center;color:var(--sun)}
+    .hint{font-size:0.65rem;color:var(--muted);margin-top:2px}
+    .panel{padding:1rem 1.2rem}
+    .sum-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:10px}
+    .sum-section{font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);padding:0.6rem 0 0.3rem;border-top:1px solid var(--border);margin-top:0.5rem}
+    .sum-section:first-child{border-top:none;margin-top:0;padding-top:0}
+    .sum-row{display:flex;justify-content:space-between;align-items:flex-start;padding:0.4rem 0;border-bottom:1px solid var(--border);font-size:0.8rem}
+    .sum-row:last-child{border-bottom:none}
+    .sum-name{color:var(--txt);font-weight:500;flex:1;padding-right:8px}
+    .sum-model{font-size:0.65rem;color:var(--muted);display:block}
+    .sum-qty{color:var(--muted);font-size:0.75rem;margin:0 8px;white-space:nowrap}
+    .tot-box{background:var(--dark);border-radius:12px;padding:1.1rem;color:#fff}
+    .tot-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+    .tot-label{font-size:0.7rem;color:#86efac;text-transform:uppercase;letter-spacing:0.06em;font-weight:500}
+    .tot-val{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:#fbbf24}
+    .wa-btn{width:100%;padding:0.8rem;border-radius:10px;border:none;font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;margin-top:10px;transition:all 0.2s;letter-spacing:0.02em}
+    .wa-btn.pri{background:var(--sun);color:#1c1c1c}
+    .wa-btn.pri:hover{background:var(--sund)}
+    .wa-btn.sec{background:#fff;color:var(--sun);border:1.5px solid var(--sun)}
+    .wa-btn.sec:hover{background:var(--sunl)}
+    .empty{text-align:center;padding:2.5rem 1rem;color:var(--muted)}
+    .empty-ico{font-size:2rem;margin-bottom:0.75rem}
+    .empty p{font-size:0.85rem;line-height:1.6}
+    .note{font-size:0.68rem;color:var(--muted);text-align:center;margin-top:8px}
+  </style>
 </head>
 <body>
- 
-<div class="hdr">
-  <div class="logo">
-    <span class="logo-main">☀ SUNCLEAN<span style="color:#fbbf24">ENERGY</span></span>
-    <span class="logo-sub">Think Green · Go Solar · La Paz BCS</span>
+  <div class="hdr">
+    <div class="logo">
+      <span class="logo-main">☀ BAJA<span style="color:#fbbf24">PRO-SERVICES</span></span>
+      <span class="logo-sub">Think Green · Go Solar · La Paz BCS</span>
+    </div>
+    <button class="cart-btn" onclick="goQuote()">Cotización <span class="cart-count" id="cc">0</span></button>
   </div>
-  <button class="cart-btn" onclick="goQuote()">Cotización <span class="cart-count" id="cc">0</span></button>
-</div>
- 
-<div class="tabs-wrap">
-  <div class="tabs">
-    <button class="tab active" onclick="setcat('all',this)">Todos</button>
-    <button class="tab" onclick="setcat('Módulos',this)">Módulos</button>
-    <button class="tab" onclick="setcat('Inversores Red',this)">Inv. Red</button>
-    <button class="tab" onclick="setcat('Microinversores',this)">Microinv.</button>
-    <button class="tab" onclick="setcat('Híbridos',this)">Híbridos</button>
-    <button class="tab" onclick="setcat('Baterías',this)">Baterías</button>
-    <button class="tab" onclick="setcat('Inv. Autónomos',this)">Inv. Autón.</button>
-    <button class="tab" onclick="setcat('Estructuras',this)">Estructuras</button>
-    <button class="tab" onclick="setcat('Accesorios',this)">Accesorios</button>
-    <button class="tab" onclick="setcat('Calentadores',this)">Calentadores</button>
-    <button class="tab" onclick="setcat('Controladores',this)">Controladores</button>
-    <button class="tab" onclick="setcat('Refrigeración',this)">Refrigeración</button>
-    <button class="tab" onclick="setcat('Bombeo',this)">Bombeo</button>
-    <button class="tab" onclick="setcat('Luminarias',this)">Luminarias</button>
+  <div class="tabs-wrap">
+    <div class="tabs">
+      <button class="tab active" onclick="setcat('all',this)">Todos</button>
+      <button class="tab" onclick="setcat('Módulos',this)">Módulos</button>
+      <button class="tab" onclick="setcat('Inversores Red',this)">Inv. Red</button>
+      <button class="tab" onclick="setcat('Microinversores',this)">Microinv.</button>
+      <button class="tab" onclick="setcat('Híbridos',this)">Híbridos</button>
+      <button class="tab" onclick="setcat('Baterías',this)">Baterías</button>
+      <button class="tab" onclick="setcat('Inv. Autónomos',this)">Inv. Autón.</button>
+      <button class="tab" onclick="setcat('Estructuras',this)">Estructuras</button>
+      <button class="tab" onclick="setcat('Accesorios',this)">Accesorios</button>
+      <button class="tab" onclick="setcat('Calentadores',this)">Calentadores</button>
+      <button class="tab" onclick="setcat('Controladores',this)">Controladores</button>
+      <button class="tab" onclick="setcat('Refrigeración',this)">Refrigeración</button>
+      <button class="tab" onclick="setcat('Bombeo',this)">Bombeo</button>
+      <button class="tab" onclick="setcat('Luminarias',this)">Luminarias</button>
+    </div>
   </div>
-</div>
- 
-<div id="cv"><div class="grid" id="pg"></div></div>
-<div id="qv" style="display:none"><div class="panel" id="qp"></div></div>
- 
-<script>
-const P=[
+  <div id="cv"><div class="grid" id="pg"></div></div>
+  <div id="qv" style="display:none"><div class="panel" id="qp"></div></div>
+  <script>
+    const P = [
+  // MODULOS FOTOVOLTAICOS
   {n:"Longi 450W Half Cell",m:"Mono PERC 144 celdas · Ef. 20.7%",c:"Módulos",ic:"☀️",b:"b-mod",pw:450},
   {n:"Longi 540W Half Cell",m:"Mono PERC 144 celdas · Ef. 21.1%",c:"Módulos",ic:"☀️",b:"b-mod",pw:540},
   {n:"ET Solar 450W Half Cell",m:"Mono PERC 144 celdas · Ef. 20.41%",c:"Módulos",ic:"☀️",b:"b-mod",pw:450},
@@ -116,6 +113,7 @@ const P=[
   {n:"Seraphim 540W Half Cell",m:"144 celdas Mono PERC · Ef. 21.13%",c:"Módulos",ic:"☀️",b:"b-mod",pw:540},
   {n:"QXPV 160W Policristalino",m:"36 celdas · Ef. 16.13% · Sistema autónomo",c:"Módulos",ic:"☀️",b:"b-mod",pw:160},
   {n:"QXPV 15W Policristalino",m:"36 celdas · Ef. 10.96% · Sistema autónomo",c:"Módulos",ic:"☀️",b:"b-mod",pw:15},
+  // INVERSORES DE RED
   {n:"Fronius Galvo 1.5kW",m:"PV-IN-15-FRG · 220V Monofásico · 95.80%",c:"Inversores Red",ic:"⚡",b:"b-inv",pw:1500},
   {n:"Fronius Galvo 2.0kW",m:"PV-IN-20-FRG · 220V Monofásico · 95.80%",c:"Inversores Red",ic:"⚡",b:"b-inv",pw:2000},
   {n:"Fronius Galvo 2.5kW",m:"PV-IN-25-FRG · 220V Monofásico · 96.00%",c:"Inversores Red",ic:"⚡",b:"b-inv",pw:2500},
@@ -189,6 +187,7 @@ const P=[
   {n:"Fimer UNO DM 6.0kW",m:"PV-IN-TL60-FMR · 220V Monofásico · 97.40%",c:"Inversores Red",ic:"⚡",b:"b-inv",pw:6000},
   {n:"Fimer PVS 60kW 480V",m:"PV-IN-PVS60-FMR · 480V Trifásico · 98.50%",c:"Inversores Red",ic:"⚡",b:"b-inv",pw:60000},
   {n:"Fimer PVS 120kW 480V",m:"PV-IN-PVS120-FMR · 480V Trifásico · 95.80%",c:"Inversores Red",ic:"⚡",b:"b-inv",pw:120000},
+  // MICROINVERSORES
   {n:"Hoymiles MI 600W",m:"PV-IN-600-HYM · 220V Monofásico · 2 módulos",c:"Microinversores",ic:"🔌",b:"b-mon",pw:600},
   {n:"Hoymiles MI 700W 110V",m:"PV-IN-7001-HYM · 110V Monofásico · 2 módulos",c:"Microinversores",ic:"🔌",b:"b-mon",pw:700},
   {n:"Hoymiles MI 700W 220V",m:"PV-IN-7002-HYM · 220V Monofásico · 2 módulos",c:"Microinversores",ic:"🔌",b:"b-mon",pw:700},
@@ -196,21 +195,25 @@ const P=[
   {n:"Hoymiles MI 1500W",m:"PV-IN-1500-HYM · 220V Monofásico · 4 módulos",c:"Microinversores",ic:"🔌",b:"b-mon",pw:1500},
   {n:"Enphase IQ7+ 290W",m:"PV-IN-IQ7P-EPH · 220V Monofásico · 97.50%",c:"Microinversores",ic:"🔌",b:"b-mon",pw:290},
   {n:"Enphase IQ7A 349W",m:"PV-IN-IQ72-EPH · 220V Monofásico · 97.00%",c:"Microinversores",ic:"🔌",b:"b-mon",pw:349},
+  // HÍBRIDOS
   {n:"Solis Híbrido 5kW 5G",m:"PV-INH-1P5-SL · 110/220V Monofásico · 98.00%",c:"Híbridos",ic:"🔋",b:"b-bat",pw:5000},
   {n:"Solis Híbrido 7.6kW 5G",m:"PV-INH-1P76-SL · 110/220V Monofásico · 98.00%",c:"Híbridos",ic:"🔋",b:"b-bat",pw:7600},
   {n:"Solis Híbrido 10kW 5G",m:"PV-INH-1P10-SL · 110/220V Monofásico · 98.00%",c:"Híbridos",ic:"🔋",b:"b-bat",pw:10000},
   {n:"Autotransformador Solis ATR 6K",m:"PV-ACC-TRNS-SL · 240/120V",c:"Híbridos",ic:"🔋",b:"b-bat",pw:6000},
   {n:"Growatt Híbrido SPH 6kW",m:"PV-IN-HYB600-GW · 220V Monofásico · 97.50%",c:"Híbridos",ic:"🔋",b:"b-bat",pw:6000},
   {n:"Autotransformador Growatt ATS",m:"PV-IN-ATU240-GW · 240/120V",c:"Híbridos",ic:"🔋",b:"b-bat",pw:0},
+  // BATERÍAS DE LITIO
   {n:"Pylontech 50Ah Li-ion H48050",m:"PV-BT-US2-PYL · Batería litio para híbridos",c:"Baterías",ic:"🔋",b:"b-bat",pw:0},
   {n:"Pylontech SC0500-100S Controlador",m:"PV-HUB-BT-PYL · Hub BMS para baterías",c:"Baterías",ic:"🔋",b:"b-bat",pw:0},
   {n:"Pylontech Controlador BMS Master",m:"PV-HUB-CTRL-PYL · Control maestro PYLOTECH",c:"Baterías",ic:"🔋",b:"b-bat",pw:0},
   {n:"Pylontech Rack para Baterías 3-7x1",m:"PV-SOP-BT-PYL · Rack modular",c:"Baterías",ic:"🔋",b:"b-bat",pw:0},
+  // BATERÍAS AUTÓNOMAS
   {n:"Parts Master 105Ah 12V",m:"PV-BT-290-PM · Batería AGM ciclo profundo",c:"Baterías",ic:"🔋",b:"b-bat",pw:0},
   {n:"Parts Master 180Ah 12V",m:"PV-BT-180-PM · Batería AGM ciclo profundo",c:"Baterías",ic:"🔋",b:"b-bat",pw:0},
   {n:"Parts Master 230Ah 6V",m:"PV-BT-230-PM · Batería AGM ciclo profundo",c:"Baterías",ic:"🔋",b:"b-bat",pw:0},
   {n:"Parts Master 370Ah 6V",m:"PV-BT-370-PM · Batería AGM ciclo profundo",c:"Baterías",ic:"🔋",b:"b-bat",pw:0},
   {n:"Ultra Batteries 115Ah 12V",m:"PV-BT-116-US · Batería AGM",c:"Baterías",ic:"🔋",b:"b-bat",pw:0},
+  // INVERSORES AUTÓNOMOS
   {n:"Growatt Autónomo 3kW Onda Pura",m:"PV-INA-3000-GW · 48V/120V · Onda pura",c:"Inv. Autónomos",ic:"⚡",b:"b-inv",pw:3000},
   {n:"Growatt Autónomo 6kW Onda Pura",m:"PV-INA-6000-GW · 48V/220V · Onda pura",c:"Inv. Autónomos",ic:"⚡",b:"b-inv",pw:6000},
   {n:"Yassion 600W Onda Modificada",m:"PV-INA-600-YX · 12V/120V",c:"Inv. Autónomos",ic:"⚡",b:"b-inv",pw:600},
@@ -220,6 +223,7 @@ const P=[
   {n:"Yassion 2000W Onda Pura",m:"PV-INA-2000PS-YX · 24V/120V",c:"Inv. Autónomos",ic:"⚡",b:"b-inv",pw:2000},
   {n:"Yassion 2500W Onda Pura",m:"PV-INA-2500PS-YX · 24V/120V",c:"Inv. Autónomos",ic:"⚡",b:"b-inv",pw:2500},
   {n:"Yassion 3000W Onda Pura",m:"PV-INA-3000PS-YX · 24V/120V",c:"Inv. Autónomos",ic:"⚡",b:"b-inv",pw:3000},
+  // ESTRUCTURAS
   {n:"Kit Estructura 0° — 2 Paneles",m:"PV-ESK-K02-GS · GSolar coplanar",c:"Estructuras",ic:"🏗️",b:"b-est",pw:0},
   {n:"Kit Estructura 0° — 3 Paneles",m:"PV-ESK-K03-GS · GSolar coplanar",c:"Estructuras",ic:"🏗️",b:"b-est",pw:0},
   {n:"Kit Estructura 0° — 4 Paneles",m:"PV-ESK-K04-GS · GSolar coplanar",c:"Estructuras",ic:"🏗️",b:"b-est",pw:0},
@@ -245,6 +249,7 @@ const P=[
   {n:"Unirac — Soporte Largo 10°",m:"PV-EST-SLG-UNR · SM Soporte largo",c:"Estructuras",ic:"🏗️",b:"b-est",pw:0},
   {n:"Unirac — Tilt Tubular 3.68m",m:"PV-EST-SMT-UNR · Inclinable",c:"Estructuras",ic:"🏗️",b:"b-est",pw:0},
   {n:"Unirac — Sujetador Cable Tierra Pro",m:"PV-EST-SUT-UNR · Cable a tierra",c:"Estructuras",ic:"🏗️",b:"b-est",pw:0},
+  // ACCESORIOS
   {n:"Zbeny — Caja Combinadora 6 IN-1",m:"1000VCD 15A · Con supresor de picos",c:"Accesorios",ic:"🔧",b:"b-acc",pw:0},
   {n:"Zbeny — Caja Combinadora 4 IN-1",m:"2 IN-1 OUT / 4 IN-1 OUT",c:"Accesorios",ic:"🔧",b:"b-acc",pw:0},
   {n:"Zbeny — String Box 1 IN-1 OUT",m:"2 IN-2 OUT · 1000VCD",c:"Accesorios",ic:"🔧",b:"b-acc",pw:0},
@@ -271,6 +276,7 @@ const P=[
   {n:"Conectores MC4 (par)",m:"Pinza + llave para MC4 · Conector solar",c:"Accesorios",ic:"🔧",b:"b-acc",pw:0},
   {n:"Gabinete Termomagnético 4 Módulos",m:"PV-GT-4M-ABB · Gabinete para tablero",c:"Accesorios",ic:"🔧",b:"b-acc",pw:0},
   {n:"Gabinete Termomagnético 8 Módulos",m:"PV-GT-8M-ABB · Gabinete para tablero",c:"Accesorios",ic:"🔧",b:"b-acc",pw:0},
+  // CALENTADORES SOLARES
   {n:"Calentador Gravedad 8 Tubos 90L",m:"CA-CG-08-AI · Acero inoxidable · Tubo al vacío",c:"Calentadores",ic:"🌊",b:"b-cal",pw:0},
   {n:"Calentador Gravedad 10 Tubos 125L",m:"CA-CG-10-AI · Acero inoxidable",c:"Calentadores",ic:"🌊",b:"b-cal",pw:0},
   {n:"Calentador Gravedad 12 Tubos 150L",m:"CA-CG-12-AI · Acero inoxidable",c:"Calentadores",ic:"🌊",b:"b-cal",pw:0},
@@ -285,95 +291,133 @@ const P=[
   {n:"Colector Alberca 4x10 GSolar",m:"PV-AL-CL-BT · Colector heliotérmico",c:"Calentadores",ic:"🌊",b:"b-cal",pw:0},
   {n:"Control Heliotérmico Análogo",m:"CA-AL-CH-GS · Solartouch · Control alberca",c:"Calentadores",ic:"🌊",b:"b-cal",pw:0},
   {n:"Control Heliotérmico Digital",m:"CA-AL-CH-ST · Solartouch · Control digital",c:"Calentadores",ic:"🌊",b:"b-cal",pw:0},
+  // CONTROLADORES
   {n:"SRNE SR-HP2420 20A",m:"PV-CT-20-SR · 12/24V · Controlador MPPT",c:"Controladores",ic:"🖥️",b:"b-ctl",pw:0},
   {n:"SRNE SR-HP2430 30A",m:"PV-CT-30-SR · 12/24V · Controlador MPPT",c:"Controladores",ic:"🖥️",b:"b-ctl",pw:0},
   {n:"SRNE SR-HP4830 30A",m:"PV-CT-30MPPT-SR · 12/24/36/48V · 30A",c:"Controladores",ic:"🖥️",b:"b-ctl",pw:0},
   {n:"SRNE SR-HP4860 60A",m:"PV-CT-60MPPT-SR · 12/24/36/48V · 60A",c:"Controladores",ic:"🖥️",b:"b-ctl",pw:0},
+  // REFRIGERACIÓN
   {n:"Freezer Solar 150L",m:"Freezer 150 · 72W · 12-24VDC · GSolar",c:"Refrigeración",ic:"❄️",b:"b-ref",pw:72},
   {n:"Freezer Solar 258L",m:"Freezer 258 · 100W · 12-24VDC · GSolar",c:"Refrigeración",ic:"❄️",b:"b-ref",pw:100},
+  // BOMBEO
   {n:"Bomba Shurflo 9300 Sumergible",m:"PV-BM-9300-SHF · 24V · 2.27 l/min",c:"Bombeo",ic:"💧",b:"b-bom",pw:0},
   {n:"Bomba Shurflo 2088",m:"PV-BM-2088-SHF · 12VDC · 30m · 10.8 l/min",c:"Bombeo",ic:"💧",b:"b-bom",pw:0},
   {n:"Bomba Shurflo 2088SO",m:"PV-BM-2088SO-SHF · 110VCA · 12.5 l/min",c:"Bombeo",ic:"💧",b:"b-bom",pw:0},
   {n:"Bomba Shurflo Doble Cabezal",m:"PV-BM-2C-SHF · Doble cabezal",c:"Bombeo",ic:"💧",b:"b-bom",pw:0},
+  // LUMINARIAS
   {n:"Luminaria Solar 40W",m:"LAMP-SH/40 · 12-24VDC · 3500-3800lm",c:"Luminarias",ic:"💡",b:"b-lum",pw:40},
   {n:"Luminaria Solar 60W",m:"LAMP-SH/60 · 12-24VDC · 5280-5700lm",c:"Luminarias",ic:"💡",b:"b-lum",pw:60},
   {n:"Ancla para Poste 3/4 x75",m:"Ancla para luminaria solar",c:"Luminarias",ic:"💡",b:"b-lum",pw:0},
   {n:"Poste para Luminaria 6m",m:"Poste metálico 6 metros",c:"Luminarias",ic:"💡",b:"b-lum",pw:0},
 ];
- 
-let cart={},curcat='all';
-function countCart(){return Object.values(cart).reduce((a,b)=>a+b,0)}
-function updCC(){document.getElementById('cc').textContent=countCart()}
- 
-function renderGrid(){
-  const filtered=curcat==='all'?P.map((p,i)=>({p,i})):P.map((p,i)=>({p,i})).filter(({p})=>p.c===curcat);
-  document.getElementById('pg').innerHTML=filtered.map(({p,i})=>{
-    const q=cart[i]||0,sel=q>0;
-    return `<div class="card${sel?' selected':''}" id="cd-${i}" onclick="tog(${i})">
-      <div class="card-check">✓</div>
-      <div class="card-icon">${p.ic}</div>
-      <div class="card-name">${p.n}</div>
-      <div class="card-model">${p.m}</div>
-      <div class="card-cat"><span class="cat-badge ${p.b}">${p.c}</span></div>
-      ${sel?`<div class="qty-ctrl" onclick="event.stopPropagation()">
-        <button class="qty-btn" onclick="chq(${i},-1)">−</button>
-        <span class="qty-num">${q}</span>
-        <button class="qty-btn" onclick="chq(${i},1)">+</button>
-      </div>`:`<div class="hint">Toca para agregar</div>`}
-    </div>`;
-  }).join('');
-}
- 
-function tog(i){if(cart[i]){delete cart[i]}else{cart[i]=1}renderGrid();updCC();}
-function chq(i,d){const nxt=(cart[i]||0)+d;if(nxt<=0){delete cart[i]}else{cart[i]=nxt}renderGrid();updCC();}
-function setcat(cat,btn){curcat=cat;document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');document.getElementById('cv').style.display='block';document.getElementById('qv').style.display='none';renderGrid();}
-function goQuote(){document.getElementById('cv').style.display='none';document.getElementById('qv').style.display='block';renderQuote();}
- 
-function renderQuote(){
-  const keys=Object.keys(cart);
-  const qp=document.getElementById('qp');
-  if(!keys.length){
-    qp.innerHTML=`<div class="empty"><div class="empty-ico">🛒</div><p>Sin productos seleccionados.<br>Elige equipos del catálogo.</p><br><button class="wa-btn sec" onclick="backCat()" style="width:auto;padding:0.5rem 1.2rem;font-size:0.8rem">← Volver al catálogo</button></div>`;
-    return;
-  }
-  const cats={};
-  keys.forEach(i=>{const p=P[i];if(!cats[p.c])cats[p.c]=[];cats[p.c].push({p,i,q:cart[i]});});
-  let rows='';
-  Object.entries(cats).forEach(([cat,items])=>{
-    rows+=`<div class="sum-section">${cat}</div>`;
-    items.forEach(({p,i,q})=>{rows+=`<div class="sum-row"><span class="sum-name">${p.n}<span class="sum-model">${p.m}</span></span><span class="sum-qty">× ${q}</span></div>`;});
-  });
-  const totalItems=countCart();
-  const totalPw=keys.reduce((a,i)=>a+(P[i].pw*(cart[i]||0)),0);
-  qp.innerHTML=`
-    <button class="wa-btn sec" onclick="backCat()" style="width:auto;padding:0.5rem 1rem;font-size:0.75rem;margin-bottom:0.8rem">← Catálogo</button>
-    <div class="sum-card">${rows}</div>
-    <div class="sum-card" style="background:#f0fdf4;border-color:#bbf7d0;display:flex;justify-content:space-between;align-items:center">
-      <span style="font-size:0.78rem;color:#166534;font-weight:500">Potencia total estimada</span>
-      <span style="font-family:'Syne',sans-serif;font-weight:700;color:#14532d;font-size:1rem">${(totalPw/1000).toFixed(2)} kW</span>
-    </div>
-    <div class="tot-box">
-      <div class="tot-row"><span class="tot-label">Total de equipos seleccionados</span><span class="tot-val">${totalItems} unid.</span></div>
-    </div>
-    <p class="note">Los precios serán confirmados por nuestro asesor · Stock sujeto a disponibilidad</p>
-    <button class="wa-btn pri" onclick="sendWA()">Solicitar cotización por WhatsApp →</button>
-  `;
-}
- 
-function backCat(){document.getElementById('cv').style.display='block';document.getElementById('qv').style.display='none';renderGrid();}
- 
-function sendWA(){
-  const keys=Object.keys(cart);
-  const cats={};
-  keys.forEach(i=>{const p=P[i];if(!cats[p.c])cats[p.c]=[];cats[p.c].push(`• ${p.n} (${p.m}) x${cart[i]}`);});
-  let msg='Hola! Me interesa cotizar los siguientes equipos de BAJA PRO-SERVICES:\n\n';
-  Object.entries(cats).forEach(([cat,items])=>{msg+=`*${cat}*\n${items.join('\n')}\n\n`;});
-  msg+=`Potencia total: ${(Object.keys(cart).reduce((a,i)=>a+(P[i].pw*(cart[i]||0)),0)/1000).toFixed(2)} kW\n¿Pueden confirmar disponibilidad y precios?`;
-  window.open(`https://wa.me/526122198325?text=${encodeURIComponent(msg)}`);
-}
- 
-renderGrid();
-</script>
+       let cart = {}, curcat = 'all';
+    function countCart() {
+      return Object.values(cart).reduce((a, b) => a + b, 0);
+    }
+    function updCC() {
+      document.getElementById('cc').textContent = countCart();
+    }
+    function renderGrid() {
+      const filtered = curcat === 'all'
+        ? P.map((p, i) => ({p, i}))
+        : P.map((p, i) => ({p, i})).filter(({p}) => p.c === curcat);
+      document.getElementById('pg').innerHTML = filtered.map(({p, i}) => {
+        const q = cart[i] || 0, sel = q > 0;
+        return `<div class="card${sel ? ' selected' : ''}" id="cd-${i}" onclick="tog(${i})">
+          <div class="card-check">✓</div>
+          <div class="card-icon">${p.ic}</div>
+          <div class="card-name">${p.n}</div>
+          <div class="card-model">${p.m}</div>
+          <div class="card-cat"><span class="cat-badge ${p.b}">${p.c}</span></div>
+          ${sel ? `<div class="qty-ctrl" onclick="event.stopPropagation()">
+            <button class="qty-btn" onclick="chq(${i},-1)">−</button>
+            <span class="qty-num">${q}</span>
+            <button class="qty-btn" onclick="chq(${i},1)">+</button>
+          </div>` : `<div class="hint">Toca para agregar</div>`}
+        </div>`;
+      }).join('');
+    }
+    function tog(i) {
+      if (cart[i]) { delete cart[i]; }
+      else { cart[i] = 1; }
+      renderGrid(); updCC();
+    }
+    function chq(i, d) {
+      const nxt = (cart[i] || 0) + d;
+      if (nxt <= 0) { delete cart[i]; }
+      else { cart[i] = nxt; }
+      renderGrid(); updCC();
+    }
+    function setcat(cat, btn) {
+      curcat = cat;
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('cv').style.display = 'block';
+      document.getElementById('qv').style.display = 'none';
+      renderGrid();
+    }
+    function goQuote() {
+      document.getElementById('cv').style.display = 'none';
+      document.getElementById('qv').style.display = 'block';
+      renderQuote();
+    }
+    function renderQuote() {
+      const keys = Object.keys(cart);
+      const qp = document.getElementById('qp');
+      if (!keys.length) {
+        qp.innerHTML = `<div class="empty"><div class="empty-ico">🛒</div><p>Sin productos seleccionados.<br>Elige equipos del catálogo.</p><br><button class="wa-btn sec" onclick="backCat()" style="width:auto;padding:0.5rem 1.2rem;font-size:0.8rem">← Volver al catálogo</button></div>`;
+        return;
+      }
+      const cats = {};
+      keys.forEach(i => {
+        const p = P[i];
+        if (!cats[p.c]) cats[p.c] = [];
+        cats[p.c].push({p, i, q: cart[i]});
+      });
+      let rows = '';
+      Object.entries(cats).forEach(([cat, items]) => {
+        rows += `<div class="sum-section">${cat}</div>`;
+        items.forEach(({p, i, q}) => {
+          rows += `<div class="sum-row"><span class="sum-name">${p.n}<span class="sum-model">${p.m}</span></span><span class="sum-qty">× ${q}</span></div>`;
+        });
+      });
+      const totalItems = countCart();
+      const totalPw = keys.reduce((a, i) => a + (P[i].pw * (cart[i] || 0)), 0);
+      qp.innerHTML = `
+        <button class="wa-btn sec" onclick="backCat()" style="width:auto;padding:0.5rem 1rem;font-size:0.75rem;margin-bottom:0.8rem">← Catálogo</button>
+        <div class="sum-card">${rows}</div>
+        <div class="sum-card" style="background:#f0fdf4;border-color:#bbf7d0;display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:0.78rem;color:#166534;font-weight:500">Potencia total estimada</span>
+          <span style="font-family:'Syne',sans-serif;font-weight:700;color:#14532d;font-size:1rem">${(totalPw/1000).toFixed(2)} kW</span>
+        </div>
+        <div class="tot-box">
+          <div class="tot-row"><span class="tot-label">Total de equipos seleccionados</span><span class="tot-val">${totalItems} unid.</span></div>
+        </div>
+        <p class="note">Los precios serán confirmados por nuestro asesor · Stock sujeto a disponibilidad</p>
+        <button class="wa-btn pri" onclick="sendWA()">Solicitar cotización por WhatsApp →</button>
+      `;
+    }
+    function backCat() {
+      document.getElementById('cv').style.display = 'block';
+      document.getElementById('qv').style.display = 'none';
+      renderGrid();
+    }
+    function sendWA() {
+      const keys = Object.keys(cart);
+      const cats = {};
+      keys.forEach(i => {
+        const p = P[i];
+        if (!cats[p.c]) cats[p.c] = [];
+        cats[p.c].push(`• ${p.n} (${p.m}) x${cart[i]}`);
+      });
+      let msg = 'Hola! Me interesa cotizar los siguientes equipos de BAJA PRO-SERVICES:\\n\\n';
+      Object.entries(cats).forEach(([cat, items]) => {
+        msg += `*${cat}*\\n${items.join('\\n')}\\n\\n`;
+      });
+      msg += `Potencia total: ${(Object.keys(cart).reduce((a, i) => a + (P[i].pw * (cart[i] || 0)), 0) / 1000).toFixed(2)} kW\\n¿Pueden confirmar disponibilidad y precios?`;
+      window.open(`https://wa.me/5216122198325?text=${encodeURIComponent(msg)}`);
+    }
+    renderGrid();
+  </script>
 </body>
 </html>
- 
