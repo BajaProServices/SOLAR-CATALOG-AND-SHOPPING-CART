@@ -1,13 +1,3 @@
-<!-- Registration Modal -->
-<div id="reg-modal" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(7,17,31,0.93);z-index:500;display:flex;align-items:center;justify-content:center;">
-  <form id="reg-form" style="background:#fff;padding:32px 28px 24px 28px;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.25);min-width:320px;max-width:90vw;display:flex;flex-direction:column;gap:18px;">
-    <h2 style="font-family:'Bebas Neue';font-size:26px;color:#07111f;margin-bottom:8px;">Registro</h2>
-    <input required name="name" placeholder="Nombre completo" style="padding:10px 12px;font-size:15px;border-radius:7px;border:1px solid #cbd5e1;outline:none;" />
-    <input required name="phone" placeholder="Teléfono" type="tel" style="padding:10px 12px;font-size:15px;border-radius:7px;border:1px solid #cbd5e1;outline:none;" />
-    <textarea required name="address" placeholder="Dirección completa" style="padding:10px 12px;font-size:15px;border-radius:7px;border:1px solid #cbd5e1;outline:none;resize:vertical;min-height:60px;"></textarea>
-    <button type="submit" style="background:#14b8a6;color:#fff;font-weight:700;font-size:16px;padding:12px 0;border:none;border-radius:8px;cursor:pointer;margin-top:8px;">Guardar y continuar</button>
-  </form>
-</div>
 <index.html>
 <html lang="es">
 <head>
@@ -131,10 +121,15 @@ body{font-family:"DM Sans",sans-serif;background:var(--dark);color:var(--text);m
       <div class="brand">BAJA <em>PRO</em> SERVICES</div>
       <div class="tagline">SOLAR &amp; SERVICES · LA PAZ BCS</div>
     </div>
-    <a href="https://wa.me/5216122198325" class="contact-pill" target="_blank">📱 612 219 8325</a>
-  </div>
+    <div style="display:flex;align-items:center;gap:18px;">
+      <select id="lang-select" style="padding:6px 12px;border-radius:8px;font-size:13px;">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+      </select>
+      <a href="https://wa.me/5216122198325" class="contact-pill" target="_blank">📱 612 219 8325</a>
     </div>
-  </header>
+  </div>
+</header>
 
   <!-- Main content ...existing code... -->
 
@@ -142,16 +137,66 @@ body{font-family:"DM Sans",sans-serif;background:var(--dark);color:var(--text);m
   <div id="cart-bar">
     <span id="cart-label">Carrito (<span id="cart-count">0</span> productos)</span>
     <div class="cart-acts">
-      <a id="cart-wa" href="#" target="_blank">Enviar pedido por WhatsApp</a>
-      <button id="cart-clear">Vaciar carrito</button>
+      <a id="cart-wa" href="#" target="_blank"></a>
+      <button id="cart-clear"></button>
     </div>
   </div>
 
+
   <!-- Toast Notification -->
-  <div class="toast" id="cart-toast">Producto agregado al carrito</div>
+  <div class="toast" id="cart-toast"></div>
+
+  <!-- Registration Modal -->
+  <div id="reg-modal" style="display:none;position:fixed;z-index:1000;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.55);align-items:center;justify-content:center;">
+    <form id="reg-form" style="background:white;color:#07111f;padding:32px 28px 22px;border-radius:16px;min-width:320px;box-shadow:0 8px 32px rgba(0,0,0,.18);display:flex;flex-direction:column;gap:16px;">
+      <div style="font-size:19px;font-weight:700;margin-bottom:8px;" id="reg-title"></div>
+      <input id="reg-name" name="name" type="text" required placeholder="Nombre completo" style="padding:10px 12px;border-radius:7px;border:1px solid #ccc;font-size:15px;">
+      <input id="reg-phone" name="phone" type="text" required placeholder="Teléfono" style="padding:10px 12px;border-radius:7px;border:1px solid #ccc;font-size:15px;">
+      <input id="reg-address" name="address" type="text" required placeholder="Dirección completa" style="padding:10px 12px;border-radius:7px;border:1px solid #ccc;font-size:15px;">
+      <button type="submit" style="background:#0d9488;color:white;font-weight:700;font-size:15px;padding:11px 0;border-radius:8px;border:none;cursor:pointer;">Registrar y ver total</button>
+      <button type="button" id="reg-cancel" style="background:transparent;color:#0d9488;font-weight:700;font-size:14px;padding:7px 0;border:none;cursor:pointer;">Cancelar</button>
+    </form>
+  </div>
 
   <script>
-  // --- Shopping Cart & Registration Logic ---
+  // --- Bilingual Cart & Registration Logic ---
+  const LANGS = {
+    es: {
+      cart: 'Carrito',
+      products: 'productos',
+      send: 'Enviar pedido por WhatsApp',
+      clear: 'Vaciar carrito',
+      added: 'Producto agregado al carrito',
+      emptied: 'Carrito vaciado',
+      regTitle: 'Registro para ver el total',
+      regName: 'Nombre completo',
+      regPhone: 'Teléfono',
+      regAddress: 'Dirección completa',
+      regBtn: 'Registrar y ver total',
+      regCancel: 'Cancelar',
+      regSuccess: '¡Registro exitoso!',
+      total: 'Total',
+      waMsg: (user) => user ? `¡Hola! Soy ${user.name} (${user.phone})\nDirección: ${user.address}\nQuiero cotizar estos productos:%0A` : '¡Hola! Quiero cotizar estos productos:%0A',
+    },
+    en: {
+      cart: 'Cart',
+      products: 'products',
+      send: 'Send order via WhatsApp',
+      clear: 'Clear cart',
+      added: 'Product added to cart',
+      emptied: 'Cart emptied',
+      regTitle: 'Register to see total',
+      regName: 'Full name',
+      regPhone: 'Phone',
+      regAddress: 'Full address',
+      regBtn: 'Register and see total',
+      regCancel: 'Cancel',
+      regSuccess: 'Registration successful!',
+      total: 'Total',
+      waMsg: (user) => user ? `Hello! I am ${user.name} (${user.phone})\nAddress: ${user.address}\nI want a quote for these products:%0A` : 'Hello! I want a quote for these products:%0A',
+    }
+  };
+  let lang = localStorage.getItem('lang') || 'es';
   const cartBar = document.getElementById('cart-bar');
   const cartCount = document.getElementById('cart-count');
   const cartClear = document.getElementById('cart-clear');
@@ -159,6 +204,12 @@ body{font-family:"DM Sans",sans-serif;background:var(--dark);color:var(--text);m
   const cartToast = document.getElementById('cart-toast');
   const regModal = document.getElementById('reg-modal');
   const regForm = document.getElementById('reg-form');
+  const regTitle = document.getElementById('reg-title');
+  const regName = document.getElementById('reg-name');
+  const regPhone = document.getElementById('reg-phone');
+  const regAddress = document.getElementById('reg-address');
+  const regCancel = document.getElementById('reg-cancel');
+  const langSelect = document.getElementById('lang-select');
 
   function getCart() {
     return JSON.parse(localStorage.getItem('cart') || '[]');
@@ -172,40 +223,39 @@ body{font-family:"DM Sans",sans-serif;background:var(--dark);color:var(--text);m
   function setUser(user) {
     localStorage.setItem('user', JSON.stringify(user));
   }
-  function updateCartBar() {
+  function updateCartBar(showTotal = false) {
     const cart = getCart();
-    const user = getUser();
-    if (!user) {
-      cartBar.classList.remove('show');
-      return;
+    cartBar.classList.toggle('show', cart.length > 0);
+    cartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+    // WhatsApp message (NO total)
+    let user = getUser();
+    let msg = LANGS[lang].waMsg(user);
+    cart.forEach(item => {
+      msg += `- ${item.name} x${item.qty}%0A`;
+    });
+    cartWA.href = `#`;
+    // Show total only if requested and user is registered
+    let total = cart.reduce((sum, item) => sum + (item.price || 0) * item.qty, 0);
+    let totalSpan = document.getElementById('cart-total');
+    if (!totalSpan) {
+      totalSpan = document.createElement('span');
+      totalSpan.id = 'cart-total';
+      totalSpan.style.marginLeft = '18px';
+      totalSpan.style.fontWeight = 'bold';
+      totalSpan.style.fontSize = '15px';
+      totalSpan.style.color = '#0e1e32';
+      cartBar.insertBefore(totalSpan, cartBar.children[1]);
     }
-    if (cart.length > 0) {
-      cartBar.classList.add('show');
-      cartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
-      // WhatsApp message (NO total)
-      let msg = `¡Hola! Soy ${user.name} (${user.phone})\nDirección: ${user.address}\nQuiero cotizar estos productos:%0A`;
-      cart.forEach(item => {
-        msg += `- ${item.name} x${item.qty}%0A`;
-      });
+    if (showTotal && user) {
+      totalSpan.textContent = `${LANGS[lang].total}: $${total.toFixed(2)}`;
       cartWA.href = `https://wa.me/5216122198325?text=${encodeURIComponent(msg)}`;
-      // Show total only to customer (in cart bar)
-      let total = cart.reduce((sum, item) => sum + (item.price || 0) * item.qty, 0);
-      if (!document.getElementById('cart-total')) {
-        const totalSpan = document.createElement('span');
-        totalSpan.id = 'cart-total';
-        totalSpan.style.marginLeft = '18px';
-        totalSpan.style.fontWeight = 'bold';
-        totalSpan.style.fontSize = '15px';
-        totalSpan.style.color = '#0e1e32';
-        cartBar.insertBefore(totalSpan, cartBar.children[1]);
-      }
-      document.getElementById('cart-total').textContent = `Total: $${total.toFixed(2)}`;
     } else {
-      cartBar.classList.remove('show');
-      cartCount.textContent = '0';
-      cartWA.href = '#';
-      if (document.getElementById('cart-total')) document.getElementById('cart-total').textContent = '';
+      totalSpan.textContent = '';
     }
+    // Update UI text
+    document.getElementById('cart-label').innerHTML = `${LANGS[lang].cart} (<span id="cart-count">${cartCount.textContent}</span> ${LANGS[lang].products})`;
+    cartWA.textContent = LANGS[lang].send;
+    cartClear.textContent = LANGS[lang].clear;
   }
   function showToast(msg) {
     cartToast.textContent = msg;
@@ -213,11 +263,6 @@ body{font-family:"DM Sans",sans-serif;background:var(--dark);color:var(--text);m
     setTimeout(() => cartToast.classList.remove('show'), 1800);
   }
   function addToCart(product) {
-    const user = getUser();
-    if (!user) {
-      regModal.style.display = 'flex';
-      return;
-    }
     let cart = getCart();
     const idx = cart.findIndex(x => x.id === product.id);
     if (idx >= 0) {
@@ -227,28 +272,37 @@ body{font-family:"DM Sans",sans-serif;background:var(--dark);color:var(--text);m
     }
     setCart(cart);
     updateCartBar();
-    showToast('Producto agregado al carrito');
+    showToast(LANGS[lang].added);
   }
   function clearCart() {
     setCart([]);
     updateCartBar();
-  }
-
-  // Registration modal logic
-  function checkRegistration() {
-    const user = getUser();
-    if (!user) {
-      regModal.style.display = 'flex';
-      cartBar.classList.remove('show');
-    } else {
-      regModal.style.display = 'none';
-      updateCartBar();
-    }
+    showToast(LANGS[lang].emptied);
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    checkRegistration();
+    // Set initial language
+    langSelect.value = lang;
     updateCartBar();
+    // Update registration modal text
+    function updateRegModalText() {
+      regTitle.textContent = LANGS[lang].regTitle;
+      regName.placeholder = LANGS[lang].regName;
+      regPhone.placeholder = LANGS[lang].regPhone;
+      regAddress.placeholder = LANGS[lang].regAddress;
+      regForm.querySelector('button[type="submit"]').textContent = LANGS[lang].regBtn;
+      regCancel.textContent = LANGS[lang].regCancel;
+    }
+    updateRegModalText();
+
+    langSelect.addEventListener('change', function() {
+      lang = langSelect.value;
+      localStorage.setItem('lang', lang);
+      updateCartBar();
+      updateRegModalText();
+    });
+
+    // Add to cart buttons
     document.querySelectorAll('.btn-add').forEach(btn => {
       btn.addEventListener('click', e => {
         e.preventDefault();
@@ -260,11 +314,37 @@ body{font-family:"DM Sans",sans-serif;background:var(--dark);color:var(--text);m
         addToCart(product);
       });
     });
-    cartClear.addEventListener('click', () => {
-      clearCart();
-      showToast('Carrito vaciado');
+    cartClear.addEventListener('click', clearCart);
+    // WhatsApp/send button logic
+    cartWA.addEventListener('click', function(e) {
+      const user = getUser();
+      if (!user) {
+        e.preventDefault();
+        regModal.style.display = 'flex';
+        // After registration, show total and WhatsApp link
+        regForm.onsubmit = function(ev) {
+          ev.preventDefault();
+          const formData = new FormData(regForm);
+          const user = {
+            name: formData.get('name').trim(),
+            phone: formData.get('phone').trim(),
+            address: formData.get('address').trim()
+          };
+          if (user.name && user.phone && user.address) {
+            setUser(user);
+            regModal.style.display = 'none';
+            updateCartBar(true);
+            showToast(LANGS[lang].regSuccess);
+            setTimeout(() => {
+              cartWA.click();
+            }, 500);
+          }
+        };
+      } else {
+        updateCartBar(true);
+      }
     });
-    // Registration form submit
+    // Registration form submit (if user opens modal directly)
     regForm.addEventListener('submit', function(e) {
       e.preventDefault();
       const formData = new FormData(regForm);
@@ -276,9 +356,12 @@ body{font-family:"DM Sans",sans-serif;background:var(--dark);color:var(--text);m
       if (user.name && user.phone && user.address) {
         setUser(user);
         regModal.style.display = 'none';
-        updateCartBar();
-        showToast('¡Registro exitoso!');
+        updateCartBar(true);
+        showToast(LANGS[lang].regSuccess);
       }
+    });
+    regCancel.addEventListener('click', function() {
+      regModal.style.display = 'none';
     });
   });
   </script>
