@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAJA PRO-SERVICES | Tienda Solar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --aqua-light: #e0f2f1;
+            --aqua-base: #009688;
+            --aqua-dark: #00695c;
+            --aqua-accent: #26a69a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        .bg-aqua-base { background-color: var(--aqua-base); }
+        .text-aqua-base { color: var(--aqua-base); }
+        .border-aqua-base { border-color: var(--aqua-base); }
+        .hover-aqua:hover { background-color: var(--aqua-dark); }
+        
+        .hero-section {
+            width: 100%;
+            height: 500px;
+            background-image: url('hero.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .tab-active { 
+            border-bottom: 4px solid white; 
+            font-weight: bold;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .card-shadow { 
+            box-shadow: 0 10px 30px rgba(0, 150, 136, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .product-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0, 150, 136, 0.1);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 150, 136, 0.25);
+            border-color: var(--aqua-base);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px 12px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            padding: 15px;
+        }
+        
+        .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--aqua-base);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stock-indicator {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+        
+        .stock-available {
+            background-color: #4caf50;
+            color: white;
+        }
+        
+        .stock-low {
+            background-color: #ff9800;
+            color: white;
+        }
+        
+        .stock-unavailable {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        .brand-section {
+            margin-bottom: 40px;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .brand-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--aqua-base);
+        }
+        
+        .brand-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--aqua-base);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .brand-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--aqua-dark);
+        }
+        
+        .model-subheader {
+            background-color: rgba(0, 150, 136, 0.05);
+            padding: 12px 16px;
+            border-left: 4px solid var(--aqua-base);
+            margin: 20px 0 15px 0;
+            border-radius: 4px;
+        }
+        
+        .model-subheader h4 {
+            color: var(--aqua-dark);
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .price-tag {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--aqua-base);
+            margin: 8px 0;
+        }
+        
+        .price-currency {
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .btn-add-cart {
+            width: 100%;
+            background: var(--aqua-base);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-add-cart:hover {
+            background: var(--aqua-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 150, 136, 0.3);
+        }
+        
+        .btn-add-cart:active {
+            transform: translateY(0);
+        }
+        
+        .btn-add-cart i {
+            transition: transform 0.3s ease;
+        }
+        
+        .btn-add-cart:hover i {
+            transform: scale(1.2);
+        }
+        
+        .cart-icon-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #f44336;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .sidebar-cart {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 100%;
+            max-width: 420px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sidebar-cart.open {
+            transform: translateX(0);
+        }
+        
+        .cart-header {
+            background: var(--aqua-dark);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cart-close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .cart-close-btn:hover {
+            transform: rotate(90deg);
+        }
+        
+        .cart-items-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(0, 150, 136, 0.05);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(0, 150, 136, 0.1);
+        }
+        
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-name {
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--aqua-dark);
+            margin-bottom: 4px;
+        }
+        
+        .cart-item-sku {
+            font-size: 10px;
+            color: #999;
+            font-family: monospace;
+            margin-bottom: 6px;
+        }
+        
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: white;
+            border: 1px solid var(--aqua-base);
+            border-radius: 4px;
+            width: fit-content;
+        }
+        
+        .cart-item-controls button {
+            background: none;
+            border: none;
+            color: var(--aqua-base);
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: background 0.2s ease;
+        }
+        
+        .cart-item-controls button:hover {
+            background: rgba(0, 150, 136, 0.1);
+        }
+        
+        .cart-item-qty {
+            font-size: 12px;
+            font-weight: 600;
+            min-width: 24px;
+            text-align: center;
+        }
+        
+        .cart-item-price {
+            font-weight: 700;
+            color: var(--aqua-base);
+            font-size: 13px;
+        }
+        
+        .cart-footer {
+            border-top: 2px solid rgba(0, 150, 136, 0.1);
+            padding: 20px;
+            background: rgba(0, 150, 136, 0.02);
+        }
+        
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            font-size: 16px;
+        }
+        
+        .cart-total-label {
+            font-weight: 600;
+            color: var(--aqua-dark);
+        }
+        
+        .cart-total-amount {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--aqua-base);
+        }
+        
+        .btn-checkout {
+            width: 100%;
+            background: var(--aqua-base);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-checkout:hover {
+            background: var(--aqua-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 150, 136, 0.3);
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+        
+        .empty-cart i {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+        
+        .filter-section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .filter-title {
+            font-weight: 600;
+            color: var(--aqua-dark);
+            margin-bottom: 12px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid rgba(0, 150, 136, 0.3);
+            background: white;
+            color: var(--aqua-dark);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .filter-btn:hover {
+            border-color: var(--aqua-base);
+            background: rgba(0, 150, 136, 0.05);
+        }
+        
+        .filter-btn.active {
+            background: var(--aqua-base);
+            color: white;
+            border-color: var(--aqua-base);
+        }
+        
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .locations-section {
+            background: linear-gradient(135deg, var(--aqua-base) 0%, var(--aqua-dark) 100%);
+            color: white;
+            padding: 40px 20px;
+            margin: 0;
+            text-align: center;
+        }
+
+        .locations-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .location-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .location-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .location-card i {
+            display: block;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar-cart {
+                max-width: 100%;
+            }
+            
+            .brand-title {
+                font-size: 22px;
+            }
+            
+            .hero-section {
+                height: 300px;
+            }
+
+            .locations-title {
+                font-size: 24px;
+            }
+
+            .locations-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="bg-white sticky top-0 z-50 shadow-md border-b-4 border-aqua-base">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-gradient-to-br from-aqua-base to-aqua-dark rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                    <i class="fas fa-sun"></i>
+                </div>
+                <div>
+                    <div class="text-xl font-black tracking-tight text-aqua-dark">BAJA PRO-SERVICES</div>
+                    <div class="text-xs font-bold text-aqua-base">SOLAR SHOP</div>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <select id="lang-selector" onchange="changeLanguage(this.value)" class="bg-transparent border-2 border-aqua-base text-sm font-semibold cursor-pointer outline-none text-aqua-dark px-3 py-2 rounded-lg transition hover:bg-aqua-light">
+                    <option value="es">🇲🇽 Español</option>
+                    <option value="en">🇺🇸 English</option>
+                </select>
+                
+                <button onclick="toggleCart()" class="relative p-3 text-aqua-dark hover:text-aqua-base transition-colors bg-aqua-light rounded-full">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                    <span id="cart-counter" class="cart-icon-badge">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+    </section>
+
+    <!-- LOCATIONS SECTION -->
+    <section class="locations-section">
+        <h2 class="locations-title" id="locations-title">Nuestras Sucursales</h2>
+        <div class="locations-grid">
+            <div class="location-card">
+                <i class="fas fa-map-marker-alt"></i>
+                LA PAZ
+            </div>
+            <div class="location-card">
+                <i class="fas fa-map-marker-alt"></i>
+                CABO SAN LUCAS
+            </div>
+            <div class="location-card">
+                <i class="fas fa-map-marker-alt"></i>
+                SAN JOSE DEL CABO
+            </div>
+            <div class="location-card">
+                <i class="fas fa-map-marker-alt"></i>
+                LORETO
+            </div>
+            <div class="location-card">
+                <i class="fas fa-map-marker-alt"></i>
+                MULEGE
+            </div>
+            <div class="location-card">
+                <i class="fas fa-map-marker-alt"></i>
+                LA RIBERA
+            </div>
+            <div class="location-card">
+                <i class="fas fa-map-marker-alt"></i>
+                LOS BARRILES
+            </div>
+            <div class="location-card">
+                <i class="fas fa-map-marker-alt"></i>
+                TODO SANTOS
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- FILTER SECTION -->
+        <div class="filter-section">
+            <div class="filter-title" id="filter-label">Filtrar por Marca:</div>
+            <div class="filter-buttons" id="filter-buttons">
+                <!-- Filter buttons will be generated here -->
+            </div>
+        </div>
+
+        <!-- PRODUCTS CONTAINER -->
+        <div id="products-container">
+            <!-- Products grouped by brand and model will be rendered here -->
+        </div>
+    </main>
+
+    <!-- CART OVERLAY -->
+    <div id="cart-overlay" class="overlay" onclick="toggleCart()"></div>
+
+    <!-- CART SIDEBAR -->
+    <div id="cart-sidebar" class="sidebar-cart">
+        <div class="cart-header">
+            <h2 id="cart-title">Carrito de Compra</h2>
+            <button class="cart-close-btn" onclick="toggleCart()">×</button>
+        </div>
+        
+        <div class="cart-items-container" id="cart-items">
+            <div class="empty-cart">
+                <i class="fas fa-shopping-bag"></i>
+                <p id="empty-cart-msg">Tu carrito está vacío</p>
+            </div>
+        </div>
+        
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span class="cart-total-label" id="total-label">Total:</span>
+                <span class="cart-total-amount" id="cart-total">$0.00</span>
+            </div>
+            <button class="btn-checkout" onclick="sendWhatsApp()">
+                <i class="fab fa-whatsapp"></i>
+                <span id="checkout-btn">Solicitar Cotización</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // TRANSLATIONS
+        const translations = {
+            es: {
+                filterLabel: "Filtrar por Marca:",
+                cartTitle: "Carrito de Compra",
+                totalLabel: "Total:",
+                checkoutBtn: "Solicitar Cotización",
+                emptyCart: "Tu carrito está vacío",
+                addToCart: "Agregar al Carrito",
+                stock: "Stock:",
+                voltage: "Voltaje:",
+                sku: "SKU:",
+                price: "Precio:",
+                quantity: "Cantidad:",
+                remove: "Eliminar",
+                all: "TODOS LOS PRODUCTOS",
+                locations: "Nuestras Sucursales"
+            },
+            en: {
+                filterLabel: "Filter by Brand:",
+                cartTitle: "Shopping Cart",
+                totalLabel: "Total:",
+                checkoutBtn: "Request Quote",
+                emptyCart: "Your cart is empty",
+                addToCart: "Add to Cart",
+                stock: "Stock:",
+                voltage: "Voltage:",
+                sku: "SKU:",
+                price: "Price:",
+                quantity: "Quantity:",
+                remove: "Remove",
+                all: "ALL PRODUCTS",
+                locations: "Our Locations"
+            }
+        };
+
+        let currentLang = 'es';
+        let cart = [];
+        let selectedBrand = null;
+
+        // COMPLETE PRODUCT DATABASE
+        const products = [
+            // FRONIUS - PRIMO Series
+            { brand: "FRONIUS", model: "PRIMO", sku: "PV-IN-38-FRP", name: "PRIMO 3.8K 1F 240V", voltage: "240V monofásico", price: 1452.10, category: "Inversor", stock: 15, image: "📊" },
+            { brand: "FRONIUS", model: "PRIMO", sku: "PV-IN-05-FRP", name: "PRIMO 5K 1F 240V", voltage: "240V monofásico", price: 1552.20, category: "Inversor", stock: 15, image: "📊" },
+            { brand: "FRONIUS", model: "PRIMO", sku: "PV-IN-06-FRP", name: "PRIMO 6K 1F 240V", voltage: "240V monofásico", price: 1650.99, category: "Inversor", stock: 15, image: "📊" },
+            { brand: "FRONIUS", model: "PRIMO", sku: "PV-IN-76-FRP", name: "PRIMO 7.6K 1F 240V", voltage: "240V monofásico", price: 2001.99, category: "Inversor", stock: 15, image: "📊" },
+            { brand: "FRONIUS", model: "PRIMO", sku: "PV-IN-82-FRP", name: "PRIMO 8.2K 1F 240V", voltage: "240V monofásico", price: 2118.99, category: "Inversor", stock: 15, image: "📊" },
+            { brand: "FRONIUS", model: "PRIMO", sku: "PV-IN-10-FRP", name: "PRIMO 10K 1F 240V", voltage: "240V monofásico", price: 2830.10, category: "Inversor", stock: 15, image: "📊" },
+            { brand: "FRONIUS", model: "PRIMO", sku: "PV-IN-114-FRP", name: "PRIMO 11.4K 1F 220V", voltage: "220V monofásico", price: 2989.99, category: "Inversor", stock: 15, image: "📊" },
+            { brand: "FRONIUS", model: "PRIMO", sku: "PV-IN-125-FRP", name: "PRIMO 12.5K 1F 240V", voltage: "240V monofásico", price: 3304.60, category: "Inversor", stock: 15, image: "📊" },
+            { brand: "FRONIUS", model: "PRIMO", sku: "PV-IN-15-FRP", name: "PRIMO 15K 1F 240V", voltage: "240V monofásico", price: 3889.60, category: "Inversor", stock: 15, image: "📊" },
+
+            // FRONIUS - GEN24 Series
+            { brand: "FRONIUS", model: "GEN24", sku: "PV-IN-GEN38-FRP", name: "PRIMO GEN24 3.8K 1F 240V", voltage: "240V monofásico", price: 1720.58, category: "Inversor", stock: 15, image: "📊" },
+            { brand: "FRONIUS", model: "GEN24", sku: "PV-IN-GEN5-FRP", name: "PRIMO GEN24 5K 1F 240V", voltage: "240V monofásico", price: 2110.50, category: "Inversor", stock: 15, image: "📊" },
+            { brand: "FRONIUS", model: "GEN24", sku: "PV-IN-GEN6-FRP", name: "PRIMO GEN24 6K 1F 240V", voltage: "240V monofásico", price: 2314.74, category: "Inversor", stock: 15, image: "📊" },
+            { brand: "FRONIUS", model: "GEN24", sku: "PV-IN-GEN77-FRP", name: "PRIMO GEN24 7.7K 1F 240V", voltage: "220V monofásico", price: 2822.25, category: "Inversor", stock: 15, image: "📊" },
+            { brand: "FRONIUS", model: "GEN24", sku: "PV-IN-GEN10-FRP", name: "PRIMO GEN24 10K 1F 240V", voltage: "240V monofásico", price: 3583.50, category: "Inversor", stock: 15, image: "📊" },
+
+            // FRONIUS - GEN24 PLUS Series (Hybrid)
+            { brand: "FRONIUS", model: "GEN24 PLUS", sku: "PV-INH-GEN38P-FRP", name: "PRIMO GEN24 PLUS 3.8K 1F 240V Híbrido", voltage: "240V monofásico", price: 2259.04, category: "Inversor Híbrido", stock: 15, image: "⚡" },
+            { brand: "FRONIUS", model: "GEN24 PLUS", sku: "PV-INH-GEN5P-FRP", name: "PRIMO GEN24 PLUS 5K 1F 240V Híbrido", voltage: "240V monofásico", price: 2772.73, category: "Inversor Híbrido", stock: 15, image: "⚡" },
+            { brand: "FRONIUS", model: "GEN24 PLUS", sku: "PV-INH-GEN6P-FRP", name: "PRIMO GEN24 PLUS 6K 1F 240V Híbrido", voltage: "240V monofásico", price: 3038.87, category: "Inversor Híbrido", stock: 15, image: "⚡" },
+            { brand: "FRONIUS", model: "GEN24 PLUS", sku: "PV-INH-GEN77P-FRP", name: "PRIMO GEN24 PLUS 7.7K 1F 240V Híbrido", voltage: "240V monofásico", price: 3688.72, category: "Inversor Híbrido", stock: 15, image: "⚡" },
+            { brand: "FRONIUS", model: "GEN24 PLUS", sku: "PV-INH-GEN10P-FRP", name: "PRIMO GEN24 PLUS 10K 1F 240V Híbrido", voltage: "240V monofásico", price: 4703.74, category: "Inversor Híbrido", stock: 15, image: "⚡" },
+
+            // FRONIUS - SYMO Series
+            { brand: "FRONIUS", model: "SYMO", sku: "PV-IN-24WA-FRS", name: "SYMOADV 24K 3F 480V", voltage: "480V trifásico", price: 3379.99, category: "Inversor Trifásico", stock: 15, image: "🔌" },
+            { brand: "FRONIUS", model: "SYMO", sku: "PV-IN-24LA-FRS", name: "SYMOADV 24K 3F 480V LT", voltage: "480V trifásico", price: 3249.99, category: "Inversor Trifásico", stock: 15, image: "🔌" },
+
+            // FRONIUS - TAURO Series
+            { brand: "FRONIUS", model: "TAURO", sku: "PV-IN-50D-FRS", name: "TAURO-D 50.0k 3F 208-220V", voltage: "220V trifasico", price: 9488.70, category: "Inversor Industrial", stock: 15, image: "🏭" },
+
+            // FRONIUS - ACCESSORIES
+            { brand: "FRONIUS", model: "ACCESORIOS", sku: "PV-IN-DTM-FR", name: "ACC DATAMANAGER 2.0 GSP", voltage: "N/A", price: 341.90, category: "Accesorio", stock: 100, image: "🔧" },
+            { brand: "FRONIUS", model: "ACCESORIOS", sku: "PV-ACC-SMRT-FRS", name: "ACC SMART METER 240/480V", voltage: "N/A", price: 430.30, category: "Accesorio", stock: 100, image: "🔧" },
+            { brand: "FRONIUS", model: "ACCESORIOS", sku: "PV-SM-2502-FRS", name: "ACC CT 1\" 250A:333mV 1PZA", voltage: "N/A", price: 57.06, category: "Accesorio", stock: 100, image: "🔧" },
+            { brand: "FRONIUS", model: "ACCESORIOS", sku: "PV-SM-6002-FRS", name: "ACC CT 2\" 600A:333mV 1 PZA", voltage: "N/A", price: 98.81, category: "Accesorio", stock: 100, image: "🔧" },
+            { brand: "FRONIUS", model: "ACCESORIOS", sku: "PV-SM-10002-FRS", name: "ACC CT 3\" 1000A:333mV 1 PZA", voltage: "N/A", price: 167.99, category: "Accesorio", stock: 100, image: "🔧" },
+            { brand: "FRONIUS", model: "ACCESORIOS", sku: "PV-IN-BB-FR", name: "ACC FRONIUS BUSBAR CC +", voltage: "N/A", price: 26.88, category: "Accesorio", stock: 100, image: "🔧" },
+            { brand: "FRONIUS", model: "ACCESORIOS", sku: "PV-IN-CBB-FR", name: "ACC FRONIUS BUSBAR CC -", voltage: "N/A", price: 26.88, category: "Accesorio", stock: 100, image: "🔧" },
+
+            // VICTRON ENERGY - MPPT Controllers
+            { brand: "VICTRON", model: "MPPT", sku: "PV-INA-SS450-VT", name: "SMARTSOLAR MPPT RS 450/100 TR+", voltage: "450VDC", price: 1138.80, category: "Controlador", stock: 10, image: "⚙️" },
+            { brand: "VICTRON", model: "MPPT", sku: "PV-INA-SS100-VT", name: "SMART SOLAR 100/20", voltage: "100VDC", price: 145.83, category: "Controlador", stock: 25, image: "⚙️" },
+            { brand: "VICTRON", model: "MPPT", sku: "PV-INA-SS150-VT", name: "SMART SOLAR 150/35", voltage: "150VDC", price: 189.80, category: "Controlador", stock: 25, image: "⚙️" },
+            { brand: "VICTRON", model: "MPPT", sku: "PV-INA-SS250-VT", name: "SMART SOLAR 250/100", voltage: "250VDC", price: 629.20, category: "Controlador", stock: 10, image: "⚙️" },
+
+            // VICTRON ENERGY - Monitoring
+            { brand: "VICTRON", model: "MONITOREO", sku: "PV-INA-SSH-VT", name: "SMART SHUNT 500", voltage: "N/A", price: 128.70, category: "Monitoreo", stock: 25, image: "📱" },
+            { brand: "VICTRON", model: "MONITOREO", sku: "PV-INA-CGXMK2-VT", name: "ACC VICTRON CERBO MK2 GX", voltage: "N/A", price: 275.59, category: "Monitoreo", stock: 15, image: "📱" },
+            { brand: "VICTRON", model: "MONITOREO", sku: "PV-INA-TOU50-VT", name: "ACC VICTRON GX TOUCH 50", voltage: "N/A", price: 205.40, category: "Monitoreo", stock: 15, image: "📱" },
+            { brand: "VICTRON", model: "MONITOREO", sku: "PV-INA-EKRGX-VT", name: "ACC VICTRON EKRANO GX", voltage: "N/A", price: 559.00, category: "Monitoreo", stock: 10, image: "📱" },
+
+            // VICTRON ENERGY - Distribution
+            { brand: "VICTRON", model: "DISTRIBUCION", sku: "PV-INA-LYNX-VT", name: "ACC VICTRON LYNX POWER M8", voltage: "N/A", price: 145.60, category: "Accesorio", stock: 15, image: "🔧" },
+            { brand: "VICTRON", model: "DISTRIBUCION", sku: "PV-INA-LYDT-VT", name: "ACC VICTRON LYNX DISTRIBUTOR M8", voltage: "N/A", price: 202.80, category: "Accesorio", stock: 15, image: "🔧" },
+            { brand: "VICTRON", model: "ACCESORIOS", sku: "PV-INA-MK3-USB", name: "ACC VICTRON MK3-USB", voltage: "N/A", price: 74.10, category: "Accesorio", stock: 30, image: "🔧" },
+
+            // VICTRON ENERGY - Protection
+            { brand: "VICTRON", model: "PROTECCIONES", sku: "PV-INA-F250-VT", name: "ACC VICTRON FUSIBLE 250A/58V", voltage: "48V", price: 31.85, category: "Protección", stock: 100, image: "🔌" },
+            { brand: "VICTRON", model: "PROTECCIONES", sku: "PV-INA-F3005-VT", name: "ACC VICTRON FUSIBLE 300A/80V (5 PZAS)", voltage: "48V", price: 39.65, category: "Protección", stock: 100, image: "🔌" },
+            { brand: "VICTRON", model: "PROTECCIONES", sku: "PV-INA-PMF-VT", name: "ACC VICTRON PORTAFUSIBLE MEGAFUSE", voltage: "N/A", price: 12.35, category: "Protección", stock: 100, image: "🔌" },
+
+            // BYD - Batteries
+            { brand: "BYD", model: "LV FLEX", sku: "PV-BT-LV5K-BYD", name: "BAT BYD LITIO 5KWH LV FLEX LITE", voltage: "48V", price: 1529.57, category: "Batería", stock: 8, image: "🔋" },
+            { brand: "BYD", model: "ACCESORIOS", sku: "PV-HUB-BMU-BYD", name: "ACC BYD CONTROLADOR LV BMU", voltage: "N/A", price: 160.95, category: "Accesorio", stock: 50, image: "🔧" },
+            { brand: "BYD", model: "ACCESORIOS", sku: "PV-ACC-ALF-BYD", name: "ACC BYD SOPORTE AJUSTABLE LV (4 PZAS)", voltage: "N/A", price: 8.98, category: "Accesorio", stock: 50, image: "🔧" },
+            { brand: "BYD", model: "ACCESORIOS", sku: "PV-HUB-BCUHV-BYD", name: "ACC BYD CONTROLADOR HV BCU", voltage: "HV", price: 728.79, category: "Accesorio", stock: 10, image: "🔧" },
+
+            // HUAWEI - Batteries
+            { brand: "HUAWEI", model: "LUNA", sku: "PV-BAT-7K-HUA", name: "BAT HUAWEI 7K HV LI-ION", voltage: "HV", price: 3248.70, category: "Batería", stock: 5, image: "🔋" },
+
+            // GROWATT - Batteries
+            { brand: "GROWATT", model: "AXE", sku: "PV-ACC-BAT-AXE5-GRW", name: "BATERÍA GROWATT AXE 5.0L (COBALTO FREE)", voltage: "48V", price: 1298.70, category: "Batería", stock: 8, image: "🔋" },
+            { brand: "GROWATT", model: "ALP", sku: "PV-ACC-BAT-ALP5-GRW", name: "BATERÍA GROWATT ALP 5.0L", voltage: "48V", price: 1244.10, category: "Batería", stock: 8, image: "🔋" },
+            { brand: "GROWATT", model: "PORTABLE", sku: "PV-BAT-INFI-GRW", name: "BAT PORTABLE GROWATT INFINITY 1500", voltage: "110V AC OUT", price: 1360.52, category: "Batería", stock: 5, image: "🔋" },
+            { brand: "GROWATT", model: "ACCESORIOS", sku: "PV-KIT-CAT-GRW", name: "KIT CABLES MULTI TORRES GROWATT", voltage: "N/A", price: 119.34, category: "Accesorio", stock: 50, image: "🔧" },
+            { brand: "GROWATT", model: "ACCESORIOS", sku: "PV-ACC-BAT-HUB-GRW", name: "ACC GROWATT ARK LV HUB-A1", voltage: "N/A", price: 388.96, category: "Accesorio", stock: 20, image: "🔧" },
+            { brand: "GROWATT", model: "ACCESORIOS", sku: "PV-ACC-BAT-AXCB-GRW", name: "ACC GROWATT CABLES BATERIA AXE", voltage: "N/A", price: 97.50, category: "Accesorio", stock: 50, image: "🔧" },
+            { brand: "GROWATT", model: "ACCESORIOS", sku: "PV-ACC-BAS-ALP-GRW", name: "ACC GROWATT BASE BATERIA ALP", voltage: "N/A", price: 88.40, category: "Accesorio", stock: 50, image: "🔧" },
+
+            // SOLUNA - Batteries
+            { brand: "SOLUNA", model: "LV", sku: "PV-BT-10KLV-SOL", name: "BAT SOLUNA 10KW LV LI-ION", voltage: "48V", price: 2535.00, category: "Batería", stock: 8, image: "🔋" },
+            { brand: "SOLUNA", model: "ACCESORIOS", sku: "PV-ACC-CJA-SOL", name: "ACC SOLUNA CAJA CONEXION PARALELO", voltage: "N/A", price: 124.80, category: "Accesorio", stock: 20, image: "🔧" },
+
+            // DEKA - Lead-Acid Batteries
+            { brand: "DEKA", model: "MARINE", sku: "PV-BT-105-PM", name: "BATERIA DEKA MARINE 105AH 12V", voltage: "12V", price: 213.55, category: "Batería", stock: 20, image: "🔋" },
+            { brand: "DEKA", model: "DEEP CYCLE", sku: "PV-BT-180-PM", name: "BATERIA DEKA 180AH 12V", voltage: "12V", price: 321.44, category: "Batería", stock: 20, image: "🔋" },
+
+            // ULTRASTART - Lead-Acid Batteries
+            { brand: "ULTRASTART", model: "DEEP CYCLE", sku: "PV-BT-115-US", name: "BATERIA ULTRASTART 115AH 12V CICLO PROFUNDO", voltage: "12V", price: 181.03, category: "Batería", stock: 20, image: "🔋" }
+        ];
+
+        // INITIALIZE APP
+        function initApp() {
+            renderFilters();
+            renderProducts();
+            updateCartCounter();
+            updateLocationsTitle();
+        }
+
+        // UPDATE LOCATIONS TITLE ON LANGUAGE CHANGE
+        function updateLocationsTitle() {
+            document.getElementById('locations-title').textContent = translations[currentLang].locations;
+        }
+
+        // RENDER FILTER BUTTONS
+        function renderFilters() {
+            const brands = ['TODOS', ...new Set(products.map(p => p.brand))];
+            const container = document.getElementById('filter-buttons');
+            
+            container.innerHTML = brands.map(brand => `
+                <button class="filter-btn ${brand === 'TODOS' ? 'active' : ''}" 
+                        onclick="filterByBrand('${brand}')">
+                    ${brand}
+                </button>
+            `).join('');
+        }
+
+        // FILTER PRODUCTS BY BRAND
+        function filterByBrand(brand) {
+            selectedBrand = brand === 'TODOS' ? null : brand;
+            
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.trim() === brand) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            renderProducts();
+        }
+
+        // RENDER PRODUCTS
+        function renderProducts() {
+            const filtered = selectedBrand 
+                ? products.filter(p => p.brand === selectedBrand)
+                : products;
+
+            // Group by brand and model
+            const grouped = {};
+            filtered.forEach(product => {
+                if (!grouped[product.brand]) {
+                    grouped[product.brand] = {};
+                }
+                if (!grouped[product.brand][product.model]) {
+                    grouped[product.brand][product.model] = [];
+                }
+                grouped[product.brand][product.model].push(product);
+            });
+
+            const container = document.getElementById('products-container');
+            let html = '';
+
+            Object.entries(grouped).forEach(([brand, models]) => {
+                html += `
+                    <div class="brand-section">
+                        <div class="brand-header">
+                            <div class="brand-icon">${brand.charAt(0)}</div>
+                            <h2 class="brand-title">${brand}</h2>
+                        </div>
+                `;
+
+                Object.entries(models).forEach(([model, items]) => {
+                    html += `
+                        <div class="model-subheader">
+                            <h4>${model}</h4>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+                    `;
+
+                    items.forEach(product => {
+                        const stockClass = product.stock > 10 ? 'stock-available' : 
+                                          product.stock > 0 ? 'stock-low' : 'stock-unavailable';
+                        const stockText = product.stock > 0 ? `${product.stock} ${translations[currentLang].stock}` : 'Agotado';
+
+                        html += `
+                            <div class="bg-white rounded-lg card-shadow product-card overflow-hidden">
+                                <div class="product-image">
+                                    <span style="font-size: 60px;">${product.image}</span>
+                                    <span class="badge">${product.category}</span>
+                                    <span class="stock-indicator ${stockClass}">${stockText}</span>
+                                </div>
+                                <div class="p-4">
+                                    <h3 class="font-bold text-aqua-dark text-sm mb-2 line-clamp-2">${product.name}</h3>
+                                    <p class="text-xs text-slate-500 font-mono mb-3">${translations[currentLang].sku}: ${product.sku}</p>
+                                    <div class="mb-3">
+                                        <p class="text-xs text-slate-600 mb-1">${translations[currentLang].voltage}: <strong>${product.voltage}</strong></p>
+                                    </div>
+                                    <div class="price-tag">$${product.price.toLocaleString()}<span class="price-currency">USD</span></div>
+                                    <button class="btn-add-cart mt-4" onclick="addToCart('${product.sku}')" ${product.stock === 0 ? 'disabled' : ''}>
+                                        <i class="fas fa-shopping-cart"></i>
+                                        ${translations[currentLang].addToCart}
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    html += `</div>`;
+                });
+
+                html += `</div>`;
+            });
+
+            container.innerHTML = html || '<p class="text-center text-slate-400">No hay productos disponibles</p>';
+        }
+
+        // ADD TO CART
+        function addToCart(sku) {
+            const product = products.find(p => p.sku === sku);
+            if (!product || product.stock === 0) return;
+
+            const existingItem = cart.find(item => item.sku === sku);
+            
+            if (existingItem) {
+                if (existingItem.qty < product.stock) {
+                    existingItem.qty++;
+                }
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+
+            updateCartUI();
+            updateCartCounter();
+            
+            // Show cart
+            if (!document.getElementById('cart-sidebar').classList.contains('open')) {
+                toggleCart();
+            }
+        }
+
+        // UPDATE CART UI
+        function updateCartUI() {
+            const container = document.getElementById('cart-items');
+            const totalDisplay = document.getElementById('cart-total');
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-bag"></i>
+                        <p>${translations[currentLang].emptyCart}</p>
+                    </div>
+                `;
+                totalDisplay.textContent = '$0.00';
+                return;
+            }
+
+            let total = 0;
+            let html = '';
+
+            cart.forEach(item => {
+                const subtotal = item.price * item.qty;
+                total += subtotal;
+
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-image">
+                            <span style="font-size: 28px;">${item.image}</span>
+                        </div>
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-sku">${item.sku}</div>
+                            <div class="flex justify-between items-center">
+                                <div class="cart-item-controls">
+                                    <button onclick="changeQty('${item.sku}', -1)">−</button>
+                                    <span class="cart-item-qty">${item.qty}</span>
+                                    <button onclick="changeQty('${item.sku}', 1)">+</button>
+                                </div>
+                                <div class="cart-item-price">$${subtotal.toLocaleString()}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            totalDisplay.textContent = `$${total.toLocaleString()}`;
+        }
+
+        // CHANGE QUANTITY
+        function changeQty(sku, delta) {
+            const item = cart.find(i => i.sku === sku);
+            const product = products.find(p => p.sku === sku);
+
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.sku !== sku);
+                } else if (item.qty > product.stock) {
+                    item.qty = product.stock;
+                }
+            }
+
+            updateCartUI();
+            updateCartCounter();
+        }
+
+        // UPDATE CART COUNTER
+        function updateCartCounter() {
+            const counter = document.getElementById('cart-counter');
+            const total = cart.reduce((sum, item) => sum + item.qty, 0);
+            counter.textContent = total;
+        }
+
+        // TOGGLE CART
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            const overlay = document.getElementById('cart-overlay');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        // CHANGE LANGUAGE
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            
+            // Update translations
+            document.getElementById('filter-label').textContent = translations[lang].filterLabel;
+            document.getElementById('cart-title').textContent = translations[lang].cartTitle;
+            document.getElementById('total-label').textContent = translations[lang].totalLabel;
+            document.getElementById('checkout-btn').textContent = translations[lang].checkoutBtn;
+            document.getElementById('empty-cart-msg').textContent = translations[lang].emptyCart;
+            
+            updateLocationsTitle();
+            renderProducts();
+            updateCartUI();
+        }
+
+        // SEND WHATSAPP
+        function sendWhatsApp() {
+            if (cart.length === 0) {
+                alert(translations[currentLang].emptyCart);
+                return;
+            }
+
+            let total = 0;
+            let message = currentLang === 'es' 
+                ? '*SOLICITUD DE COTIZACIÓN - BAJA PRO-SERVICES*\n'
+                : '*QUOTE REQUEST - BAJA PRO-SERVICES*\n';
+            
+            message += '═══════════════════════════════════\n';
+
+            cart.forEach(item => {
+                const subtotal = item.price * item.qty;
+                total += subtotal;
+                message += `\n📦 *${item.brand} - ${item.model}*\n`;
+                message += `📝 ${item.name}\n`;
+                message += `🔹 SKU: ${item.sku}\n`;
+                message += `💡 Cantidad: ${item.qty} × $${item.price.toLocaleString()} USD\n`;
+                message += `💰 Subtotal: $${subtotal.toLocaleString()} USD\n`;
+                message += '───────────────────────────────────\n';
+            });
+
+            message += `\n*TOTAL: $${total.toLocaleString()} USD*\n`;
+            message += '═══════════════════════════════════';
+
+            const encodedMsg = encodeURIComponent(message);
+            window.open(`https://wa.me/526122198325?text=${encodedMsg}`, '_blank');
+        }
+
+        // INITIALIZE ON LOAD
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
