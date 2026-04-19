@@ -3,456 +3,303 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BAJA PRO SERVICES - Catálogo Profesional</title>
+    <title>Catálogo Profesional | BAJA PRO SERVICES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #003366;
-            --secondary: #00a859;
-            --accent: #f39c12;
-            --light: #f8f9fa;
-            --dark: #2c3e50;
-            --white: #ffffff;
-        }
-
-        body {
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            margin: 0;
-            background-color: var(--light);
-            color: var(--dark);
-        }
-
-        /* Hero sin obstrucciones */
-        .hero-header {
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .hero-banner {
             width: 100%;
             height: 350px;
             background: url('hero.png') no-repeat center center;
             background-size: cover;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        header {
-            background: var(--white);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .nav-top {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* Botones de Marca Visuales */
-        .brand-nav {
-            background: #eee;
-            padding: 15px 0;
-            overflow-x: auto;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .brand-card-btn {
-            background: var(--white);
-            border: 2px solid transparent;
-            border-radius: 8px;
-            padding: 8px 15px;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-width: 100px;
-            transition: 0.3s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .brand-card-btn img {
-            height: 35px;
-            margin-bottom: 5px;
-            object-fit: contain;
-        }
-
-        .brand-card-btn span {
-            font-size: 0.75rem;
-            font-weight: bold;
-            color: var(--primary);
-            text-transform: uppercase;
-        }
-
-        .brand-card-btn:hover, .brand-card-btn.active {
-            border-color: var(--secondary);
-            background: #eafff3;
-            transform: translateY(-3px);
-        }
-
-        /* Grid de Productos */
-        .catalog-container {
-            max-width: 1300px;
-            margin: 30px auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            padding: 0 20px;
+            border-bottom: 4px solid #00a859;
         }
 
         .product-card {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border: 1px solid #eee;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .product-card img {
-            width: 100%;
-            height: 180px;
-            object-fit: contain;
-            margin-bottom: 15px;
-        }
-
-        .product-sku { font-size: 0.7rem; color: #999; font-weight: bold; }
-        .product-title { font-size: 1rem; font-weight: 600; margin: 8px 0; height: 45px; overflow: hidden; }
-        .product-spec { color: var(--secondary); font-size: 0.85rem; margin-bottom: 10px; }
-        .product-price { font-size: 1.5rem; font-weight: bold; color: var(--primary); margin: 10px 0; }
-        .stock-info { font-size: 0.8rem; margin-bottom: 15px; color: #666; }
-
-        .add-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-
-        .add-btn:hover { background: var(--dark); }
-
-        /* Carrito Flotante */
-        .cart-trigger {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--secondary);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            z-index: 2000;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.6);
-            z-index: 3000;
-        }
-
-        .modal-content {
-            background: white;
-            width: 90%; max-width: 500px;
-            margin: 50px auto;
-            border-radius: 15px;
-            padding: 25px;
-            position: relative;
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-900">
 
-<div class="hero-header"></div>
+<div class="hero-banner"></div>
 
-<header>
-    <div class="nav-top">
-        <h1 style="margin:0; font-size: 1.5rem; color: var(--primary);">BAJA PRO SERVICES</h1>
-        <select id="lang-switch" onchange="changeLang()" style="padding: 8px; border-radius: 5px;">
-            <option value="es">Español</option>
-            <option value="en">English</option>
-        </select>
+<header class="sticky top-0 z-50 bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div class="w-10 h-10 bg-blue-900 rounded-lg flex items-center justify-center">
+                <i class="fas fa-solar-panel text-white"></i>
+            </div>
+            <h1 class="text-xl font-black text-blue-900 tracking-tighter">BAJA PRO SERVICES</h1>
+        </div>
+        <div class="flex items-center gap-4">
+            <select id="lang-switch" onchange="changeLanguage()" class="bg-gray-100 border-none text-sm rounded-lg focus:ring-green-500 block p-2.5">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+            </select>
+            <div onclick="toggleCart()" class="relative cursor-pointer group">
+                <i class="fas fa-shopping-basket text-2xl text-blue-900 group-hover:text-green-600 transition"></i>
+                <span id="cart-count" class="absolute -top-2 -right-2 bg-green-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">0</span>
+            </div>
+        </div>
     </div>
-    <div class="brand-nav" id="brand-selector">
+
+    <div id="brandNav" class="max-w-7xl mx-auto px-4 border-t flex gap-6 overflow-x-auto no-scrollbar py-4 bg-gray-50">
         </div>
 </header>
 
-<main class="catalog-container" id="main-catalog"></main>
-
-<div class="cart-trigger" onclick="toggleCart()">
-    <i class="fas fa-shopping-cart fa-lg"></i>
-    <span id="cart-count">0</span>
-    <span id="cart-label">Productos</span>
-</div>
-
-<div id="cart-modal" class="modal">
-    <div class="modal-content">
-        <h2 id="modal-title">Solicitud de Cotización</h2>
-        <div id="cart-list" style="max-height: 400px; overflow-y: auto;"></div>
-        <hr>
-        <div style="display:flex; justify-content:space-between; font-size: 1.3rem; font-weight:bold; margin: 20px 0;">
-            <span id="lbl-total">Total:</span>
-            <span id="total-price">$0.00</span>
+<main class="max-w-7xl mx-auto px-4 py-8">
+    <div id="main-catalog" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         </div>
-        <button class="add-btn" style="background:#25d366; width:100%; font-size:1.1rem;" onclick="sendToWhatsApp()">
-            <i class="fab fa-whatsapp"></i> <span id="lbl-btn-ws">Enviar a WhatsApp</span>
-        </button>
-        <button class="add-btn" style="background:#888; width:100%; margin-top:10px;" onclick="toggleCart()">Cerrar</button>
+</main>
+
+<div id="cart-modal" class="fixed inset-0 z-[100] hidden overflow-y-auto bg-black bg-opacity-50 backdrop-blur-sm">
+    <div class="relative top-10 mx-auto p-5 border w-full max-w-md shadow-2xl rounded-2xl bg-white">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-xl font-bold text-blue-900" id="lbl-modal-title">Solicitud de Cotización</h3>
+            <button onclick="toggleCart()" class="text-gray-400 hover:text-red-500 text-2xl">&times;</button>
+        </div>
+        
+        <div id="cart-list" class="space-y-4 mb-6">
+            </div>
+
+        <div class="border-t pt-4">
+            <div class="flex justify-between items-center mb-6">
+                <span class="text-gray-500 font-medium" id="lbl-total">Total Global:</span>
+                <span id="total-price" class="text-2xl font-black text-blue-900">$0.00</span>
+            </div>
+            <button onclick="sendToWhatsApp()" class="w-full bg-[#25d366] text-white font-bold py-4 rounded-xl shadow-lg hover:bg-green-600 transition flex items-center justify-center gap-3">
+                <i class="fab fa-whatsapp text-xl"></i> <span id="lbl-btn-send">SOLICITAR TOTAL</span>
+            </button>
+        </div>
     </div>
 </div>
 
 <script>
     const products = [
         // --- FRONIUS ---
-        { sku: "PV-IN-38-FRP", desc: "PRIMO 3.8K 1F 240V", volt: "240V monofásico", price: 1452.10, cat: "Fronius", stock: 15, img: "fronius inversor.png", brandImg: "img/fronius.png" },
-        { sku: "PV-IN-05-FRP", desc: "PRIMO 5K 1F 240V", volt: "240V monofásico", price: 1552.20, cat: "Fronius", stock: 15, img: "fronius inversor.png", brandImg: "img/fronius.png" },
-        { sku: "PV-IN-06-FRP", desc: "PRIMO 6K 1F 240V", volt: "240V monofásico", price: 1650.99, cat: "Fronius", stock: 15, img: "fronius inversor.png", brandImg: "img/fronius.png" },
-        { sku: "PV-IN-76-FRP", desc: "PRIMO 7.6K 1F 240V", volt: "240V monofásico", price: 2001.99, cat: "Fronius", stock: 15, img: "fronius inversor.png", brandImg: "img/fronius.png" },
-        { sku: "PV-IN-82-FRP", desc: "PRIMO 8.2K 1F 240V", volt: "240V monofásico", price: 2095.60, cat: "Fronius", stock: 15, img: "fronius inversor.png", brandImg: "img/fronius.png" },
-        { sku: "PV-IN-10-FRP", desc: "SYMO 10K 3F 220V", volt: "220V trifásico", price: 2975.70, cat: "Fronius", stock: 15, img: "fronius inversor.png", brandImg: "img/fronius.png" },
-        { sku: "PV-IN-12-FRP", desc: "SYMO 12.5K 3F 220V", volt: "220V trifásico", price: 3243.50, cat: "Fronius", stock: 15, img: "fronius inversor.png", brandImg: "img/fronius.png" },
-        { sku: "PV-IN-15-FRP", desc: "SYMO 15K 3F 480V", volt: "480V trifásico", price: 3412.50, cat: "Fronius", stock: 15, img: "fronius inversor.png", brandImg: "img/fronius.png" },
-        { sku: "PV-IN-20-FRP", desc: "SYMO 20K 3F 480V", volt: "480V trifásico", price: 3880.50, cat: "Fronius", stock: 15, img: "fronius inversor.png", brandImg: "img/fronius.png" },
-        { sku: "PV-IN-24-FRP", desc: "SYMO 24K 3F 480V", volt: "480V trifásico", price: 4218.50, cat: "Fronius", stock: 15, img: "fronius inversor.png", brandImg: "img/fronius.png" },
-
+        { sku: "PV-IN-38-FRP", desc: "PRIMO 3.8K 1F 240V", volt: "240V monofásico", price: 1452.10, cat: "Fronius", stock: 15, img: "fronius.png" },
+        { sku: "PV-IN-05-FRP", desc: "PRIMO 5K 1F 240V", volt: "240V monofásico", price: 1552.20, cat: "Fronius", stock: 15, img: "fronius.png" },
+        { sku: "PV-IN-06-FRP", desc: "PRIMO 6K 1F 240V", volt: "240V monofásico", price: 1650.99, cat: "Fronius", stock: 15, img: "fronius.png" },
+        { sku: "PV-IN-76-FRP", desc: "PRIMO 7.6K 1F 240V", volt: "240V monofásico", price: 2001.99, cat: "Fronius", stock: 15, img: "fronius.png" },
+        { sku: "PV-IN-82-FRP", desc: "PRIMO 8.2K 1F 240V", volt: "240V monofásico", price: 2095.60, cat: "Fronius", stock: 15, img: "fronius.png" },
+        { sku: "PV-IN-10-FRP", desc: "SYMO 10K 3F 220V", volt: "220V trifásico", price: 2975.70, cat: "Fronius", stock: 15, img: "fronius.png" },
+        { sku: "PV-IN-12-FRP", desc: "SYMO 12.5K 3F 220V", volt: "220V trifásico", price: 3243.50, cat: "Fronius", stock: 15, img: "fronius.png" },
+        { sku: "PV-IN-15-FRP", desc: "SYMO 15K 3F 480V", volt: "480V trifásico", price: 3412.50, cat: "Fronius", stock: 15, img: "fronius.png" },
+        { sku: "PV-IN-20-FRP", desc: "SYMO 20K 3F 480V", volt: "480V trifásico", price: 3880.50, cat: "Fronius", stock: 15, img: "fronius.png" },
+        { sku: "PV-IN-24-FRP", desc: "SYMO 24K 3F 480V", volt: "480V trifásico", price: 4218.50, cat: "Fronius", stock: 15, img: "fronius.png" },
         // --- SOLIS ---
-        { sku: "PV-IN-1.5K-SOL", desc: "SOLIS 1.5K 1F 220V MINI", volt: "220V monofásico", price: 448.50, cat: "Solis", stock: 15, img: "solis inversor.png", brandImg: "img/solis.png" },
-        { sku: "PV-IN-2.5K-SOL", desc: "SOLIS 2.5K 1F 220V MINI", volt: "220V monofásico", price: 494.00, cat: "Solis", stock: 15, img: "solis inversor.png", brandImg: "img/solis.png" },
-        { sku: "PV-IN-3.6K-SOL", desc: "SOLIS 3.6K 1F 220V", volt: "220V monofásico", price: 591.50, cat: "Solis", stock: 15, img: "solis inversor.png", brandImg: "img/solis.png" },
-        { sku: "PV-IN-5K-SOL", desc: "SOLIS 5K 1F 220V", volt: "220V monofásico", price: 741.00, cat: "Solis", stock: 15, img: "solis inversor.png", brandImg: "img/solis.png" },
-        { sku: "PV-IN-6K-SOL", desc: "SOLIS 6K 1F 220V", volt: "220V monofásico", price: 819.00, cat: "Solis", stock: 15, img: "solis inversor.png", brandImg: "img/solis.png" },
-        { sku: "PV-IN-10K-SOL", desc: "SOLIS 10K 1F 220V", volt: "220V monofásico", price: 1150.50, cat: "Solis", stock: 15, img: "solis inversor.png", brandImg: "img/solis.png" },
+        { sku: "PV-IN-1.5K-SOL", desc: "SOLIS 1.5K 1F 220V MINI", volt: "220V monofásico", price: 448.50, cat: "Solis", stock: 15, img: "solis.png" },
+        { sku: "PV-IN-2.5K-SOL", desc: "SOLIS 2.5K 1F 220V MINI", volt: "220V monofásico", price: 494.00, cat: "Solis", stock: 15, img: "solis.png" },
+        { sku: "PV-IN-3.6K-SOL", desc: "SOLIS 3.6K 1F 220V", volt: "220V monofásico", price: 591.50, cat: "Solis", stock: 15, img: "solis.png" },
+        { sku: "PV-IN-5K-SOL", desc: "SOLIS 5K 1F 220V", volt: "220V monofásico", price: 741.00, cat: "Solis", stock: 15, img: "solis.png" },
+        { sku: "PV-IN-6K-SOL", desc: "SOLIS 6K 1F 220V", volt: "220V monofásico", price: 819.00, cat: "Solis", stock: 15, img: "solis.png" },
+        { sku: "PV-IN-10K-SOL", desc: "SOLIS 10K 1F 220V", volt: "220V monofásico", price: 1150.50, cat: "Solis", stock: 15, img: "solis.png" },
 
         // --- GROWATT (RED E HÍBRIDOS - RESPALDO) ---
-        { sku: "PV-IN-MIN30-GRW", desc: "GROWATT 3K MIN 2500TL-X", volt: "220V monofásico", price: 543.40, cat: "Growatt", stock: 15, img: "growatt inversor.png", brandImg: "img/growatt.png" },
-        { sku: "PV-IN-MIN50-GRW", desc: "GROWATT 5K MIN 5000TL-X", volt: "220V monofásico", price: 746.20, cat: "Growatt", stock: 15, img: "growatt inversor.png", brandImg: "img/growatt.png" },
-        { sku: "PV-IN-MIN60-GRW", desc: "GROWATT 6K MIN 6000TL-X", volt: "220V monofásico", price: 825.50, cat: "Growatt", stock: 15, img: "growatt inversor.png", brandImg: "img/growatt.png" },
-        { sku: "PV-IN-MOD10-GRW", desc: "GROWATT 10K MOD 10KTL3-X", volt: "220V trifásico", price: 1378.00, cat: "Growatt", stock: 15, img: "growatt inversor.png", brandImg: "img/growatt.png" },
-        { sku: "PV-IN-MID20-GRW", desc: "GROWATT 20K MID 20KTL3-X", volt: "220V trifásico", price: 1982.50, cat: "Growatt", stock: 15, img: "growatt inversor.png", brandImg: "img/growatt.png" },
-        { sku: "PV-IN-SPH50-GRW", desc: "GROWATT 5K SPH 5000 (RESPALDO)", volt: "220V monofásico", price: 1657.50, cat: "Growatt", stock: 15, img: "growatt inversor.png", brandImg: "img/growatt.png" },
-        { sku: "PV-IN-SPF35-GRW", desc: "GROWATT 3.5K SPF 3500 (OFF-GRID)", volt: "110V monofásico", price: 890.50, cat: "Growatt", stock: 15, img: "growatt inversor.png", brandImg: "img/growatt.png" },
-        
+        { sku: "PV-IN-MIN30-GRW", desc: "GROWATT 3K MIN 2500TL-X", volt: "220V monofásico", price: 543.40, cat: "Growatt", stock: 15, img: "growatt.png" },
+        { sku: "PV-IN-MIN50-GRW", desc: "GROWATT 5K MIN 5000TL-X", volt: "220V monofásico", price: 746.20, cat: "Growatt", stock: 15, img: "growatt.png" },
+        { sku: "PV-IN-MIN60-GRW", desc: "GROWATT 6K MIN 6000TL-X", volt: "220V monofásico", price: 825.50, cat: "Growatt", stock: 15, img: "growatt.png" },
+        { sku: "PV-IN-MOD10-GRW", desc: "GROWATT 10K MOD 10KTL3-X", volt: "220V trifásico", price: 1378.00, cat: "Growatt", stock: 15, img: "growatt.png" },
+        { sku: "PV-IN-MID20-GRW", desc: "GROWATT 20K MID 20KTL3-X", volt: "220V trifásico", price: 1982.50, cat: "Growatt", stock: 15, img: "growatt.png" },
+        { sku: "PV-IN-SPH50-GRW", desc: "GROWATT 5K SPH 5000 (RESPALDO)", volt: "220V monofásico", price: 1657.50, cat: "Growatt", stock: 15, img: "growatt.png" },
+        { sku: "PV-IN-SPF35-GRW", desc: "GROWATT 3.5K SPF 3500 (OFF-GRID)", volt: "110V monofásico", price: 890.50, cat: "Growatt", stock: 15, img: "growatt.png" },
+
         // --- HUAWEI ---
-        { sku: "PV-IN-SUN3-HUA", desc: "HUAWEI SUN2000-3KTL-L1", volt: "220V monofásico", price: 793.00, cat: "Huawei", stock: 15, img: "huawei inversor.png", brandImg: "img/huawei.png" },
-        { sku: "PV-IN-SUN5-HUA", desc: "HUAWEI SUN2000-5KTL-L1", volt: "220V monofásico", price: 929.50, cat: "Huawei", stock: 15, img: "huawei inversor.png", brandImg: "img/huawei.png" },
-        { sku: "PV-IN-SUN10-HUA", desc: "HUAWEI SUN2000-10KTL-M1", volt: "220V trifásico", price: 1846.00, cat: "Huawei", stock: 15, img: "huawei inversor.png", brandImg: "img/huawei.png" },
-        { sku: "PV-IN-SUN36-HUA", desc: "HUAWEI SUN2000-36KTL-M3", volt: "440V trifásico", price: 3445.00, cat: "Huawei", stock: 15, img: "huawei inversor.png", brandImg: "img/huawei.png" },
-        
-        // --- HOYMILES (MICROINVERSORES) ---
-        { sku: "PV-MI-HMS500-HOY", desc: "HOYMILES HMS-500-1T", volt: "220V monofásico", price: 188.50, cat: "Hoymiles", stock: 15, img: "hoymiles microinversor.png", brandImg: "img/hoymiles.png" },
-        { sku: "PV-MI-HMS1000-HOY", desc: "HOYMILES HMS-1000-2T", volt: "220V monofásico", price: 279.50, cat: "Hoymiles", stock: 15, img: "hoymiles microinversor.png", brandImg: "img/hoymiles.png" },
-        { sku: "PV-MI-HMS1500-HOY", desc: "HOYMILES HMS-1500-4T", volt: "220V monofásico", price: 357.50, cat: "Hoymiles", stock: 15, img: "hoymiles microinversor.png", brandImg: "img/hoymiles.png" },
-        { sku: "PV-MI-HMS2000-HOY", desc: "HOYMILES HMS-2000-4T", volt: "220V monofásico", price: 416.00, cat: "Hoymiles", stock: 15, img: "hoymiles microinversor.png", brandImg: "img/hoymiles.png" },
-        { sku: "PV-ACC-DTUB-HOY", desc: "ACC HOYMILES DTU-WLite-S", volt: "N/A", price: 97.50, cat: "Hoymiles", stock: 30, img: "hoymiles microinversor.png", brandImg: "img/hoymiles.png" },
+        { sku: "PV-IN-SUN3-HUA", desc: "HUAWEI SUN2000-3KTL-L1", volt: "220V monofásico", price: 793.00, cat: "Huawei", stock: 15, img: "huawei.png" },
+        { sku: "PV-IN-SUN5-HUA", desc: "HUAWEI SUN2000-5KTL-L1", volt: "220V monofásico", price: 929.50, cat: "Huawei", stock: 15, img: "huawei.png" },
+        { sku: "PV-IN-SUN10-HUA", desc: "HUAWEI SUN2000-10KTL-M1", volt: "220V trifásico", price: 1846.00, cat: "Huawei", stock: 15, img: "huawei.png" },
+        { sku: "PV-IN-SUN36-HUA", desc: "HUAWEI SUN2000-36KTL-M3", volt: "440V trifásico", price: 3445.00, cat: "Huawei", stock: 15, img: "huawei.png" },
 
-        // --- APSYSTEMS ---
-        { sku: "PV-MI-DS3-APS", desc: "APSYSTEMS DS3 (880W) 220V", volt: "220V monofásico", price: 318.50, cat: "APSystems", stock: 15, img: "hoymiles microinversor.png", brandImg: "img/apsystems.png" },
-        { sku: "PV-MI-QT2-APS", desc: "APSYSTEMS QT2 (1720W) 3F 220V", volt: "220V trifásico", price: 513.50, cat: "APSystems", stock: 15, img: "hoymiles microinversor.png", brandImg: "img/apsystems.png" },
-        // --- MÓDULOS SOLARES (PANELES) ---
-        { sku: "PV-MOD-415-TRI", desc: "TRINA SOLAR 415W VERTEX S", volt: "DC", price: 167.05, cat: "Paneles", stock: 500, img: "trina solar.png", brandImg: "img/trina.png" },
-        { sku: "PV-MOD-460-LON", desc: "LONGI SOLAR 460W MONO PERC", volt: "DC", price: 175.50, cat: "Paneles", stock: 500, img: "longi solar.png", brandImg: "img/longi.png" },
-        { sku: "PV-MOD-550-JIN", desc: "JINKO SOLAR 550W TIGER PRO", volt: "DC", price: 210.60, cat: "Paneles", stock: 500, img: "jinko solar.png", brandImg: "img/jinko.png" },
-        { sku: "PV-MOD-600-CAN", desc: "CANADIAN SOLAR 600W TOPCON", volt: "DC", price: 253.50, cat: "Paneles", stock: 500, img: "canadian solar.png", brandImg: "img/canadian.png" },
-        { sku: "PV-MOD-100-QX", desc: "QXPV 100W POLICRISTALINO", volt: "DC", price: 71.50, cat: "Paneles", stock: 500, img: "qxpv solar.png", brandImg: "img/qxpv.png" },
+        // --- MICROINVERSORES ---
+        { sku: "PV-MI-HMS500-HOY", desc: "HOYMILES HMS-500-1T", volt: "220V monofásico", price: 188.50, cat: "Hoymiles", stock: 15, img: "hoymiles.png" },
+        { sku: "PV-MI-HMS1000-HOY", desc: "HOYMILES HMS-1000-2T", volt: "220V monofásico", price: 279.50, cat: "Hoymiles", stock: 15, img: "hoymiles.png" },
+        { sku: "PV-MI-HMS2000-HOY", desc: "HOYMILES HMS-2000-4T", volt: "220V monofásico", price: 416.00, cat: "Hoymiles", stock: 15, img: "hoymiles.png" },
+        { sku: "PV-MI-DS3-APS", desc: "APSYSTEMS DS3 (880W) 220V", volt: "220V monofásico", price: 318.50, cat: "APSystems", stock: 15, img: "apsystems.png" },
 
+        // --- MÓDULOS SOLARES (STOCK 500) ---
+        { sku: "PV-MOD-415-TRI", desc: "TRINA SOLAR 415W VERTEX S", volt: "DC", price: 167.05, cat: "Paneles", stock: 500, img: "trina.png" },
+        { sku: "PV-MOD-460-LON", desc: "LONGI SOLAR 460W MONO PERC", volt: "DC", price: 175.50, cat: "Paneles", stock: 500, img: "longi.png" },
+        { sku: "PV-MOD-550-JIN", desc: "JINKO SOLAR 550W TIGER PRO", volt: "DC", price: 210.60, cat: "Paneles", stock: 500, img: "jinko.png" },
+        { sku: "PV-MOD-600-CAN", desc: "CANADIAN SOLAR 600W TOPCON", volt: "DC", price: 253.50, cat: "Paneles", stock: 500, img: "canadian.png" },
+        { sku: "PV-MOD-100-QX", desc: "QXPV 100W POLICRISTALINO", volt: "DC", price: 71.50, cat: "Paneles", stock: 500, img: "qxpv.png" },
         // --- ALMACENAMIENTO (BATERÍAS - RESPALDO) ---
-        { sku: "PV-BT-US5000-PYL", desc: "PYLONTECH US5000 4.8KWH (RESPALDO)", volt: "48V", price: 1685.00, cat: "Baterías", stock: 50, img: "pylontech lifepo4.png", brandImg: "img/pylontech.png" },
-        { sku: "PV-BT-US3000-PYL", desc: "PYLONTECH US3000C 3.5KWH (RESPALDO)", volt: "48V", price: 1249.95, cat: "Baterías", stock: 50, img: "pylontech lifepo4.png", brandImg: "img/pylontech.png" },
-        { sku: "PV-BT-ARK5-GRW", desc: "GROWATT ARK 2.5L-A1 (RESPALDO)", volt: "48V", price: 985.40, cat: "Baterías", stock: 40, img: "growatt inversor.png", brandImg: "img/growatt.png" },
-        { sku: "PV-BT-10KLV-SOL", desc: "SOLUNA 10KW LV LI-ION (RESPALDO)", volt: "48V", price: 2535.00, cat: "Baterías", stock: 15, img: "pylontech lifepo4.png", brandImg: "img/soluna.png" },
-        { sku: "PV-BT-180-PM", desc: "DEKA 180AH 12V CICLO PROFUNDO", volt: "12V", price: 322.40, cat: "Baterías", stock: 100, img: "parts master ciclo profundo.png", brandImg: "img/deka.png" },
+        { sku: "PV-BT-US5000-PYL", desc: "PYLONTECH US5000 4.8KWH (RESPALDO)", volt: "48V", price: 1685.00, cat: "Baterías", stock: 50, img: "pylontech.png" },
+        { sku: "PV-BT-US3000-PYL", desc: "PYLONTECH US3000C 3.5KWH (RESPALDO)", volt: "48V", price: 1249.95, cat: "Baterías", stock: 50, img: "pylontech.png" },
+        { sku: "PV-BT-ARK5-GRW", desc: "GROWATT ARK 2.5L-A1 (RESPALDO)", volt: "48V", price: 985.40, cat: "Baterías", stock: 40, img: "growatt.png" },
+        { sku: "PV-BT-10KLV-SOL", desc: "SOLUNA 10KW LV LI-ION (RESPALDO)", volt: "48V", price: 2535.00, cat: "Baterías", stock: 15, img: "soluna.png" },
+        { sku: "PV-BT-180-PM", desc: "DEKA 180AH 12V CICLO PROFUNDO", volt: "12V", price: 322.40, cat: "Baterías", stock: 100, img: "deka.png" },
 
-        // --- ESTRUCTURA (UNIRAC) ---
-        { sku: "PV-ACC-RIEL42-UNI", desc: "RIEL UNIRAC SOLARMOUNT 4.2M", volt: "N/A", price: 48.50, cat: "Accesorios", stock: 200, img: "unirac estructura.png", brandImg: "img/unirac.png" },
-        { sku: "PV-ACC-LFOOT-UNI", desc: "UNIRAC L-FOOT (PAQUETE 4)", volt: "N/A", price: 31.20, cat: "Accesorios", stock: 500, img: "unirac estructura.png", brandImg: "img/unirac.png" },
-        { sku: "PV-ACC-MID-UNI", desc: "UNIRAC MID CLAMP (30-40MM)", volt: "N/A", price: 4.80, cat: "Accesorios", stock: 1000, img: "unirac estructura.png", brandImg: "img/unirac.png" },
-        { sku: "PV-ACC-END-UNI", desc: "UNIRAC END CLAMP (30-40MM)", volt: "N/A", price: 5.20, cat: "Accesorios", stock: 1000, img: "unirac estructura.png", brandImg: "img/unirac.png" },
-
-        // --- BOMBEO Y ACCESORIOS FINALES ---
-        { sku: "PV-SP-BOM9325-SHU", desc: "BOMBA SUMERGIBLE SHURFLO 9325 24V", volt: "24V", price: 785.00, cat: "Bombeo", stock: 12, img: "bomba shurflo.png", brandImg: "img/shurflo.png" },
-        { sku: "PV-ACC-CAB10-R", desc: "CABLE SOLAR ROJO 10AWG (MTS)", volt: "DC", price: 1.63, cat: "Accesorios", stock: 2000, img: "cable solar rojo.png", brandImg: "img/cable.png" },
-        { sku: "PV-ACC-CAB10-N", desc: "CABLE SOLAR NEGRO 10AWG (MTS)", volt: "DC", price: 1.63, cat: "Accesorios", stock: 2000, img: "cable solar negro.png", brandImg: "img/cable.png" },
-        { sku: "PV-ACC-MC4-SRNE", desc: "CONECTOR MC4 SRNE (PAR M/F)", volt: "N/A", price: 3.25, cat: "Accesorios", stock: 1500, img: "srne controlador.png", brandImg: "img/srne.png" },
-        { sku: "PV-ACC-ZBENY-4S", desc: "CAJA COMBINADORA ZBENY 4 STRINGS", volt: "DC", price: 318.50, cat: "Accesorios", stock: 15, img: "zbeny combinatoria.png", brandImg: "img/zbeny.png" },
-        { sku: "PV-KIT-PORT-GRW", desc: "GROWATT INFINITY 1500 PORTABLE", volt: "110V", price: 1360.52, cat: "Accesorios", stock: 8, img: "growatt inversor.png", brandImg: "img/growatt.png" }
+        // --- ACCESORIOS Y ESTRUCTURA (UNIRAC) ---
+        { sku: "PV-ACC-RIEL42-UNI", desc: "RIEL UNIRAC SOLARMOUNT 4.2M", volt: "N/A", price: 48.50, cat: "Accesorios", stock: 200, img: "unirac.png" },
+        { sku: "PV-ACC-LFOOT-UNI", desc: "UNIRAC L-FOOT (PAQUETE 4)", volt: "N/A", price: 31.20, cat: "Accesorios", stock: 500, img: "unirac.png" },
+        { sku: "PV-ACC-MID-UNI", desc: "UNIRAC MID CLAMP (30-40MM)", volt: "N/A", price: 4.80, cat: "Accesorios", stock: 1000, img: "unirac.png" },
+        { sku: "PV-ACC-END-UNI", desc: "UNIRAC END CLAMP (30-40MM)", volt: "N/A", price: 5.20, cat: "Accesorios", stock: 1000, img: "unirac.png" },
+        { sku: "PV-ACC-CAB10-R", desc: "CABLE SOLAR ROJO 10AWG (MTS)", volt: "DC", price: 1.63, cat: "Accesorios", stock: 2000, img: "cable.png" },
+        { sku: "PV-ACC-CAB10-N", desc: "CABLE SOLAR NEGRO 10AWG (MTS)", volt: "DC", price: 1.63, cat: "Accesorios", stock: 2000, img: "cable.png" },
+        { sku: "PV-ACC-MC4-SRNE", desc: "CONECTOR MC4 SRNE (PAR M/F)", volt: "N/A", price: 3.25, cat: "Accesorios", stock: 1500, img: "srne.png" },
+        { sku: "PV-ACC-ZBENY-4S", desc: "CAJA COMBINADORA ZBENY 4 STRINGS", volt: "DC", price: 318.50, cat: "Accesorios", stock: 15, img: "zbeny.png" }
     ];
 
-    // --- LÓGICA DE INTERFAZ Y TRADUCCIÓN ---
     let cart = [];
     let currentLang = 'es';
 
     const translations = {
         es: {
-            brand: "BAJA PRO SERVICES",
-            cart: "Productos",
-            total: "Total",
-            send: "Enviar a WhatsApp",
-            modal: "Tu Solicitud",
-            add: "Añadir al carrito",
-            stock: "Stock: ",
             all: "TODOS",
-            whatsappMsg: "Hola BAJA PRO SERVICES, me interesa cotizar lo siguiente:"
+            stock: "STOCK:",
+            add: "AGREGAR",
+            modal: "Solicitud de Cotización",
+            total: "Total Global:",
+            btnSend: "SOLICITAR TOTAL",
+            wsHeader: "*SOLICITUD DE COTIZACIÓN - BAJA PRO-SERVICES*",
+            required: "Nombre, Ciudad y Teléfono son obligatorios."
         },
         en: {
-            brand: "BAJA PRO SERVICES",
-            cart: "Items",
-            total: "Total",
-            send: "Send to WhatsApp",
-            modal: "Your Request",
-            add: "Add to cart",
-            stock: "Stock: ",
             all: "ALL",
-            whatsappMsg: "Hello BAJA PRO SERVICES, I am interested in quoting the following:"
+            stock: "STOCK:",
+            add: "ADD TO CART",
+            modal: "Quote Request",
+            total: "Grand Total:",
+            btnSend: "REQUEST QUOTE",
+            wsHeader: "*QUOTE REQUEST - BAJA PRO-SERVICES*",
+            required: "Name, City, and Phone are required."
         }
     };
-    // --- LÓGICA DE RENDERIZADO Y FUNCIONALIDAD ---
 
     function init() {
-        renderBrandButtons();
+        renderBrandFilters();
         renderProducts('TODOS');
-        updateUI();
     }
 
-    // Genera botones visuales: Marca + Imagen
-    function renderBrandButtons() {
-        const categories = ['TODOS', ...new Set(products.map(p => p.cat))];
-        const container = document.getElementById('brand-selector');
+    function renderBrandFilters() {
+        const container = document.getElementById('brandNav');
+        const brands = [...new Set(products.map(p => p.img.split('.')[0]))];
         
-        container.innerHTML = categories.map(cat => {
-            // Buscamos la primera imagen de marca disponible para esa categoría
-            const sample = products.find(p => p.cat === cat);
-            const bImg = cat === 'TODOS' ? 'hero.png' : (sample ? sample.brandImg : 'img/default.png');
-            
-            return `
-                <div class="brand-card-btn" onclick="renderProducts('${cat}')">
-                    <img src="${bImg}" alt="${cat}" onerror="this.src='https://via.placeholder.com/50x30?text=${cat}'">
-                    <span>${cat === 'TODOS' ? translations[currentLang].all : cat}</span>
+        let html = `
+            <div onclick="renderProducts('TODOS')" class="flex-shrink-0 cursor-pointer group text-center">
+                <div class="w-16 h-16 bg-white rounded-xl shadow flex items-center justify-center border-2 border-transparent group-hover:border-green-500 transition-all">
+                    <i class="fas fa-th text-blue-900 text-xl"></i>
                 </div>
-            `;
-        }).join('');
+                <span class="text-[10px] font-bold text-blue-900 mt-2 block uppercase">${translations[currentLang].all}</span>
+            </div>`;
+
+        brands.forEach(brand => {
+            html += `
+                <div onclick="renderProductsByBrand('${brand}')" class="flex-shrink-0 cursor-pointer group text-center">
+                    <div class="w-16 h-16 bg-white rounded-xl shadow flex items-center justify-center border-2 border-transparent group-hover:border-green-500 transition-all p-2">
+                        <img src="img/${brand}.png" class="max-h-full object-contain" onerror="this.src='https://via.placeholder.com/40?text=${brand}'">
+                    </div>
+                    <span class="text-[10px] font-bold text-blue-900 mt-2 block uppercase">${brand}</span>
+                </div>`;
+        });
+        container.innerHTML = html;
     }
 
     function renderProducts(filter) {
+        const data = filter === 'TODOS' ? products : products.filter(p => p.cat === filter);
+        renderGrid(data);
+    }
+
+    function renderProductsByBrand(brand) {
+        const data = products.filter(p => p.img.split('.')[0] === brand);
+        renderGrid(data);
+    }
+
+    function renderGrid(data) {
         const grid = document.getElementById('main-catalog');
-        const filtered = filter === 'TODOS' ? products : products.filter(p => p.cat === filter);
-        
-        grid.innerHTML = filtered.map(p => `
-            <div class="product-card">
-                <img src="${p.img}" alt="${p.desc}" onerror="this.src='https://via.placeholder.com/200x150?text=Solar+Item'">
-                <div class="product-sku">${p.sku}</div>
-                <div class="product-title">${p.desc}</div>
-                <div class="product-spec"><i class="fas fa-bolt"></i> ${p.volt}</div>
-                <div class="product-price">$${p.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</div>
-                <div class="stock-info">${translations[currentLang].stock} <strong>${p.stock}</strong></div>
-                <button class="add-btn" onclick="addToCart('${p.sku}')">
-                    <i class="fas fa-cart-plus"></i> ${translations[currentLang].add}
-                </button>
+        grid.innerHTML = data.map(p => `
+            <div class="product-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col">
+                <img src="${p.img}" class="h-44 w-full object-contain mb-4">
+                <span class="text-[10px] font-bold text-gray-400 tracking-widest">${p.sku}</span>
+                <h3 class="font-bold text-blue-900 text-sm mb-2 h-10 overflow-hidden leading-tight">${p.desc}</h3>
+                <p class="text-xs font-semibold text-green-600 mb-4"><i class="fas fa-bolt mr-1"></i>${p.volt}</p>
+                <div class="mt-auto">
+                    <p class="text-2xl font-black text-blue-900 mb-2">$${p.price.toFixed(2)}</p>
+                    <p class="text-[10px] text-gray-500 mb-4 uppercase">${translations[currentLang].stock} ${p.stock}</p>
+                    <button onclick="addToCart('${p.sku}')" class="w-full bg-blue-900 text-white py-3 rounded-xl font-bold text-xs hover:bg-green-600 transition tracking-tighter">
+                        <i class="fas fa-plus mr-2"></i>${translations[currentLang].add}
+                    </button>
+                </div>
             </div>
         `).join('');
-
-        // Marcar botón activo
-        document.querySelectorAll('.brand-card-btn').forEach(btn => {
-            btn.classList.remove('active');
-            if(btn.querySelector('span').innerText === filter || (filter === 'TODOS' && btn.querySelector('span').innerText === translations[currentLang].all)) {
-                btn.classList.add('active');
-            }
-        });
     }
 
     function addToCart(sku) {
-        const product = products.find(p => p.sku === sku);
-        const itemInCart = cart.find(item => item.sku === sku);
-
-        if (itemInCart) {
-            if (itemInCart.qty < product.stock) {
-                itemInCart.qty++;
-            } else {
-                alert(currentLang === 'es' ? "Sin stock disponible" : "Out of stock");
-                return;
-            }
-        } else {
-            cart.push({ ...product, qty: 1 });
-        }
+        const p = products.find(x => x.sku === sku);
+        const exists = cart.find(x => x.sku === sku);
+        if(exists) exists.qty++; else cart.push({...p, qty: 1});
+        document.getElementById('cart-count').innerText = cart.reduce((a,b) => a + b.qty, 0);
         updateUI();
-    }
-
-    function updateUI() {
-        const totalItems = cart.reduce((acc, item) => acc + item.qty, 0);
-        document.getElementById('cart-count').innerText = totalItems;
-        document.getElementById('cart-label').innerText = translations[currentLang].cart;
-
-        const cartList = document.getElementById('cart-list');
-        let grandTotal = 0;
-
-        cartList.innerHTML = cart.map(item => {
-            const subtotal = item.price * item.qty;
-            grandTotal += subtotal;
-            return `
-                <div style="display:flex; justify-content:space-between; align-items:center; margin: 10px 0; border-bottom: 1px solid #f0f0f0; padding-bottom: 5px;">
-                    <div style="font-size:0.9rem;">
-                        <strong>${item.qty}x</strong> ${item.desc}<br>
-                        <small style="color:#666;">${item.sku}</small>
-                    </div>
-                    <div style="font-weight:bold;">$${subtotal.toFixed(2)}</div>
-                </div>
-            `;
-        }).join('');
-
-        document.getElementById('total-price').innerText = `$${grandTotal.toFixed(2)}`;
-        
-        // Actualizar textos de interfaz
-        document.getElementById('lbl-total').innerText = translations[currentLang].total + ":";
-        document.getElementById('lbl-btn-ws').innerText = translations[currentLang].send;
-        document.getElementById('modal-title').innerText = translations[currentLang].modal;
     }
 
     function toggleCart() {
-        const modal = document.getElementById('cart-modal');
-        modal.style.display = (modal.style.display === 'block') ? 'none' : 'block';
+        const m = document.getElementById('cart-modal');
+        m.classList.toggle('hidden');
+        if(!m.classList.contains('hidden')) updateUI();
     }
 
-    function changeLang() {
-        currentLang = document.getElementById('lang-switch').value;
-        renderBrandButtons();
-        renderProducts('TODOS');
-        updateUI();
+    function updateUI() {
+        const list = document.getElementById('cart-list');
+        let total = 0;
+        let html = `
+            <div class="bg-blue-50 p-4 rounded-xl space-y-3 mb-6">
+                <input type="text" id="custName" placeholder="Nombre Completo / Full Name" class="w-full p-3 rounded-lg border-none text-sm shadow-sm">
+                <select id="custCity" class="w-full p-3 rounded-lg border-none text-sm shadow-sm">
+                    <option value="">Seleccionar Ciudad (BCS)...</option>
+                    <option value="La Paz">La Paz</option>
+                    <option value="Cabo San Lucas">Cabo San Lucas</option>
+                    <option value="San José del Cabo">San José del Cabo</option>
+                    <option value="Todos Santos">Todos Santos</option>
+                    <option value="Los Barriles">Los Barriles</option>
+                    <option value="Loreto">Loreto</option>
+                </select>
+                <input type="tel" id="custPhone" placeholder="Teléfono / Phone" class="w-full p-3 rounded-lg border-none text-sm shadow-sm">
+            </div><div class="space-y-2">`;
+
+        cart.forEach(item => {
+            total += (item.price * item.qty);
+            html += `
+                <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
+                    <span class="font-bold text-blue-900 w-8">${item.qty}x</span>
+                    <span class="text-xs flex-1 font-medium">${item.desc}</span>
+                </div>`;
+        });
+        list.innerHTML = html + `</div>`;
+        document.getElementById('total-price').innerText = `$${total.toLocaleString('en-US',{minimumFractionDigits:2})}`;
     }
 
     function sendToWhatsApp() {
-        if (cart.length === 0) return;
+        const n = document.getElementById('custName').value;
+        const c = document.getElementById('custCity').value;
+        const t = document.getElementById('custPhone').value;
 
-        let message = `*${translations[currentLang].whatsappMsg}*\n\n`;
-        let total = 0;
+        if(!n || !c || !t) return alert(translations[currentLang].required);
 
-        cart.forEach(item => {
-            const sub = item.price * item.qty;
-            total += sub;
-            message += `✅ *${item.qty}* x ${item.desc}\n   _SKU: ${item.sku}_ | Sub: $${sub.toFixed(2)}\n\n`;
+        let msg = `${translations[currentLang].wsHeader}\n\n👤 *CLIENTE:* ${n.toUpperCase()}\n📍 *LUGAR:* ${c}\n📞 *TEL:* ${t}\n\n*PARTIDAS:*\n`;
+        let grand = 0;
+        cart.forEach(i => {
+            let sub = i.price * i.qty;
+            grand += sub;
+            msg += `• ${i.qty}x ${i.desc}\n  SKU: ${i.sku} | Unit: $${i.price} | Sub: $${sub.toFixed(2)}\n\n`;
         });
-
-        message += `*TOTAL GLOBAL: $${total.toFixed(2)}*`;
-
-        const encoded = encodeURIComponent(message);
-        window.open(`https://wa.me/6122198325?text=${encoded}`, '_blank');
+        msg += `*TOTAL ESTIMADO: $${grand.toLocaleString('en-US')} USD*`;
+        window.open(`https://wa.me/526122198325?text=${encodeURIComponent(msg)}`);
     }
 
-    window.onclick = function(e) {
-        if (e.target == document.getElementById('cart-modal')) toggleCart();
+    function changeLanguage() {
+        currentLang = document.getElementById('lang-switch').value;
+        init();
     }
 
-    // Iniciar aplicación
     window.onload = init;
 </script>
 </body>
