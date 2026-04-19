@@ -1,4 +1,4 @@
-<index.html>
+0000000p
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -704,3 +704,5 @@
     </script>
 </body>
 </html>
+{ sku: "PV-IN-CAPTO-HYM", desc: "ACC CAP P/PUERTO CABLE TRONCAL", volt: "N/A", price: 2.31, cat: "ACC", stock: 100, img: "hoymiles.png" },
+            { sku: "PV-DC-PTO-HYM", desc: "ACC HTA P/DESCONEXIÓN DE PUERTO", volt: "N/A", price: 2.31, cat: "ACC", stock: 100, img: "hoymiles.png" },
