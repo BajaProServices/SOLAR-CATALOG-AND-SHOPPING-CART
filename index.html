@@ -3,129 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAJA PRO-SERVICES | Solar Shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>BAJA PRO SERVICES | CATALOGO PREMIUM BAJA SOLAR</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --aqua-green: #2dd4bf; /* Verde Aqua Profesional */
-            --dark-navy: #0f172a;
+            --aqua-light: #e0f2f1;
+            --aqua-base: #009688;
+            --aqua-dark: #00695c;
+            --aqua-accent: #26a69a;
         }
-        .bg-aqua { background-color: var(--aqua-green); }
-        .text-aqua { color: var(--aqua-green); }
-        .border-aqua { border-color: var(--aqua-green); }
+        .bg-aqua-base { background-color: var(--aqua-base); }
+        .text-aqua-base { color: var(--aqua-base); }
+        .border-aqua-base { border-color: var(--aqua-base); }
+        .hover-aqua:hover { background-color: var(--aqua-dark); }
         
-        .catalog-container { max-height: 650px; overflow-y: auto; scroll-behavior: smooth; }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-thumb { background: var(--aqua-green); border-radius: 10px; }
-        
-        .hero-banner {
-            background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)), url('hero.jpg');
+        .hero-section {
+            background: linear-gradient(rgba(0, 150, 136, 0.4), rgba(0, 77, 64, 0.7)), url('hero.png');
             background-size: cover;
             background-position: center;
+            height: 400px;
         }
-
-        .modal-overlay { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); }
-        
-        input:focus, select:focus { border-color: var(--aqua-green) !important; ring: 2px var(--aqua-green); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .tab-active { border-bottom: 4px solid white; font-weight: bold; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 150, 136, 0.1), 0 8px 10px -6px rgba(0, 150, 136, 0.1); }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans antialiased">
+<body class="bg-slate-50 font-sans text-slate-800">
 
-    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur shadow-md border-b-2 border-aqua">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="font-bold text-2xl tracking-tighter uppercase flex items-center gap-2">
-                <span class="bg-aqua text-white px-2 py-1 rounded">BAJA PRO</span>
-                <span class="text-slate-800">SERVICES</span>
+    <nav class="bg-white sticky top-0 z-50 shadow-sm border-b border-aqua-light">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-aqua-base rounded-full flex items-center justify-center text-white font-bold">BPS</div>
+                <span class="text-xl font-black tracking-tighter text-aqua-dark">BAJA PRO-SERVICES</span>
             </div>
-            <button onclick="toggleCart()" class="relative p-3 bg-slate-100 rounded-full text-slate-700 hover:bg-aqua hover:text-white transition-all">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-                <span id="cartCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full">0</span>
-            </button>
+            
+            <div class="flex items-center gap-4 md:gap-8">
+                <select id="lang-selector" onchange="changeLanguage(this.value)" class="bg-transparent border-none text-sm font-semibold cursor-pointer outline-none text-aqua-dark">
+                    <option value="es">ES 🇲🇽</option>
+                    <option value="en">EN 🇺🇸</option>
+                </select>
+                
+                <button onclick="toggleCart()" class="relative p-2 text-aqua-dark hover:text-aqua-base transition-colors">
+                    <i class="fas fa-shopping-bag text-2xl"></i>
+                    <span id="cart-counter" class="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                </button>
+            </div>
         </div>
     </nav>
 
-    <header class="pt-32 pb-20 hero-banner text-white">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-6xl font-black mb-4 uppercase">Catálogo Baja Solar <span class="text-aqua">2026</span></h1>
-            <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-8">Sistemas de Interconexión, Híbridos y Autónomos de Alta Eficiencia.</p>
-            <div class="bg-aqua/20 border border-aqua/50 px-6 py-2 rounded-full inline-block">
-                <span class="text-aqua font-bold tracking-widest">PROMO VERANO: 10% OFF HASTA JUNIO 30</span>
-            </div>
+    <header class="hero-section flex items-center justify-center text-center text-white px-4">
+        <div class="max-w-3xl">
+            <h1 id="hero-title" class="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">Soluciones Solares de Vanguardia</h1>
+            <p id="hero-sub" class="text-lg md:text-xl font-light opacity-90">Equipos fotovoltaicos de alta gama para proyectos residenciales e industriales.</p>
         </div>
     </header>
 
-    <main class="container mx-auto px-6 py-12">
-        <div class="grid lg:grid-cols-4 gap-8">
-            
-            <aside class="space-y-6">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                    <h3 class="font-bold mb-4 uppercase text-xs tracking-widest text-slate-400">Búsqueda Avanzada</h3>
-                    <input type="text" id="searchInput" placeholder="SKU o Modelo..." class="w-full p-3 rounded-xl border bg-slate-50 outline-none mb-4">
-                    
-                    <h3 class="font-bold mb-4 uppercase text-xs tracking-widest text-slate-400">Categorías</h3>
-                    <select id="brandFilter" class="w-full p-3 rounded-xl border bg-slate-50 outline-none font-medium">
-                        <option value="">Todo el Almacén</option>
-                        <option value="FRONIUS">Fronius</option>
-                        <option value="SOLIS">Solis</option>
-                        <option value="GROWATT">Growatt</option>
-                        <option value="HUAWEI">Huawei</option>
-                        <option value="SRNE">SRNE</option>
-                        <option value="MOD">Módulos Solares</option>
-                        <option value="BAT">Baterías</option>
-                    </select>
+    <div class="bg-aqua-base sticky top-[65px] z-40 shadow-md">
+        <div class="container mx-auto overflow-x-auto no-scrollbar">
+            <div id="tabs-container" class="flex items-center py-1 text-white uppercase text-xs font-bold tracking-widest">
                 </div>
-            </aside>
-
-            <section class="lg:col-span-3">
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
-                    <div class="catalog-container">
-                        <table class="w-full text-left border-collapse">
-                            <thead class="sticky-header bg-slate-900 text-white uppercase text-[10px] font-bold tracking-widest">
-                                <tr>
-                                    <th class="p-4">Img</th>
-                                    <th class="p-4">SKU / Ficha Técnica</th>
-                                    <th class="p-4 text-center">Voltaje</th>
-                                    <th class="p-4 text-center">Stock</th>
-                                    <th class="p-4 text-right">Precio (USD)</th>
-                                    <th class="p-4 text-center">Añadir</th>
-                                </tr>
-                            </thead>
-                            <tbody id="catalogBody" class="divide-y divide-slate-100">
-                                </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <div id="leadModal" class="fixed inset-0 z-[100] modal-overlay hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl">
-            <h2 class="text-2xl font-black mb-2 uppercase">Finalizar Cotización</h2>
-            <p class="text-slate-500 mb-6 text-sm">Por favor, ingresa tus datos para generar el documento oficial y enviarlo a tu WhatsApp.</p>
-            <form id="leadForm" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-bold uppercase mb-1">Nombre Completo</label>
-                    <input type="text" id="userName" required class="w-full p-3 rounded-xl border bg-slate-50 outline-none" placeholder="Juan Pérez">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold uppercase mb-1">WhatsApp (10 dígitos)</label>
-                    <input type="tel" id="userPhone" required class="w-full p-3 rounded-xl border bg-slate-50 outline-none" placeholder="6121234567">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold uppercase mb-1">Correo Electrónico</label>
-                    <input type="email" id="userEmail" required class="w-full p-3 rounded-xl border bg-slate-50 outline-none" placeholder="contacto@empresa.com">
-                </div>
-                <button type="submit" class="w-full bg-aqua text-slate-900 font-black py-4 rounded-xl shadow-lg hover:brightness-110 transition-all uppercase tracking-widest mt-4">
-                    Obtener Cotización ⚡
-                </button>
-            </form>
         </div>
     </div>
 
-    <script>  
-<script>
-        const productos = [
+    <main class="container mx-auto px-4 py-12">
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            </div>
+    </main>
+
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-full max-w-md bg-white shadow-2xl z-[60] transform translate-x-full transition-transform duration-300 ease-in-out border-l border-aqua-light">
+        <div class="flex flex-col h-full">
+            <div class="p-6 bg-aqua-dark text-white flex justify-between items-center">
+                <h2 id="cart-label" class="text-xl font-bold">Carrito de Cotización</h2>
+                <button onclick="toggleCart()" class="text-white text-2xl hover:rotate-90 transition-transform">&times;</button>
+            </div>
+            
+            <div id="cart-items" class="flex-grow overflow-y-auto p-6 space-y-4">
+                </div>
+            
+            <div class="p-6 border-t border-aqua-light bg-aqua-light/20">
+                <div class="flex justify-between items-center mb-6">
+                    <span id="total-label" class="text-lg font-bold text-aqua-dark">Total estimado:</span>
+                    <span id="cart-total" class="text-2xl font-black text-aqua-base">$0.00 USD</span>
+                </div>
+                <button onclick="sendWhatsApp()" class="w-full bg-aqua-base hover:bg-aqua-dark text-white font-bold py-4 rounded-xl flex items-center justify-center gap-3 transition-all shadow-lg">
+                    <i class="fab fa-whatsapp text-2xl"></i>
+                    <span id="btn-quote-label">SOLICITAR COTIZACIÓN</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURACIÓN E IDIOMAS
+        const i18n = {
+            es: {
+                heroT: "Soluciones Solares de Vanguardia",
+                heroS: "Equipos fotovoltaicos de alta gama para proyectos residenciales e industriales.",
+                cartL: "Carrito de Cotización",
+                totalL: "Total estimado:",
+                btnQ: "SOLICITAR COTIZACIÓN",
+                add: "Agregar al Carrito",
+                stock: "Disponible:",
+                volt: "Voltaje:",
+                empty: "Tu carrito está vacío",
+                all: "TODOS",
+                acc: "ACCESORIOS"
+            },
+            en: {
+                heroT: "Cutting-Edge Solar Solutions",
+                heroS: "High-end photovoltaic equipment for residential and industrial projects.",
+                cartL: "Quotation Cart",
+                totalL: "Estimated Total:",
+                btnQ: "REQUEST QUOTATION",
+                add: "Add to Cart",
+                stock: "Stock:",
+                volt: "Voltage:",
+                empty: "Your cart is empty",
+                all: "ALL",
+                acc: "ACCESSORIES"
+            }
+        };
+
+        let currentLang = 'es';
+        let cart = [];
+                const productos = [
             { sku: "PV-IN-38-FRP", desc: "PRIMO 3.8K 1F 240V", volt: "240V monofásico", price: 1452.10, cat: "INV", stock: 15, img: "fronius_primo.png" },
             { sku: "PV-IN-05-FRP", desc: "PRIMO 5K 1F 240V", volt: "240V monofásico", price: 1552.20, cat: "INV", stock: 15, img: "fronius_primo.png" },
             { sku: "PV-IN-06-FRP", desc: "PRIMO 6K 1F 240V", volt: "240V monofásico", price: 1650.99, cat: "INV", stock: 15, img: "fronius_primo.png" },
@@ -549,206 +551,203 @@
             });
         }     
 
-        // --- FUNCIONES DE CIERRE DEL SISTEMA ---
+        // LÓGICA DE LA APLICACIÓN
+        function initApp() {
+            renderTabs();
+            renderProducts('TODOS');
+            updateCartCounter();
+            translatePage();
+        }
 
-        // Función para inyectar las categorías dinámicamente en el filtro
-        function setupFilters() {
-            const brands = [...new Set(products.map(p => p.cat))];
-            const select = document.getElementById('brandFilter');
-            // Mantenemos las opciones base y añadimos las detectadas
-            brands.forEach(b => {
-                if (![...select.options].some(o => o.value === b)) {
-                    const opt = document.createElement('option');
-                    opt.value = b;
-                    opt.innerText = b;
-                    select.appendChild(opt);
-                }
+        function renderTabs() {
+            const categories = ['TODOS', ...new Set(products.map(p => p.cat))];
+            const container = document.getElementById('tabs-container');
+            container.innerHTML = categories.map(cat => `
+                <button onclick="filterProducts('${cat}')" 
+                        class="tab-btn px-6 py-4 transition-all hover:bg-aqua-accent" 
+                        data-cat="${cat}">
+                    ${cat === 'ACC' ? i18n[currentLang].acc : cat}
+                </button>
+            `).join('');
+            setActiveTab('TODOS');
+        }
+
+        function filterProducts(cat) {
+            renderProducts(cat);
+            setActiveTab(cat);
+        }
+
+        function setActiveTab(cat) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('tab-active');
+                if(btn.dataset.cat === cat) btn.classList.add('tab-active');
             });
         }
 
-        // Función para aplicar el 10% OFF al total si estamos en periodo de promo
-        function calcularTotalConDescuento(total) {
-            const hoy = new Date();
-            const limite = new Date('2026-06-30');
-            if (hoy <= limite) {
-                return total * 0.90; // Aplicar 10% de descuento
-            }
-            return total;
-        }
-
-        // Re-vinculación de los eventos de búsqueda para mayor precisión
-        document.getElementById('searchInput').addEventListener('keyup', (e) => {
-            renderCatalog(e.target.value, document.getElementById('brandFilter').value);
-        });
-
-        // Inicialización Global
-        window.onload = () => {
-            setupFilters();
-            renderCatalog();
-            console.log("Sistema BAJA PRO SERVICES v2.6 cargado exitosamente.");
-        };
-
-        // Función para cerrar el modal si se hace clic fuera de él
-        window.onclick = function(event) {
-            const modal = document.getElementById('leadModal');
-            if (event.target == modal) {
-                toggleLeadModal(false);
-            }
-        }
-    </script>
-</body>
-        let cart = [];
-
-        // --- RENDERIZADO DEL CATÁLOGO ---
-        function renderCatalog(search = '', brand = '') {
-            const body = document.getElementById('catalogBody');
-            body.innerHTML = '';
+        function renderProducts(filter = 'TODOS') {
+            const grid = document.getElementById('product-grid');
+            const filtered = filter === 'TODOS' ? products : products.filter(p => p.cat === filter);
             
-            const filtered = products.filter(p => 
-                (p.sku.toLowerCase().includes(search.toLowerCase()) || p.desc.toLowerCase().includes(search.toLowerCase())) &&
-                (brand === '' || p.cat === brand)
-            );
-
-            filtered.forEach(p => {
-                const stockColor = p.stock > 5 ? 'text-slate-500' : 'text-red-500 font-bold';
-                body.innerHTML += `
-                    <tr class="hover:bg-slate-50 transition-colors">
-                        <td class="p-4">
-                            <img src="${p.img}" alt="${p.cat}" class="w-12 h-12 object-contain rounded-lg border bg-white p-1">
-                        </td>
-                        <td class="p-4">
-                            <div class="font-mono font-black text-aqua text-xs">${p.sku}</div>
-                            <div class="text-sm font-bold text-slate-700">${p.desc}</div>
-                        </td>
-                        <td class="p-4 text-center">
-                            <span class="px-2 py-1 rounded-md bg-slate-100 text-[10px] font-black">${p.volt}</span>
-                        </td>
-                        <td class="p-4 text-center ${stockColor} text-xs">${p.stock} pza</td>
-                        <td class="p-4 text-right font-black text-slate-900 text-lg">$${p.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</td>
-                        <td class="p-4 text-center">
-                            <button onclick="addToCart('${p.sku}')" class="bg-aqua text-slate-900 p-3 rounded-xl hover:scale-110 transition-transform shadow-md">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-width="3" stroke-linecap="round"/></svg>
-                            </button>
-                        </td>
-                    </tr>`;
-            });
-            document.getElementById('counter').innerText = `${filtered.length} EQUIPOS DISPONIBLES EN SISTEMA`;
+            grid.innerHTML = filtered.map(p => `
+                <div class="bg-white rounded-2xl p-5 card-shadow flex flex-col justify-between product-card border border-aqua-light/30">
+                    <div>
+                        <div class="relative mb-4 overflow-hidden rounded-xl bg-aqua-light/20">
+                            <img src="${p.img}" alt="${p.desc}" class="w-full h-48 object-contain p-4 mix-blend-multiply">
+                            <span class="absolute top-2 right-2 bg-aqua-base text-white text-[10px] px-2 py-1 rounded-full font-bold">
+                                ${p.cat}
+                            </span>
+                        </div>
+                        <h3 class="font-bold text-aqua-dark text-sm mb-1 h-10 overflow-hidden">${p.desc}</h3>
+                        <p class="text-slate-400 text-[10px] font-mono mb-2">SKU: ${p.sku}</p>
+                        <div class="flex justify-between items-end mb-4">
+                            <div>
+                                <p class="text-[10px] text-slate-500 uppercase font-bold">${i18n[currentLang].volt} ${p.volt}</p>
+                                <p class="text-2xl font-black text-aqua-base">$${p.price.toLocaleString()} <span class="text-xs font-normal">USD</span></p>
+                            </div>
+                            <p class="text-[10px] ${p.stock > 0 ? 'text-green-600' : 'text-red-500'} font-bold">
+                                ${i18n[currentLang].stock} ${p.stock}
+                            </p>
+                        </div>
+                    </div>
+                    <button onclick="addToCart('${p.sku}')" 
+                            class="w-full bg-aqua-base hover:bg-aqua-dark text-white font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 group">
+                        <i class="fas fa-cart-plus group-hover:scale-110 transition-transform"></i>
+                        ${i18n[currentLang].add}
+                    </button>
+                </div>
+            `).join('');
+        }
+        // FUNCIONES DEL CARRITO
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            sidebar.classList.toggle('translate-x-full');
         }
 
         function addToCart(sku) {
             const product = products.find(p => p.sku === sku);
-            const inCart = cart.find(i => i.sku === sku);
-            if (inCart) inCart.qty++; else cart.push({...product, qty: 1});
+            const itemInCart = cart.find(item => item.sku === sku);
+
+            if (itemInCart) {
+                if (itemInCart.qty < product.stock) {
+                    itemInCart.qty++;
+                } else {
+                    alert(currentLang === 'es' ? "Stock máximo alcanzado" : "Maximum stock reached");
+                    return;
+                }
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            updateCartUI();
+            if (document.getElementById('cart-sidebar').classList.contains('translate-x-full')) {
+                toggleCart();
+            }
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items');
+            const totalDisplay = document.getElementById('cart-total');
+            const counter = document.getElementById('cart-counter');
+            
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="text-center py-10 opacity-50"><i class="fas fa-box-open text-4xl mb-2"></i><p>${i18n[currentLang].empty}</p></div>`;
+                totalDisplay.innerText = "$0.00 USD";
+                counter.innerText = "0";
+                return;
+            }
+
+            let total = 0;
+            let totalItems = 0;
+
+            container.innerHTML = cart.map(item => {
+                const subtotal = item.price * item.qty;
+                total += subtotal;
+                totalItems += item.qty;
+                return `
+                    <div class="flex items-center gap-4 bg-aqua-light/10 p-3 rounded-xl border border-aqua-light/50">
+                        <img src="${item.img}" class="w-16 h-16 object-contain bg-white rounded-lg p-1">
+                        <div class="flex-grow">
+                            <h4 class="text-xs font-bold text-aqua-dark line-clamp-1">${item.desc}</h4>
+                            <p class="text-[10px] text-slate-400 font-mono">${item.sku}</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <div class="flex items-center border border-aqua-base/30 rounded-lg bg-white overflow-hidden">
+                                    <button onclick="changeQty('${item.sku}', -1)" class="px-2 py-1 hover:bg-aqua-light text-aqua-dark">-</button>
+                                    <span class="px-3 text-xs font-bold">${item.qty}</span>
+                                    <button onclick="changeQty('${item.sku}', 1)" class="px-2 py-1 hover:bg-aqua-light text-aqua-dark">+</button>
+                                </div>
+                                <p class="text-sm font-black text-aqua-base">$${subtotal.toLocaleString()} <span class="text-[10px]">USD</span></p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            totalDisplay.innerText = `$${total.toLocaleString()} USD`;
+            counter.innerText = totalItems;
+        }
+
+        function changeQty(sku, delta) {
+            const item = cart.find(i => i.sku === sku);
+            const product = products.find(p => p.sku === sku);
+            
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.sku !== sku);
+                } else if (item.qty > product.stock) {
+                    item.qty = product.stock;
+                }
+            }
             updateCartUI();
         }
 
-        //// --- CONTINUACIÓN DE LÓGICA DE CARRITO Y LEAD MAGNET ---
+        // MOTOR DE TRADUCCIÓN DINÁMICA
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            
+            // Actualizar etiquetas estáticas
+            document.getElementById('hero-title').innerText = i18n[lang].heroT;
+            document.getElementById('hero-sub').innerText = i18n[lang].heroS;
+            document.getElementById('cart-label').innerText = i18n[lang].cartL;
+            document.getElementById('total-label').innerText = i18n[lang].totalL;
+            document.getElementById('btn-quote-label').innerText = i18n[lang].btnQ;
 
-        function updateCartUI() {
-            const container = document.getElementById('cartItems');
-            const countLabel = document.getElementById('cartCount');
-            const totalLabel = document.getElementById('cartTotal');
-            
-            countLabel.innerText = cart.reduce((a, b) => a + b.qty, 0);
-            container.innerHTML = '';
-            
+            // Refrescar componentes dinámicos
+            renderTabs();
+            renderProducts();
+            updateCartUI();
+        }
+
+        // GENERADOR DE MENSAJE WHATSAPP
+        function sendWhatsApp() {
+            if (cart.length === 0) return alert(i18n[currentLang].empty);
+
             let total = 0;
+            let message = currentLang === 'es' ? 
+                "*SOLICITUD DE COTIZACIÓN - BAJA PRO-SERVICES*\n" : 
+                "*QUOTE REQUEST - BAJA PRO-SERVICES*\n";
+            message += "--------------------------------------\n";
+
             cart.forEach(item => {
                 const subtotal = item.price * item.qty;
                 total += subtotal;
-                container.innerHTML += `
-                    <div class="bg-slate-50 p-4 rounded-2xl flex justify-between items-center border border-slate-200">
-                        <div class="max-w-[220px]">
-                            <p class="font-black text-[10px] text-aqua uppercase tracking-tighter">${item.sku}</p>
-                            <p class="text-xs font-bold text-slate-700 leading-tight">${item.desc}</p>
-                            <p class="text-[10px] text-slate-400 mt-1 italic">Unit: $${item.price.toLocaleString()}</p>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <input type="number" value="${item.qty}" min="1" 
-                                onchange="updateQty('${item.sku}', this.value)" 
-                                class="w-10 bg-white border rounded-lg font-bold text-center text-sm p-1 outline-none focus:border-aqua">
-                            <button onclick="removeFromCart('${item.sku}')" class="text-red-400 hover:text-red-600 transition-colors">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/></svg>
-                            </button>
-                        </div>
-                    </div>`;
-            });
-            totalLabel.innerText = `$${total.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
-        }
-
-        function updateQty(sku, qty) {
-            const item = cart.find(i => i.sku === sku);
-            if(item) item.qty = parseInt(qty) || 1;
-            updateCartUI();
-        }
-
-        function removeFromCart(sku) {
-            cart = cart.filter(i => i.sku !== sku);
-            updateCartUI();
-        }
-
-        function toggleCart() {
-            document.getElementById('cartSidebar').classList.toggle('translate-x-full');
-        }
-
-        // --- GESTIÓN DE LEAD MAGNET Y ENVÍO ---
-
-        function toggleLeadModal(show) {
-            const modal = document.getElementById('leadModal');
-            if(show) modal.classList.remove('hidden'); else modal.classList.add('hidden');
-        }
-
-        // Interceptamos el envío de WhatsApp para pedir datos primero
-        function enviarWhatsApp() {
-            if (cart.length === 0) return alert("El carrito está vacío. Añade equipos para cotizar.");
-            toggleLeadModal(true); // Abrir formulario obligatorio
-        }
-
-        document.getElementById('leadForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const nombre = document.getElementById('userName').value;
-            const tel = document.getElementById('userPhone').value;
-            const email = document.getElementById('userEmail').value;
-            
-            // Construcción del mensaje profesional para WhatsApp
-            let total = 0;
-            let msg = `*SOLICITUD DE COTIZACIÓN - BAJA PRO SERVICES*\n`;
-            msg += `━━━━━━━━━━━━━━━━━━━━\n`;
-            msg += `*DATOS DEL CLIENTE:*\n`;
-            msg += `👤 Nombre: ${nombre}\n`;
-            msg += `📱 WhatsApp: ${tel}\n`;
-            msg += `📧 Email: ${email}\n\n`;
-            msg += `*DETALLE DEL PEDIDO:*\n`;
-            
-            cart.forEach(i => {
-                const sub = i.price * i.qty;
-                total += sub;
-                msg += `• ${i.sku}\n`;
-                msg += `  ${i.desc}\n`;
-                msg += `  Cant: ${i.qty} x $${i.price.toLocaleString()} | Sub: $${sub.toLocaleString()} USD\n\n`;
+                message += `📦 *SKU:* ${item.sku}\n`;
+                message += `📝 *Desc:* ${item.desc}\n`;
+                message += `🔹 *Cant:* ${item.qty} x $${item.price.toLocaleString()} USD\n`;
+                message += `💰 *Subtotal:* $${subtotal.toLocaleString()} USD\n`;
+                message += "--------------------------------------\n";
             });
 
-            msg += `━━━━━━━━━━━━━━━━━━━━\n`;
-            msg += `*TOTAL ESTIMADO:* $${total.toLocaleString()} USD\n`;
-            msg += `*VALIDEZ:* Precios sujetos a cambio sin previo aviso.\n`;
-            msg += `━━━━━━━━━━━━━━━━━━━━\n`;
-            msg += `Favor de confirmar disponibilidad de stock y costos de envío.`;
-
-            // Número de WhatsApp de la empresa (según instrucción)
-            const phoneEmpresa = "526122198325";
-            const waUrl = `https://wa.me/${phoneEmpresa}?text=${encodeURIComponent(msg)}`;
+            message += `\n*TOTAL GLOBAL:* $${total.toLocaleString()} USD`;
             
-            window.open(waUrl, '_blank');
-            toggleLeadModal(false);
+            const encodedMsg = encodeURIComponent(message);
+            window.open(`https://wa.me/526122198325?text=${encodedMsg}`, '_blank');
+        }
+
+        // AUTO-INICIO
+        document.addEventListener('DOMContentLoaded', () => {
+            initApp();
         });
-
-        // Event Listeners para Filtros
-        document.getElementById('searchInput').addEventListener('input', e => renderCatalog(e.target.value, document.getElementById('brandFilter').value));
-        document.getElementById('brandFilter').addEventListener('change', e => renderCatalog(document.getElementById('searchInput').value, e.target.value));
-        
-        // Inicialización
-        window.onload = () => renderCatalog();
     </script>
 </body>
 </html>
