@@ -1,4 +1,4 @@
-<index.html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -15,15 +15,16 @@
         .brand-content.expanded { max-height: 5000px; }
         .active-filter { background-color: var(--aqua-base) !important; color: white !important; border-color: var(--aqua-base) !important; }
         .logo-container { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; background: white; border-radius: 8px; padding: 4px; border: 1px solid #e2e8f0; }
+        .hero-gradient { background: linear-gradient(to bottom, rgba(0,0,0,0) 60%, rgba(248,250,252,1) 100%); }
     </style>
 </head>
 <body class="bg-slate-50 font-sans text-slate-900">
 
-    <header class="bg-white border-b sticky top-0 z-50 p-4 shadow-sm">
+    <header class="bg-white/80 backdrop-blur-md border-b sticky top-0 z-50 p-4 shadow-sm">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex flex-col">
                 <h1 class="text-xl font-black tracking-tighter italic">BAJA <span class="text-aqua-base">PRO-SERVICES</span></h1>
-                <span class="text-[9px] uppercase tracking-[0.2em] text-slate-400 font-bold">Energía Solar Profesional BCS</span>
+                <span class="text-[9px] uppercase tracking-[0.2em] text-slate-400 font-bold">Soluciones Fotovoltaicas</span>
             </div>
             <button onclick="toggleCart()" class="relative p-2 bg-slate-100 rounded-full hover:bg-aqua-base hover:text-white transition-all">
                 <i class="fas fa-shopping-cart text-lg"></i>
@@ -31,6 +32,35 @@
             </button>
         </div>
     </header>
+
+    <section class="relative w-full h-[300px] md:h-[450px] overflow-hidden bg-slate-200">
+        <img src="hero.jpg" alt="Baja Pro Services Solar" class="w-full h-full object-cover">
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="absolute bottom-8 left-0 right-0 px-6 text-center">
+            <h2 class="text-white text-3xl md:text-5xl font-black italic drop-shadow-lg tracking-tighter">
+                ENERGÍA QUE <span class="text-aqua-base">TRANSFORMA</span> BAJA
+            </h2>
+        </div>
+    </section>
+
+    <section class="max-w-5xl mx-auto px-4 py-6">
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col items-center">
+            <span class="text-[10px] font-black text-aqua-base uppercase tracking-[0.3em] mb-4 text-center">Cobertura en Baja California Sur</span>
+            <div class="flex flex-wrap justify-center gap-3 text-[11px] font-bold text-slate-500 italic">
+                <span class="flex items-center"><i class="fas fa-map-marker-alt text-aqua-base mr-1.5"></i>LA PAZ</span>
+                <span class="text-slate-200">|</span>
+                <span class="flex items-center"><i class="fas fa-map-marker-alt text-aqua-base mr-1.5"></i>CABO SAN LUCAS</span>
+                <span class="text-slate-200">|</span>
+                <span class="flex items-center"><i class="fas fa-map-marker-alt text-aqua-base mr-1.5"></i>SAN JOSÉ DEL CABO</span>
+                <span class="text-slate-200">|</span>
+                <span class="flex items-center"><i class="fas fa-map-marker-alt text-aqua-base mr-1.5"></i>TODOS SANTOS</span>
+                <span class="text-slate-200">|</span>
+                <span class="flex items-center"><i class="fas fa-map-marker-alt text-aqua-base mr-1.5"></i>LOS BARRILES</span>
+                <span class="text-slate-200">|</span>
+                <span class="flex items-center"><i class="fas fa-map-marker-alt text-aqua-base mr-1.5"></i>CIUDAD CONSTITUCIÓN</span>
+            </div>
+        </div>
+    </section>
 
     <main class="max-w-5xl mx-auto p-4 pb-24">
         <p class="text-[10px] font-black text-slate-400 mb-3 uppercase tracking-widest ml-1">Seleccionar Marca</p>
@@ -50,7 +80,17 @@
             { sku: "INV-SG-10K", desc: "SUNGROW 10KW", volt: "220V", price: 1450.00, brand: "SUNGROW", img: "sungrow inversor.png", logo: "sungrow logo.png" },
             { sku: "INV-YS-3K", desc: "YASSION 3KW AISLADO", volt: "24V", price: 420.00, brand: "YASSION", img: "yassion inversor.png", logo: "yassion logo.png" },
             { sku: "INV-FM-PVI", desc: "FIMER PVI-3.6-OUTD", volt: "240V", price: 890.00, brand: "FIMER", img: "fimer inversor.png", logo: "fimer logo.png" },
-            
+            { sku: "INV-FR-3.8", desc: "PRIMO 3.8K 1F 240V", volt: "240V", price: 1117.00, brand: "FRONIUS", img: "fronius inversor.png", logo: "fronius logo.png" },
+            { sku: "INV-GR-6K", desc: "GROWATT 6KW HIBRIDO", volt: "48V", price: 950.00, brand: "GROWATT", img: "growatt inversor.png", logo: "growatt logo.png" },
+            { sku: "INV-SL-5K", desc: "SOLIS 5KW INTERCONECTADO", volt: "220V", price: 785.00, brand: "SOLIS", img: "solis inversor.png", logo: "solis logo.png" },
+            { sku: "INV-SG-10K", desc: "SUNGROW 10KW", volt: "220V", price: 1450.00, brand: "SUNGROW", img: "sungrow inversor.png", logo: "sungrow logo.png" },
+            { sku: "INV-YS-3K", desc: "YASSION 3KW AISLADO", volt: "24V", price: 420.00, brand: "YASSION", img: "yassion inversor.png", logo: "yassion logo.png" },
+            { sku: "MIC-EN-IQ8", desc: "ENPHASE IQ8+ MICROINVERSOR", volt: "240V", price: 189.00, brand: "ENPHASE", img: "enphase microinversor.png", logo: "enphase logo.png" },
+            { sku: "PAN-LG-550", desc: "LONGI 550W MONO HI-MO 5", volt: "N/A", price: 145.00, brand: "LONGI", img: "longi solar.png", logo: "logo longi.png" },
+            { sku: "BAT-PY-3000", desc: "PYLONTECH US3000C LiFePO4", volt: "48V", price: 1250.00, brand: "PYLONTECH", img: "pylontech lifepo4.png", logo: "pylontech logo.png" },
+            { sku: "CTL-SR-60", desc: "CONTROLADOR SRNE MPPT 60A", volt: "48V", price: 185.00, brand: "SRNE", img: "srne controlador.png", logo: "snre logo.png" },
+            { sku: "EST-UN-RAIL", desc: "RIEL UNIRAC 14 FT", volt: "N/A", price: 65.00, brand: "UNIRAC", img: "unirac estructura.png", logo: "unirac logo.png" },
+            { sku: "EST-GO-LFT", desc: "GO SOLAR L-FOOT", volt: "N/A", price: 4.50, brand: "GO SOLAR", img: "go solar estructura.png", logo: "go solar logo.png" }
             // MICROINVERSORES (ENPHASE, HOYMILES)
             { sku: "MIC-EN-IQ8", desc: "ENPHASE IQ8+ MICROINVERSOR", volt: "240V", price: 189.00, brand: "ENPHASE", img: "enphase microinversor.png", logo: "enphase logo.png" },
             { sku: "MIC-HY-1500", desc: "HOYMILES 1500W 4 EN 1", volt: "240V", price: 345.00, brand: "HOYMILES", img: "hoymiles microinversor.png", logo: "hoymiles logo.png" },
