@@ -1,413 +1,638 @@
-<index.html>
+<!DOCTYPE <index.html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>BAJA PRO SERVICES | Catálogo Premium Solar</title>
+    <title>BAJA PRO SERVICES | CATALOGO PREMIUM BAJA SOLAR</title>
     <style>
-        .catalog-container { max-height: 700px; overflow-y: auto; scroll-behavior: smooth; }
-        .sticky-header { position: sticky; top: 0; background: #f8fafc; z-index: 10; }
-        .cart-dot { position: absolute; top: -5px; right: -5px; background: #ef4444; color: white; border-radius: 50%; width: 18px; height: 18px; font-size: 11px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-thumb { background: #2563eb; border-radius: 10px; }
+        :root {
+            --aqua-green: #2dd4bf; /* Verde Aqua Profesional */
+            --dark-navy: #0f172a;
+        }
+        .bg-aqua { background-color: var(--aqua-green); }
+        .text-aqua { color: var(--aqua-green); }
+        .border-aqua { border-color: var(--aqua-green); }
         
-        .hero-bg {
-            background-image: linear-gradient(rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.8)), url('hero.jpg');
+        .catalog-container { max-height: 650px; overflow-y: auto; scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: var(--aqua-green); border-radius: 10px; }
+        
+        .hero-banner {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)), url('hero.jpg');
             background-size: cover;
             background-position: center;
         }
+
+        .modal-overlay { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); }
+        
+        input:focus, select:focus { border-color: var(--aqua-green) !important; ring: 2px var(--aqua-green); }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans antialiased">
 
-    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur shadow-sm border-b">
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur shadow-md border-b-2 border-aqua">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="font-bold text-2xl tracking-tighter uppercase">BAJA PRO <span class="text-blue-600">SERVICES</span></div>
-            <div class="flex items-center gap-6">
-                <button onclick="toggleCart()" class="relative p-3 bg-blue-100 rounded-full text-blue-600 hover:bg-blue-200 transition">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-                    <span id="cartCount" class="cart-dot">0</span>
-                </button>
+            <div class="font-bold text-2xl tracking-tighter uppercase flex items-center gap-2">
+                <span class="bg-aqua text-white px-2 py-1 rounded">BAJA PRO</span>
+                <span class="text-slate-800">SERVICES</span>
             </div>
+            <button onclick="toggleCart()" class="relative p-3 bg-slate-100 rounded-full text-slate-700 hover:bg-aqua hover:text-white transition-all">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                <span id="cartCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full">0</span>
+            </button>
         </div>
     </nav>
 
-    <header class="pt-40 pb-24 hero-bg text-white relative">
-        <div class="container mx-auto px-6 text-center relative z-10">
-            <h1 class="text-5xl md:text-7xl font-black mb-6 uppercase tracking-tight leading-none">Catálogo <span class="text-blue-400">Solar 2026</span></h1>
-            <p class="text-xl text-slate-200 max-w-2xl mx-auto font-light mb-8">Todos nuestros equipos autorizados en un solo lugar.</p>
-            <div class="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl inline-block">
-                <p class="text-yellow-400 font-bold uppercase tracking-widest">⚡ 10% OFF HASTA JUNIO 30 ⚡</p>
+    <header class="pt-32 pb-20 hero-banner text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-black mb-4 uppercase">Catálogo Baja Solar <span class="text-aqua">2026</span></h1>
+            <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-8">Sistemas de Interconexión, Híbridos y Autónomos de Alta Eficiencia.</p>
+            <div class="bg-aqua/20 border border-aqua/50 px-6 py-2 rounded-full inline-block">
+                <span class="text-aqua font-bold tracking-widest">PROMO VERANO: 10% OFF HASTA JUNIO 30</span>
             </div>
         </div>
     </header>
 
-    <section id="catalogo" class="py-12 container mx-auto px-6">
-        <div class="grid md:grid-cols-3 gap-6 mb-8">
-            <div class="md:col-span-2">
-                <input type="text" id="searchInput" placeholder="Buscar por SKU, potencia o descripción..." class="w-full p-5 rounded-2xl border-none shadow-xl focus:ring-2 focus:ring-blue-600 outline-none text-lg">
-            </div>
-            <div>
-                <select id="brandFilter" class="w-full p-5 rounded-2xl border-none shadow-xl bg-white font-bold text-slate-700 outline-none">
-                    <option value="">Todas las Categorías</option>
-                    <option value="FRONIUS">Fronius</option>
-                    <option value="SOLIS">Solis</option>
-                    <option value="GROWATT">Growatt</option>
-                    <option value="HUAWEI">Huawei</option>
-                    <option value="HOYMILES">Hoymiles</option>
-                    <option value="ENPHASE">Enphase</option>
-                    <option value="BAT">Baterías / Ciclo Profundo</option>
-                    <option value="MOD">Módulos Solares</option>
-                    <option value="ACC">Accesorios y Estructura</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200">
-            <div class="catalog-container">
-                <table class="w-full text-left border-collapse">
-                    <thead class="sticky-header shadow-sm uppercase text-[10px] font-black text-blue-900 tracking-widest">
-                        <tr>
-                            <th class="p-6 border-b">Clave (SKU)</th>
-                            <th class="p-6 border-b">Descripción Técnica</th>
-                            <th class="p-6 border-b text-right">Precio (USD)</th>
-                            <th class="p-6 border-b text-center">Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody id="catalogBody" class="divide-y divide-slate-100 text-sm">
-                        </tbody>
-                </table>
-            </div>
-            <div class="bg-blue-600 p-4 text-center text-white font-bold">
-                <p id="counter">Cargando base de datos...</p>
-            </div>
-        </div>
-    </section>
-
-    <aside id="cartSidebar" class="fixed right-0 top-0 h-full w-full md:w-[480px] bg-white shadow-2xl z-[60] transform translate-x-full transition-transform duration-500 flex flex-col">
-        <div class="p-6 bg-slate-900 text-white flex justify-between items-center">
-            <h2 class="text-2xl font-black uppercase tracking-tighter">Tu Cotización</h2>
-            <button onclick="toggleCart()" class="text-3xl">&times;</button>
-        </div>
-        <div id="cartItems" class="flex-grow overflow-y-auto p-6 space-y-4"></div>
-        <div class="p-8 border-t bg-slate-50 space-y-4">
-            <div class="flex justify-between items-center text-3xl font-black">
-                <span class="text-slate-400">TOTAL:</span>
-                <span id="cartTotal" class="text-blue-600">$0.00</span>
-            </div>
-            <button onclick="enviarWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white py-5 rounded-2xl font-black text-xl shadow-lg transition-all">
-                Enviar a WhatsApp
-            </button>
-        </div>
-    </aside>
-
-    <script>
-        // BASE DE DATOS COMPLETA (441 PRODUCTOS)
-        // Se incluyen categorías principales, accesorios y variaciones técnicas
-        const products = [
-            // FRONIUS
-            {sku: "PV-IN-38-FRP", desc: "PRIMO 3.8K 1F 240V", price: 1396.25, cat: "FRONIUS"},
-            {sku: "PV-IN-05-FRP", desc: "PRIMO 5K 1F 240V", price: 1492.50, cat: "FRONIUS"},
-            {sku: "PV-IN-06-FRP", desc: "PRIMO 6K 1F 240V", price: 1587.49, cat: "FRONIUS"},
-            {sku: "PV-IN-76-FRP", desc: "PRIMO 7.6K 1F 240V", price: 1924.99, cat: "FRONIUS"},
-            {sku: "PV-IN-82-FRP", desc: "PRIMO 8.2K 1F 240V", price: 2037.49, cat: "FRONIUS"},
-            {sku: "PV-IN-10-FRP", desc: "PRIMO 10K 1F 240V", price: 2721.25, cat: "FRONIUS"},
-            {sku: "PV-IN-GEN38-FRP", desc: "PRIMO GEN24 3.8K 1F 240V", price: 1654.40, cat: "FRONIUS"},
-            {sku: "PV-INH-GEN10P-FRP", desc: "PRIMO GEN24 PLUS 10K 1F 240V HIB", price: 4522.83, cat: "FRONIUS"},
-            {sku: "PV-IN-15-FRS", desc: "SYMO 15K 3F 480V", price: 3450.00, cat: "FRONIUS"},
-            {sku: "PV-IN-20-FRS", desc: "SYMO 20K 3F 480V", price: 3845.00, cat: "FRONIUS"},
+    <main class="container mx-auto px-6 py-12">
+        <div class="grid lg:grid-cols-4 gap-8">
             
-            // SOLIS
-            {sku: "PV-IN-1S6-SL", desc: "SOLIS S6 1K 1F 110V CD", price: 293.75, cat: "SOLIS"},
-            {sku: "PV-IN-15S6-SL", desc: "SOLIS S6 1.5K 1F 110V CD", price: 318.75, cat: "SOLIS"},
-            {sku: "PV-IN-3S6-SL", desc: "SOLIS S6 3K 1F 220V CD", price: 456.25, cat: "SOLIS"},
-            {sku: "PV-INH-1P8KS6-SL", desc: "SOLIS S6 8K 1F 220V HIB BAT LV", price: 1994.49, cat: "SOLIS"},
-            {sku: "PV-INH-3P30KLV-SL", desc: "SOLIS S6 30K 3F 220V HIB BAT HV", price: 9595.59, cat: "SOLIS"},
+            <aside class="space-y-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold mb-4 uppercase text-xs tracking-widest text-slate-400">Búsqueda Avanzada</h3>
+                    <input type="text" id="searchInput" placeholder="SKU o Modelo..." class="w-full p-3 rounded-xl border bg-slate-50 outline-none mb-4">
+                    
+                    <h3 class="font-bold mb-4 uppercase text-xs tracking-widest text-slate-400">Categorías</h3>
+                    <select id="brandFilter" class="w-full p-3 rounded-xl border bg-slate-50 outline-none font-medium">
+                        <option value="">Todo el Almacén</option>
+                        <option value="FRONIUS">Fronius</option>
+                        <option value="SOLIS">Solis</option>
+                        <option value="GROWATT">Growatt</option>
+                        <option value="HUAWEI">Huawei</option>
+                        <option value="SRNE">SRNE</option>
+                        <option value="MOD">Módulos Solares</option>
+                        <option value="BAT">Baterías</option>
+                    </select>
+                </div>
+            </aside>
 
-            // GROWATT
-            {sku: "PV-IN-TL3KX2-GW", desc: "GROWATT MIC 3K 1F 220V TL-X2", price: 314.38, cat: "GROWATT"},
-            {sku: "PV-IN-TL5KX2-GW", desc: "GROWATT MIC 5K 1F 220V TL-X2", price: 423.75, cat: "GROWATT"},
-            {sku: "PV-IN-HYB10-GW", desc: "GROWATT SPH 10K 1F 220V HIB", price: 2469.01, cat: "GROWATT"},
-            {sku: "PV-BT-APX5P-GRW", desc: "GROWATT BATERIA APX 5KWH LI-ION", price: 1885.00, cat: "BAT"},
+            <section class="lg:col-span-3">
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
+                    <div class="catalog-container">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="sticky-header bg-slate-900 text-white uppercase text-[10px] font-bold tracking-widest">
+                                <tr>
+                                    <th class="p-4">Img</th>
+                                    <th class="p-4">SKU / Ficha Técnica</th>
+                                    <th class="p-4 text-center">Voltaje</th>
+                                    <th class="p-4 text-center">Stock</th>
+                                    <th class="p-4 text-right">Precio (USD)</th>
+                                    <th class="p-4 text-center">Añadir</th>
+                                </tr>
+                            </thead>
+                            <tbody id="catalogBody" class="divide-y divide-slate-100">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
 
-            // HOYMILES
-            {sku: "PV-IN-800ACC-HYM", desc: "HOYMILES HMS 800W 1F 110V C/ACC", price: 184.63, cat: "HOYMILES"},
-            {sku: "PV-IN-2KACC-HYM", desc: "HOYMILES HMS 2000W 1F 220V C/ACC", price: 240.00, cat: "HOYMILES"},
+    <div id="leadModal" class="fixed inset-0 z-[100] modal-overlay hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl">
+            <h2 class="text-2xl font-black mb-2 uppercase">Finalizar Cotización</h2>
+            <p class="text-slate-500 mb-6 text-sm">Por favor, ingresa tus datos para generar el documento oficial y enviarlo a tu WhatsApp.</p>
+            <form id="leadForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase mb-1">Nombre Completo</label>
+                    <input type="text" id="userName" required class="w-full p-3 rounded-xl border bg-slate-50 outline-none" placeholder="Juan Pérez">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase mb-1">WhatsApp (10 dígitos)</label>
+                    <input type="tel" id="userPhone" required class="w-full p-3 rounded-xl border bg-slate-50 outline-none" placeholder="6121234567">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase mb-1">Correo Electrónico</label>
+                    <input type="email" id="userEmail" required class="w-full p-3 rounded-xl border bg-slate-50 outline-none" placeholder="contacto@empresa.com">
+                </div>
+                <button type="submit" class="w-full bg-aqua text-slate-900 font-black py-4 rounded-xl shadow-lg hover:brightness-110 transition-all uppercase tracking-widest mt-4">
+                    Obtener Cotización ⚡
+                </button>
+            </form>
+        </div>
+    </div>
 
-            // PANELES
-            {sku: "PV-MOD-460-LON", desc: "LONGI SOLAR 460W MONO PERC", price: 135.00, cat: "MOD"},
-            {sku: "PV-MOD-550-SER", desc: "SERAPHIM 550W MONO PERC", price: 168.00, cat: "MOD"},
+    <script>  
+<script>
+        const productos = [
+            { sku: "PV-IN-38-FRP", desc: "PRIMO 3.8K 1F 240V", volt: "240V monofásico", price: 1452.10, cat: "INV", stock: 15, img: "fronius_primo.png" },
+            { sku: "PV-IN-05-FRP", desc: "PRIMO 5K 1F 240V", volt: "240V monofásico", price: 1552.20, cat: "INV", stock: 15, img: "fronius_primo.png" },
+            { sku: "PV-IN-06-FRP", desc: "PRIMO 6K 1F 240V", volt: "240V monofásico", price: 1650.99, cat: "INV", stock: 15, img: "fronius_primo.png" },
+            { sku: "PV-IN-76-FRP", desc: "PRIMO 7.6K 1F 240V", volt: "240V monofásico", price: 2001.99, cat: "INV", stock: 15, img: "fronius_primo.png" },
+            { sku: "PV-IN-82-FRP", desc: "PRIMO 8.2K 1F 240V", volt: "240V monofásico", price: 2118.99, cat: "INV", stock: 15, img: "fronius_primo.png" },
+            { sku: "PV-IN-10-FRP", desc: "PRIMO 10K 1F 240V", volt: "240V monofásico", price: 2830.10, cat: "INV", stock: 15, img: "fronius_primo.png" },
+            { sku: "PV-IN-114-FRP", desc: "PRIMO 11.4K 1F 220V", volt: "220V monofásico", price: 2989.99, cat: "INV", stock: 15, img: "fronius_primo.png" },
+            { sku: "PV-IN-125-FRP", desc: "PRIMO 12.5K 1F 240V", volt: "240V monofásico", price: 3304.60, cat: "INV", stock: 15, img: "fronius_primo.png" },
+            { sku: "PV-IN-15-FRP", desc: "PRIMO 15K 1F 240V", volt: "240V monofásico", price: 3889.60, cat: "INV", stock: 15, img: "fronius_primo.png" },
+            { sku: "PV-IN-GEN38-FRP", desc: "PRIMO GEN24 3.8K 1F 240V", volt: "240V monofásico", price: 1720.58, cat: "INV", stock: 15, img: "fronius_gen24.png" },
+            { sku: "PV-IN-GEN5-FRP", desc: "PRIMO GEN24 5K 1F 240V", volt: "240V monofásico", price: 2110.50, cat: "INV", stock: 15, img: "fronius_gen24.png" },
+            { sku: "PV-IN-GEN6-FRP", desc: "PRIMO GEN24 6K 1F 240V", volt: "240V monofásico", price: 2314.74, cat: "INV", stock: 15, img: "fronius_gen24.png" },
+            { sku: "PV-IN-GEN77-FRP", desc: "PRIMO GEN24 7.7K 1F 240V", volt: "220V monofásico", price: 2822.25, cat: "INV", stock: 15, img: "fronius_gen24.png" },
+            { sku: "PV-IN-GEN10-FRP", desc: "PRIMO GEN24 10K 1F 240V", volt: "240V monofásico", price: 3583.50, cat: "INV", stock: 15, img: "fronius_gen24.png" },
+            { sku: "PV-INH-GEN38P-FRP", desc: "PRIMO GEN24 PLUS 3.8K 1F 240V Híbrido", volt: "240V monofásico", price: 2259.04, cat: "INV", stock: 15, img: "fronius_gen24_plus.png" },
+            { sku: "PV-INH-GEN5P-FRP", desc: "PRIMO GEN24 PLUS 5K 1F 240V Híbrido", volt: "240V monofásico", price: 2772.73, cat: "INV", stock: 15, img: "fronius_gen24_plus.png" },
+            { sku: "PV-INH-GEN6P-FRP", desc: "PRIMO GEN24 PLUS 6K 1F 240V Híbrido", volt: "240V monofásico", price: 3038.87, cat: "INV", stock: 15, img: "fronius_gen24_plus.png" },
+            { sku: "PV-INH-GEN77P-FRP", desc: "PRIMO GEN24 PLUS 7.7K 1F 240V Híbrido", volt: "240V monofásico", price: 3688.72, cat: "INV", stock: 15, img: "fronius_gen24_plus.png" },
+            { sku: "PV-INH-GEN10P-FRP", desc: "PRIMO GEN24 PLUS 10K 1F 240V Híbrido", volt: "240V monofásico", price: 4703.74, cat: "INV", stock: 15, img: "fronius_gen24_plus.png" },
+            { sku: "PV-IN-24WA-FRS", desc: "SYMOADV 24K 3F 480V", volt: "480V trifásico", price: 3379.99, cat: "INV", stock: 15, img: "fronius_symo.png" },
+            { sku: "PV-IN-24LA-FRS", desc: "SYMOADV 24K 3F 480V LT", volt: "480V trifásico", price: 3249.99, cat: "INV", stock: 15, img: "fronius_symo.png" },
+            { sku: "PV-IN-50D-FRS", desc: "TAURO-D 50.0k 3F 208-220V", volt: "220V trifasico", price: 9488.70, cat: "INV", stock: 15, img: "fronius_tauro.png" },
+            { sku: "PV-IN-DTM-FR", desc: "ACC DATAMANAGER 2.0 GSP", volt: "N/A", price: 341.90, cat: "ACC", stock: 100, img: "fronius_datamanager.png" },
+            { sku: "PV-ACC-SMRT-FRS", desc: "ACC SMART METER 240/480V", volt: "N/A", price: 430.30, cat: "ACC", stock: 100, img: "fronius_smart_meter.png" },
+            { sku: "PV-SM-2502-FRS", desc: "ACC CT 1\" 250A:333mV 1PZA", volt: "N/A", price: 57.06, cat: "ACC", stock: 100, img: "fronius_ct.png" },
+            { sku: "PV-SM-6002-FRS", desc: "ACC CT 2\" 600A:333mV 1 PZA", volt: "N/A", price: 98.81, cat: "ACC", stock: 100, img: "fronius_ct.png" },
+            { sku: "PV-SM-10002-FRS", desc: "ACC CT 3\" 1000A:333mV 1 PZA", volt: "N/A", price: 167.99, cat: "ACC", stock: 100, img: "fronius_ct.png" },
+            { sku: "PV-IN-BB-FR", desc: "ACC FRONIUS BUSBAR CC +", volt: "N/A", price: 26.88, cat: "ACC", stock: 100, img: "fronius_busbar.png" },
+            { sku: "PV-IN-CBB-FR", desc: "ACC FRONIUS BUSBAR CC -", volt: "N/A", price: 26.88, cat: "ACC", stock: 100, img: "fronius_busbar.png" }
+       // Continuación de la lista de productos (Solis y Accesorios)
+        const productosSolis = [
+            { sku: "PV-IN-1S6-SL", desc: "S6 1K 1F 110V CD", volt: "110V monofasico", price: 305.50, cat: "INV", stock: 15, img: "solis_s6.png" },
+            { sku: "PV-IN-1S62S-SL", desc: "S6 1K 1F 220V CD", volt: "220V monofásico", price: 245.70, cat: "INV", stock: 15, img: "solis_s6.png" },
+            { sku: "PV-IN-2S6CM-SL", desc: "S6 2K 1F 220V CM", volt: "220V monofásico", price: 306.80, cat: "INV", stock: 15, img: "solis_s6.png" },
+            { sku: "PV-IN-25S6S2CM-SL", desc: "S6-S 2.5K 1F 220V CM", volt: "220V monofásico", price: 418.59, cat: "INV", stock: 15, img: "solis_s6.png" },
+            { sku: "PV-IN-3S6S2CM-SL", desc: "S6-S 3K 1F 110V CM", volt: "110V monofásico", price: 754.00, cat: "INV", stock: 15, img: "solis_s6.png" },
+            { sku: "PV-IN-3S6SCM-SL", desc: "S6-S 3K 1F 220V CM", volt: "220V monofásico", price: 336.70, cat: "INV", stock: 15, img: "solis_s6.png" },
+            { sku: "PV-IN-36S6CM-SL", desc: "S6-S 3.6K 1F 220V CM", volt: "220V monofásico", price: 421.20, cat: "INV", stock: 15, img: "solis_s6.png" },
+            { sku: "PV-IN-4S6CM-SL", desc: "S6-S 4K 1F 220V CM", volt: "220V monofásico", price: 443.30, cat: "INV", stock: 15, img: "solis_s6.png" },
+            { sku: "PV-IN-5S6CM-SL", desc: "S6-S 5K 1F 220V CM", volt: "220V monofásico", price: 469.30, cat: "INV", stock: 15, img: "solis_s6.png" },
+            { sku: "PV-IN-6S6S2CM-SL", desc: "S6-S 6K 1F 220V CM", volt: "220V monofásico", price: 553.80, cat: "INV", stock: 15, img: "solis_s6.png" },
+            { sku: "PV-IN-5S8K1FM-SL", desc: "S5 8K 1F 220V CM", volt: "220V monofásico", price: 894.40, cat: "INV", stock: 15, img: "solis_s5.png" },
+            { sku: "PV-IN-5S10K1FM-SL", desc: "S5 10K 1F 220V CM", volt: "220V monofásico", price: 988.00, cat: "INV", stock: 15, img: "solis_s5.png" },
+            { sku: "PV-IN-3PS5CM-SL", desc: "S5 10K 3F 220V CM", volt: "220V trifásico", price: 2063.10, cat: "INV", stock: 15, img: "solis_s5_3f.png" },
+            { sku: "PV-IN-5S15K3FM-SL", desc: "S5 15K 3F 220V CM", volt: "220V trifásico", price: 2403.70, cat: "INV", stock: 15, img: "solis_s5_3f.png" },
+            { sku: "PV-IN-5S15KCM-SL", desc: "S5 15K 3F 480V CM", volt: "480V trifásico", price: 2087.80, cat: "INV", stock: 15, img: "solis_s5_480.png" },
+            { sku: "PV-IN-5S20K3FM-SL", desc: "S5 20KW 3F 220V CM", volt: "220V trifásico", price: 2601.30, cat: "INV", stock: 15, img: "solis_s5_3f.png" },
+            { sku: "PV-IN-20S5CM-SL", desc: "S5 20KW 3F 480V CM", volt: "480V trifásico", price: 2193.10, cat: "INV", stock: 15, img: "solis_s5_480.png" },
+            { sku: "PV-IN-5S30K3FM-SL", desc: "S5 30K 3F 220V CM", volt: "220V trifásico", price: 3378.70, cat: "INV", stock: 15, img: "solis_s5_3f.png" },
+            { sku: "PV-IN-5S40K3F4M-SL", desc: "S5 40K 3F 480V CM", volt: "480V trifásico", price: 3027.70, cat: "INV", stock: 15, img: "solis_s5_480.png" },
+            { sku: "PV-IN-5S50K3FM-SL", desc: "S5 50K 3F 220V CM", volt: "220V trifásico", price: 4446.00, cat: "INV", stock: 15, img: "solis_s5_3f.png" },
+            { sku: "PV-IN-5S50K34M-SL", desc: "S5 50K 3F 480V CM", volt: "480V trifásico", price: 3082.30, cat: "INV", stock: 15, img: "solis_s5_480.png" },
+            { sku: "PV-IN-5S60K3FM-SL", desc: "S5 60K 3F 220V CM", volt: "220V trifásico", price: 4501.90, cat: "INV", stock: 15, img: "solis_s5_3f.png" },
+            { sku: "PV-IN-5S60K3F4M-SL", desc: "S5 60K 3F 480V CM", volt: "480V trifásico", price: 3302.00, cat: "INV", stock: 15, img: "solis_s5_480.png" },
+            { sku: "PV-IN-80KS5M-SL", desc: "S5 80K 3F 480V CM", volt: "480V trifásico", price: 4769.70, cat: "INV", stock: 15, img: "solis_s5_high.png" },
+            { sku: "PV-IN-100KS5CM-SL", desc: "S5 100K 3F 480V CM", volt: "480V trifásico", price: 4862.00, cat: "INV", stock: 15, img: "solis_s5_high.png" },
+            { sku: "PV-IN-5S124K3F4M-SL", desc: "S5 124K 3F 480V CM", volt: "480V trifásico", price: 5099.90, cat: "INV", stock: 15, img: "solis_s5_high.png" },
+            { sku: "PV-INH-1P5S5-SL", desc: "S6 5K 1F 220V Híbrido BAT HV", volt: "220V monofásico", price: 2078.70, cat: "INV", stock: 15, img: "solis_hybrid_hv.png" },
+            { sku: "PV-INH-1P8S5-SL", desc: "S6 8K 1F 220V Híbrido BAT HV", volt: "220V monofásico", price: 3170.70, cat: "INV", stock: 15, img: "solis_hybrid_hv.png" },
+            { sku: "PV-INH-1P114S5-SL", desc: "S6 11.4K 1F 220V Híbrido BAT HV", volt: "220V monofásico", price: 3508.70, cat: "INV", stock: 15, img: "solis_hybrid_hv.png" },
+            { sku: "PV-INH-1P8KS6-SL", desc: "S6 8K 1F 220V Híbrido BAT LV", volt: "220V monofásico", price: 2074.27, cat: "INV", stock: 15, img: "solis_hybrid_lv.png" },
+            { sku: "PV-INH-1P10KS6-SL", desc: "S6 10K 1F 220V Híbrido BAT LV", volt: "220V monofásico", price: 2772.06, cat: "INV", stock: 15, img: "solis_hybrid_lv.png" },
+            { sku: "PV-INH-1P16KS6-SL", desc: "S6 16K 1F 220V Híbrido BAT LV", volt: "220V monofásico", price: 3441.18, cat: "INV", stock: 15, img: "solis_hybrid_lv.png" },
+            { sku: "PV-INH-3P30KLV-SL", desc: "S6 30K 3F 220V Híbrido BAT HV", volt: "220V trifásico", price: 9979.41, cat: "INV", stock: 15, img: "solis_hybrid_3f.png" },
+            { sku: "PV-INH-3P30KHV-SL", desc: "S6 30K 3F 480V Híbrido BAT HV", volt: "480V trifásico", price: 10151.47, cat: "INV", stock: 15, img: "solis_hybrid_3f.png" },
+            { sku: "PV-INH-3P60KHV-SL", desc: "S6 60K 3F 480V Híbrido BAT HV", volt: "480V trifásico", price: 15294.12, cat: "INV", stock: 15, img: "solis_hybrid_3f.png" },
+            { sku: "PV-IN-EPM3PR-SL", desc: "EPM3 5G PRO 3F 220-480V", volt: "N/A", price: 391.30, cat: "ACC", stock: 100, img: "solis_epm.png" },
+            { sku: "PV-MD-CT-SL", desc: "CT 1PZA 100A:33.3mA 1F", volt: "N/A", price: 69.99, cat: "ACC", stock: 100, img: "solis_ct.png" },
+            { sku: "PV-MD-3P300-SL", desc: "CT 3PZA 300A:5A 3F", volt: "N/A", price: 146.28, cat: "ACC", stock: 100, img: "solis_ct_3p.png" },
+            { sku: "PV-INM-GLWF-SL", desc: "WIFI GL-S (2.0) (S3-WiFi-ST)", volt: "N/A", price: 50.70, cat: "ACC", stock: 100, img: "solis_wifi.png" },
+            { sku: "PV-IN-MTWF-SL", desc: "ACC MONITOREO SOLIS WIFI STICK", volt: "N/A", price: 39.00, cat: "ACC", stock: 100, img: "solis_wifi.png" },
+            { sku: "PV-IN-LAN-SL", desc: "ACC SOLIS MONITOREO LAN 4 PINES", volt: "N/A", price: 25.74, cat: "ACC", stock: 100, img: "solis_lan.png" }
+        // Continuación de la lista de productos (Growatt y Accesorios de Monitoreo)
+        const productosGrowatt = [
+            { sku: "PV-IN-TL2KX2-GW", desc: "MIC 2K 1F 220V TL-X2", volt: "220V monofásico", price: 304.20, cat: "INV", stock: 15, img: "growatt_mic.png" },
+            { sku: "PV-IN-TL25KX2-GW", desc: "MIC 2.5K 1F 220V TL-X2", volt: "220V monofásico", price: 313.30, cat: "INV", stock: 15, img: "growatt_mic.png" },
+            { sku: "PV-IN-TL3KX2-GW", desc: "MIC 3K 1F 220V TL-X2", volt: "220V monofásico", price: 326.95, cat: "INV", stock: 15, img: "growatt_mic.png" },
+            { sku: "PV-IN-TL33KX2-GW", desc: "MIC 3.3K 1F 220V TL-X2", volt: "220V monofásico", price: 336.70, cat: "INV", stock: 15, img: "growatt_mic.png" },
+            { sku: "PV-IN-TL36KX2-GW", desc: "MIN 3.6K 1F 220V TL-X2", volt: "220V monofásico", price: 415.87, cat: "INV", stock: 15, img: "growatt_min.png" },
+            { sku: "PV-IN-TL42KX2-GW", desc: "MIN 4.2K 1F 220V TL-X2", volt: "220V monofásico", price: 434.20, cat: "INV", stock: 15, img: "growatt_min.png" },
+            { sku: "PV-IN-TL5KX2-GW", desc: "MIN 5K 1F 220V TL-X2", volt: "220V monofásico", price: 440.70, cat: "INV", stock: 15, img: "growatt_min.png" },
+            { sku: "PV-IN-TL6KX2-GW", desc: "MIN 6K 1F 220V TL-X2", volt: "220V monofásico", price: 523.90, cat: "INV", stock: 15, img: "growatt_min.png" },
+            { sku: "PV-IN-TL8KX2-GW", desc: "MIN 8K 1F 220V TL-X2", volt: "220V monofásico", price: 761.80, cat: "INV", stock: 15, img: "growatt_min.png" },
+            { sku: "PV-IN-TL10KX2-GW", desc: "MIN 10K 1F 220V TL-X2", volt: "220V monofásico", price: 845.65, cat: "INV", stock: 15, img: "growatt_min.png" },
+            { sku: "PV-IN-MID15-GW", desc: "MID 15K 3F 220V TL3-XL2", volt: "220V trifásico", price: 1784.90, cat: "INV", stock: 15, img: "growatt_mid.png" },
+            { sku: "PV-IN-MID20-GW", desc: "MID 20K 3F 220V TL3-XL2", volt: "220V trifásico", price: 1926.60, cat: "INV", stock: 15, img: "growatt_mid.png" },
+            { sku: "PV-IN-MID25-GW", desc: "MID 25K 3F 220V TL3-XL2", volt: "220V trifásico", price: 2061.80, cat: "INV", stock: 15, img: "growatt_mid.png" },
+            { sku: "PV-IN-KTL330-GW", desc: "MAC 30K 3F 220V KTL3-XL", volt: "220V trifásico", price: 2164.50, cat: "INV", stock: 15, img: "growatt_mac.png" },
+            { sku: "PV-IN-KTL3302-GW", desc: "MAC 30K 3F 220V KTL3-XL2", volt: "220V trifásico", price: 2164.50, cat: "INV", stock: 15, img: "growatt_mac.png" },
+            { sku: "PV-IN-KTL3362-GW", desc: "MAC 36K 3F 220V KTL3-XL2", volt: "220V trifásico", price: 2299.70, cat: "INV", stock: 15, img: "growatt_mac.png" },
+            { sku: "PV-IN-KT350-GW", desc: "MAC 50K 3F 480V CM TL3", volt: "480V trifásico", price: 2320.50, cat: "INV", stock: 15, img: "growatt_mac_480.png" },
+            { sku: "PV-IN-KTL3-60-GRW", desc: "MAX 60K 3F 220V KTL3", volt: "220V trifásico", price: 3769.99, cat: "INV", stock: 15, img: "growatt_max.png" },
+            { sku: "PV-IN-KTL370-GW", desc: "MAC 70K 3F 480V KTL3-XL", volt: "480V trifásico", price: 2622.10, cat: "INV", stock: 15, img: "growatt_mac_480.png" },
+            { sku: "PV-IN-KTL3-70-GRW", desc: "MAX 70K 3F 220V KTL3", volt: "220V trifásico", price: 3667.30, cat: "INV", stock: 15, img: "growatt_max.png" },
+            { sku: "PV-IN-KTL3-75-GRW", desc: "MAX 75K 3F 220V KTL3", volt: "220V trifásico", price: 4000.10, cat: "INV", stock: 15, img: "growatt_max.png" },
+            { sku: "PV-IN-KTL3-124-GRW", desc: "MAX 124K 3F 480V KTL3", volt: "480V trifásico", price: 3597.10, cat: "INV", stock: 15, img: "growatt_max_480.png" },
+            { sku: "PV-IN-KTL3-150-GRW", desc: "MAX 150K 3F 480V KTL3", volt: "480V trifásico", price: 3781.70, cat: "INV", stock: 15, img: "growatt_max_480.png" },
+            { sku: "PV-IN-HYB10-GW", desc: "SPH 10K 1F 220V Híbrido", volt: "220V monofásico", price: 2567.77, cat: "INV", stock: 15, img: "growatt_sph.png" },
+            { sku: "PV-IN-MSPX-GRW", desc: "ACC MONITOREO SHINE WIFI-X", volt: "N/A", price: 42.90, cat: "ACC", stock: 100, img: "shine_wifi_x.png" },
+            { sku: "PV-IN-MTSS-GRW", desc: "ACC MONITOREO SHINE WIFI-S", volt: "N/A", price: 26.00, cat: "ACC", stock: 100, img: "shine_wifi_s.png" },
+            { sku: "PV-IN-4GX-GRW", desc: "ACC MONITOREO SHINE 4G-X", volt: "N/A", price: 135.20, cat: "ACC", stock: 100, img: "shine_4g_x.png" },
+            { sku: "PV-MON-SMR-GRW", desc: "ACC MONITOREO SHINEMASTER", volt: "N/A", price: 422.50, cat: "ACC", stock: 100, img: "shinemaster.png" },
+            { sku: "PV-ACC-MED-CORR-GRW", desc: "ACC MEDIDOR DE CORRIENTE", volt: "N/A", price: 202.80, cat: "ACC", stock: 100, img: "growatt_ct.png" },
+            { sku: "PV-ACC-SEM22-100-GRW", desc: "ACC SEM 100KW", volt: "N/A", price: 591.50, cat: "ACC", stock: 100, img: "growatt_sem.png" },
+            { sku: "PV-ACC-SEM48-200-GRW", desc: "ACC SEM-D 200KW", volt: "N/A", price: 591.50, cat: "ACC", stock: 100, img: "growatt_sem.png" },
+            { sku: "PV-ACC-SEM300-GRW", desc: "ACC SEM 300KW", volt: "N/A", price: 702.00, cat: "ACC", stock: 100, img: "growatt_sem.png" }
+        // Continuación de la lista de productos (Huawei y Accesorios)
+        const productosHuawei = [
+            { sku: "PV-IN-20K3P-HUA", desc: "SUN2000 20K 3F 220V", volt: "220V trifásico", price: 2415.40, cat: "INV", stock: 15, img: "huawei_sun2000_small.png" },
+            { sku: "PV-IN-50KLV-HUA", desc: "SUN2000 50K 3F 220V", volt: "220V trifásico", price: 5644.60, cat: "INV", stock: 15, img: "huawei_sun2000_large.png" },
+            { sku: "PV-IN-50K3P-HUA", desc: "SUN2000 50K 3F 480V", volt: "480V trifásico", price: 3183.70, cat: "INV", stock: 15, img: "huawei_sun2000_large.png" },
+            { sku: "PV-IN-80KLV-HUA", desc: "SUN2000 80K 3F 220V", volt: "220V trifásico", price: 5848.70, cat: "INV", stock: 15, img: "huawei_sun2000_large.png" },
+            { sku: "PV-IN-150K3P-HUA", desc: "SUN2000 150K 3F 480V", volt: "480V trifásico", price: 8512.40, cat: "INV", stock: 15, img: "huawei_sun2000_huge.png" },
+            { sku: "PV-MON-SMTL-HUA", desc: "MONITOREO SMARTLOGGER 3000A", volt: "N/A", price: 648.70, cat: "ACC", stock: 100, img: "huawei_smartlogger.png" },
+            { sku: "PV-MON-ADA06-HUA", desc: "MONITOREO SDONGLE 4G 06", volt: "N/A", price: 169.00, cat: "ACC", stock: 100, img: "huawei_sdongle_4g.png" },
+            { sku: "PV-MON-05WL-HUA", desc: "MONITOREO SDONGLE 05 WLAN", volt: "N/A", price: 68.90, cat: "ACC", stock: 100, img: "huawei_sdongle_wlan.png" },
+            { sku: "PV-INH-2K1P-HUA", desc: "SUN2000 2K 1F 220V Híbrido", volt: "220V monofásico", price: 447.20, cat: "INV", stock: 15, img: "huawei_hybrid.png" },
+            { sku: "PV-INH-3K1P-HUA", desc: "SUN2000 3K 1F 220V Híbrido", volt: "220V monofásico", price: 497.55, cat: "INV", stock: 15, img: "huawei_hybrid.png" },
+            { sku: "PV-INH-4K1P-HUA", desc: "SUN2000 4K 1F 220V Híbrido", volt: "220V monofásico", price: 508.30, cat: "INV", stock: 15, img: "huawei_hybrid.png" },
+            { sku: "PV-INH-5K1P-HUA", desc: "SUN2000 5K 1F 220V Híbrido", volt: "220V monofásico", price: 570.70, cat: "INV", stock: 15, img: "huawei_hybrid.png" },
+            { sku: "PV-INH-6K1P-HUA", desc: "SUN2000 6K 1F 220V Híbrido", volt: "220V monofásico", price: 638.30, cat: "INV", stock: 15, img: "huawei_hybrid.png" },
+            { sku: "PV-INH-8K1P-HUA", desc: "SUN2000 8K 1F 220V", volt: "220V monofásico", price: 1016.60, cat: "INV", stock: 15, img: "huawei_hybrid_high.png" },
+            { sku: "PV-INH-10K1P-HUA", desc: "SUN2000 10K 1F 220V", volt: "220V monofásico", price: 1125.80, cat: "INV", stock: 15, img: "huawei_hybrid_high.png" },
+            { sku: "PV-ACC-DCDC-HUA", desc: "ACC CONVERTIDOR DC/DC", volt: "N/A", price: 1043.90, cat: "ACC", stock: 100, img: "huawei_dcdc.png" },
+            { sku: "PV-ACC-DC10-HUA", desc: "ACC HUAWEI CONTROLADOR 10KW", volt: "N/A", price: 1335.89, cat: "ACC", stock: 100, img: "huawei_controlador.png" },
+            { sku: "PV-ACC-ATF-HUA", desc: "ACC ATF 5K 1F 60HZ 5 000 W", volt: "240V/120V monofásico", price: 412.10, cat: "ACC", stock: 100, img: "huawei_atf.png" },
+            { sku: "PV-ACC-BOX-HUA", desc: "ACC BACKUP BOX BO", volt: "N/A", price: 520.00, cat: "ACC", stock: 100, img: "huawei_backup_box.png" },
+            { sku: "PV-ACC-DT60-HUA", desc: "ACC METER DTSU666-HW/YDS60-80", volt: "N/A", price: 110.10, cat: "ACC", stock: 100, img: "huawei_meter.png" },
+            { sku: "PV-ACC-CC3M-HUA", desc: "ACC CABLE ALIM 180A 2P 1TF 3M", volt: "N/A", price: 68.41, cat: "ACC", stock: 100, img: "huawei_cable.png" },
+            { sku: "PV-ACC-OPT6-HUA", desc: "ACC OPTIMIZADOR 600W", volt: "N/A", price: 64.35, cat: "ACC", stock: 100, img: "huawei_optimizer.png" }
+        // Continuación de la lista de productos (Hoymiles: Microinversores y Accesorios)
+        const productosHoymiles = [
+            { sku: "PV-IN-800ACC-HYM", desc: "HMS 800W 1F 110V C/ACC", volt: "110V monofásico", price: 192.01, cat: "INV", stock: 15, img: "hoymiles_hms_800.png" },
+            { sku: "PV-IN-1KACC-HYM", desc: "HMS 1000W 1F 220V C/ACC", volt: "220V monofásico", price: 181.22, cat: "INV", stock: 15, img: "hoymiles_hms_1000.png" },
+            { sku: "PV-IN-1500HM-HYM", desc: "HM 1500W 1F 220V", volt: "220V monofásico", price: 169.17, cat: "INV", stock: 15, img: "hoymiles_hm_1500.png" },
+            { sku: "PV-IN-2KACC-HYM", desc: "HMS 2000W 1F 220V C/ACC", volt: "220V monofásico", price: 249.60, cat: "INV", stock: 15, img: "hoymiles_hms_2000.png" },
+            { sku: "PV-IN-2000-3P-HYM", desc: "HMT 2000W 3F 220V", volt: "220V trifásico", price: 370.42, cat: "INV", stock: 15, img: "hoymiles_hmt_2000.png" },
+            { sku: "PV-IN-NECP-HYM", desc: "ACC ENDCAP P/CONECTOR HEMBRA", volt: "N/A", price: 3.39, cat: "ACC", stock: 100, img: "hoymiles_endcap.png" },
+            { sku: "PV-IN-ECCM-HYM", desc: "ACC ENDCAP P/CONECTOR MACHO", volt: "N/A", price: 3.39, cat: "ACC", stock: 100, img: "hoymiles_endcap_m.png" },
+            { sku: "PV-IN-ACCM-HYM", desc: "ACC CONECTOR MACHO AC", volt: "N/A", price: 10.24, cat: "ACC", stock: 100, img: "hoymiles_conn_m.png" },
+            { sku: "PV-IN-ACC-HYM", desc: "ACC CONECTOR HEMBRA C.A.", volt: "N/A", price: 10.24, cat: "ACC", stock: 100, img: "hoymiles_conn_h.png" },
+            { sku: "PV-IN-ECAP-HYM", desc: "ACC ENDCAP P/CABLE TRONCAL AC", volt: "N/A", price: 3.55, cat: "ACC", stock: 100, img: "hoymiles_troncal_cap.png" },
+            { sku: "PV-IN-CTRAC-HYM", desc: "ACC CABLE TRONCAL AC 20T 10AWG", volt: "N/A", price: 22.54, cat: "ACC", stock: 100, img: "hoymiles_cable_ac.png" },
+            { sku: "PV-IN-CAPTO-HYM", desc: "ACC CAP P/PUERTO CABLE TRONCAL", volt: "N/A", price: 3.55, cat: "ACC", stock: 100, img: "hoymiles_port_cap.png" },
+            { sku: "PV-DC-PTO-HYM", desc: "ACC HTA P/DESCONEXIÓN DE PUERTO", volt: "N/A", price: 3.55, cat: "ACC", stock: 100, img: "hoymiles_tool_1.png" },
+            { sku: "PV-DC-CONEC-HYM", desc: "ACC DESCONECTADOR DE CONECTOR", volt: "N/A", price: 3.55, cat: "ACC", stock: 100, img: "hoymiles_tool_2.png" },
+            { sku: "PV-IN-WIFIPRO-HYM", desc: "ACC MONITOREO HMS DTU PRO S", volt: "N/A", price: 266.50, cat: "ACC", stock: 100, img: "hoymiles_dtu_pro.png" },
+            { sku: "PV-IN-WFDTU-HYM", desc: "ACC MONITOREO HMS DTU LITE S", volt: "N/A", price: 123.50, cat: "ACC", stock: 100, img: "hoymiles_dtu_lite.png" },
+            { sku: "PV-IN-MTDT-HYM", desc: "ACC MONITOREO MI GPRS", volt: "N/A", price: 194.99, cat: "ACC", stock: 100, img: "hoymiles_gprs.png" },
+            { sku: "PV-IN-DTU-HYM", desc: "ACC MONITOREO MI DTU W100", volt: "N/A", price: 102.70, cat: "ACC", stock: 100, img: "hoymiles_dtu_w100.png" },
+            { sku: "PV-IN-ACDC-HYM", desc: "ACC HERRAMIENTA DESCONECTOR AC", volt: "N/A", price: 3.21, cat: "ACC", stock: 100, img: "hoymiles_tool_ac.png" },
+            { sku: "PV-IN-CCH-HYM", desc: "ACC CABLE CONECTOR HMS", volt: "N/A", price: 20.53, cat: "ACC", stock: 100, img: "hoymiles_cable_hms.png" },
+            { sku: "PV-IN-CCT-HYM", desc: "ACC CONECTOR P/CABLE TRONCAL HMS", volt: "N/A", price: 5.47, cat: "ACC", stock: 100, img: "hoymiles_conn_troncal.png" },
+            { sku: "PV-IN-CON-HYM", desc: "ACC CONECTOR FINAL HMS", volt: "N/A", price: 4.10, cat: "ACC", stock: 100, img: "hoymiles_conn_final.png" },
+            { sku: "PV-IN-ECN-HYM", desc: "ACC EXTENSION DE CONECTOR HMS", volt: "N/A", price: 4.10, cat: "ACC", stock: 100, img: "hoymiles_ext_hms.png" },
+            { sku: "PV-IN-CTP-HYM", desc: "ACC TAPA FINAL HMS", volt: "N/A", price: 1.37, cat: "ACC", stock: 100, img: "hoymiles_tapa_hms.png" },
+            { sku: "PV-IN-LLD-HYM", desc: "ACC LLAVE DESCONEXIÓN HMS", volt: "N/A", price: 4.10, cat: "ACC", stock: 100, img: "hoymiles_llave_hms.png" },
+            { sku: "PV-IN-CC230-HYM", desc: "ACC HMT CABLE NA10-230", volt: "N/A", price: 29.06, cat: "ACC", stock: 100, img: "hoymiles_hmt_cable.png" },
+            { sku: "PV-IN-HER-3P-HYM", desc: "ACC HMT DESCONECTOR CABLE TRONCAL 3F", volt: "N/A", price: 5.82, cat: "ACC", stock: 100, img: "hoymiles_hmt_tool.png" },
+            { sku: "PV-IN-TCN-3P-HYM", desc: "ACC HMT CONECTOR CABLE TRONCAL 3F", volt: "N/A", price: 13.07, cat: "ACC", stock: 100, img: "hoymiles_hmt_conn.png" },
+            { sku: "PV-IN-EXT-3P-HYM", desc: "ACC HMT CONECTOR PARA EXTENSIÓN 3F", volt: "N/A", price: 5.82, cat: "ACC", stock: 100, img: "hoymiles_hmt_ext.png" },
+            { sku: "PV-ACC-DT60-HYM", desc: "ACC METER DTSU666 (CT-2 x 250A)", volt: "N/A", price: 208.00, cat: "ACC", stock: 100, img: "hoymiles_meter_dtsu.png" }
+        // Continuación de la lista de productos (Growatt línea NEO y Accesorios)
+        const productosGrowattNeo = [
+            { sku: "PV-IN-N2500-GRW", desc: "NEO-X2 2500W 1F 220V", volt: "220V monofásico", price: 271.70, cat: "INV", stock: 15, img: "growatt_neo_2500.png" },
+            { sku: "PV-ACC-CAP-GRW", desc: "ACC CAP CONECTOR AC", volt: "N/A", price: 2.99, cat: "ACC", stock: 100, img: "growatt_neo_cap.png" },
+            { sku: "PV-ACC-DESC-GRW", desc: "ACC DESCONECTOR MICRO-CONEC", volt: "N/A", price: 2.99, cat: "ACC", stock: 100, img: "growatt_neo_tool.png" },
+            { sku: "PV-ACC-SWL-GRW", desc: "ACC MONITOREO SHINE WIFI-X (NEO)", volt: "N/A", price: 42.90, cat: "ACC", stock: 100, img: "shine_wifi_x.png" }
+       // Continuación de la lista de productos (Cableado, Conectores y Herramientas)
+        const productosAccesoriosInstalacion = [
+            { sku: "PV-CB-04N-SLO", desc: "CABLE FV 4mm (12AWG) NEGRO 100 m", volt: "N/A", price: 75.40, cat: "ACC", stock: 500, img: "cable_fv_4n.png" },
+            { sku: "PV-CB-04R-SLO", desc: "CABLE FV 4mm (12AWG) ROJO 100 m", volt: "N/A", price: 75.40, cat: "ACC", stock: 500, img: "cable_fv_4r.png" },
+            { sku: "PV-CB-06N-SLO", desc: "CABLE FV 6mm (10AWG) NEGRO 100 m", volt: "N/A", price: 110.49, cat: "ACC", stock: 500, img: "cable_fv_6n.png" },
+            { sku: "PV-CB-06R-SLO", desc: "CABLE FV 6mm (10AWG) ROJO 100 m", volt: "N/A", price: 110.49, cat: "ACC", stock: 500, img: "cable_fv_6r.png" },
+            { sku: "PV-CB-06N1-SLO", desc: "CABLE FV 6mm (10AWG) NEGRO 1000 m", volt: "N/A", price: 1192.09, cat: "ACC", stock: 500, img: "cable_fv_6n_1000.png" },
+            { sku: "PV-CB-06R1-SLO", desc: "CABLE FV 6mm (10AWG) ROJO 1000 m", volt: "N/A", price: 1192.09, cat: "ACC", stock: 500, img: "cable_fv_6r_1000.png" },
+            { sku: "PV-CB-04N2-SLO", desc: "CABLE FV 4MM (12AWG) NEGRO 500M", volt: "N/A", price: 481.77, cat: "ACC", stock: 500, img: "cable_fv_4n_500.png" },
+            { sku: "PV-CB-04R2-SLO", desc: "CABLE FV 4MM (12AWG) ROJO 500M", volt: "N/A", price: 481.77, cat: "ACC", stock: 500, img: "cable_fv_4r_500.png" },
+            { sku: "PV-CB-06N2-SLO", desc: "CABLE FV 6MM (10AWG) NEGRO 500M", volt: "N/A", price: 642.36, cat: "ACC", stock: 500, img: "cable_fv_6n_500.png" },
+            { sku: "PV-CB-06R2-SLO", desc: "CABLE FV 6MM (10AWG) ROJO 500M", volt: "N/A", price: 642.36, cat: "ACC", stock: 500, img: "cable_fv_6r_500.png" },
+            { sku: "PV-CN-MC4M-MA", desc: "CONECTOR MC4 CAL. 4mm", volt: "N/A", price: 1.79, cat: "ACC", stock: 500, img: "mc4_4mm.png" },
+            { sku: "PV-CN-MC6M-MA", desc: "CONECTOR MC4 CAL. 6mm", volt: "N/A", price: 1.81, cat: "ACC", stock: 500, img: "mc4_6mm.png" },
+            { sku: "PV-CN-MCY-MA", desc: "CONECTOR TIPO Y PARA MC4 (PAR)", volt: "N/A", price: 3.89, cat: "ACC", stock: 500, img: "mc4_y_connector.png" },
+            { sku: "PV-IN-PZ-MC4", desc: "PINZAS PONCHADORAS Y HERRAMIENTA MC4", volt: "N/A", price: 102.70, cat: "TOOL", stock: 50, img: "crimping_tool_mc4.png" },
+            { sku: "PV-ACC-LR5-LNG", desc: "ACC LONGI CONECTOR DC LR5 PAR", volt: "N/A", price: 1.56, cat: "ACC", stock: 500, img: "longi_dc_connector.png" },
+            { sku: "PV-CB-6N1000-VIA", desc: "CABLE FV 6MM (10AWG) NEGRO 1000M VKN", volt: "N/A", price: 1774.12, cat: "ACC", stock: 500, img: "cable_vkn_6n.png" },
+            { sku: "PV-CB-6R1000-VIA", desc: "CABLE FV 6MM (10AWG) ROJO 1000M VKN", volt: "N/A", price: 1774.12, cat: "ACC", stock: 500, img: "cable_vkn_6r.png" }
+        // Continuación de la lista de productos (Protecciones CD ZJBENY y Gabinetes)
+        const productosProteccionesCD = [
+            { sku: "PV-IT-13ACD-BN", desc: "INTERRUPTOR 13A, 600VCD 2P, ZJBENY", volt: "600VCD", price: 12.19, cat: "PROT", stock: 100, img: "zjbeny_breaker.png" },
+            { sku: "PV-IT-16ACD-BN", desc: "INTERRUPTOR 16A, 600VCD 2P, ZJBENY", volt: "600VCD", price: 13.18, cat: "PROT", stock: 100, img: "zjbeny_breaker.png" },
+            { sku: "PV-IT-25A10-BN", desc: "INTERRUPTOR 25A, 1000VCD 2P, ZJBENY", volt: "1000VCD", price: 12.74, cat: "PROT", stock: 100, img: "zjbeny_breaker_1000.png" },
+            { sku: "PV-IT-25ACD-BN", desc: "INTERRUPTOR 25A, 600VCD 2P, ZJBENY", volt: "600VCD", price: 12.74, cat: "PROT", stock: 100, img: "zjbeny_breaker.png" },
+            { sku: "PV-IT-32ACD-BN", desc: "INTERRUPTOR 32A, 600VCD 2P, ZJBENY", volt: "600VCD", price: 13.18, cat: "PROT", stock: 100, img: "zjbeny_breaker.png" },
+            { sku: "PV-IT-40A600-BN", desc: "INTERRUPTOR 40A, 600VCD 2P, ZJBENY", volt: "600VCD", price: 21.70, cat: "PROT", stock: 100, img: "zjbeny_breaker.png" },
+            { sku: "PV-DC-4P32A-BN", desc: "DESCONECTOR 2/4 POLOS, 32A 1000V, ZJBENY", volt: "1000VCD", price: 33.97, cat: "PROT", stock: 100, img: "zjbeny_isolator.png" },
+            { sku: "PV-DC-4P40A-BN", desc: "DESCONECTOR 2/4 POLOS, 40A 1000V, ZJBENY", volt: "1000VCD", price: 38.48, cat: "PROT", stock: 100, img: "zjbeny_isolator.png" },
+            { sku: "PV-DC-4P50A-BN", desc: "DESCONECTOR 2/4 POLOS, 50A 1000V, ZJBENY", volt: "1000VCD", price: 42.46, cat: "PROT", stock: 100, img: "zjbeny_isolator.png" },
+            { sku: "PV-SP-2040A-BN", desc: "SUPRESOR PICOS, 2P 600VCD 20/40KA ZJBENY", volt: "600VCD", price: 28.60, cat: "PROT", stock: 100, img: "zjbeny_spd.png" },
+            { sku: "PV-SP-S3P-BN", desc: "SUPRESOR PICOS 3P 1000VCD 20/40KA ZJBENY", volt: "1000VCD", price: 36.87, cat: "PROT", stock: 100, img: "zjbeny_spd_1000.png" },
+            { sku: "PV-PF-12A-BN", desc: "PORTAFUSIBLE C/F, 12A 1000VCD, ZJBENY", volt: "1000VCD", price: 5.59, cat: "PROT", stock: 100, img: "zjbeny_fuseholder.png" },
+            { sku: "PV-PF-15A-BN", desc: "PORTAFUSIBLE C/F, 15A 1000VCD, ZJBENY", volt: "1000VCD", price: 5.59, cat: "PROT", stock: 100, img: "zjbeny_fuseholder.png" },
+            { sku: "PV-PF-20A-BN", desc: "PORTAFUSIBLE C/F, 20A 1000VCD, ZJBENY", volt: "1000VCD", price: 5.59, cat: "PROT", stock: 100, img: "zjbeny_fuseholder.png" },
+            { sku: "PV-PF-30A-BN", desc: "PORTAFUSIBLE C/F, 30A 1000VCD, ZJBENY", volt: "1000VCD", price: 5.59, cat: "PROT", stock: 100, img: "zjbeny_fuseholder.png" },
+            { sku: "PV-FB-12A-BN", desc: "FUSIBLE 12A 1000VCD, ZJBENY", volt: "1000VCD", price: 3.03, cat: "PROT", stock: 100, img: "zjbeny_fuse.png" },
+            { sku: "PV-FB-15A-BN", desc: "FUSIBLE 15A 1000VCD, ZJBENY", volt: "1000VCD", price: 3.37, cat: "PROT", stock: 100, img: "zjbeny_fuse.png" },
+            { sku: "PV-FB-20A-BN", desc: "FUSIBLE 20A 1000VCD, ZJBENY", volt: "1000VCD", price: 3.37, cat: "PROT", stock: 100, img: "zjbeny_fuse.png" },
+            { sku: "PV-FB-30A-BN", desc: "FUSIBLE 30A 1000VCD, ZJBENY", volt: "1000VCD", price: 3.37, cat: "PROT", stock: 100, img: "zjbeny_fuse.png" },
+            { sku: "PV-CB-1/1-BN", desc: "STRING BOX, 1 IN - 1 OUT, ZJBENY", volt: "CD", price: 148.68, cat: "ACC", stock: 20, img: "zjbeny_string_box.png" },
+            { sku: "PV-CB-2/2-BN", desc: "STRING BOX, 2 IN - 2 OUT, ZJBENY", volt: "CD", price: 245.78, cat: "ACC", stock: 20, img: "zjbeny_string_box_double.png" },
+            { sku: "PV-CB-02-BN", desc: "COMBINER BOX, 2 IN - 1 OUT, ZJBENY", volt: "CD", price: 161.33, cat: "ACC", stock: 20, img: "zjbeny_combiner_box.png" },
+            { sku: "PV-CB-04-BN", desc: "COMBINER BOX, 4 IN - 1 OUT, ZJBENY", volt: "CD", price: 212.28, cat: "ACC", stock: 20, img: "zjbeny_combiner_box_4.png" },
+            { sku: "PV-CB-61-BN", desc: "COMBINER BOX, 6 IN - 1 OUT, ZJBENY", volt: "CD", price: 393.11, cat: "ACC", stock: 20, img: "zjbeny_combiner_box_6.png" },
+            { sku: "PV-GT-4M-ABB", desc: "GABINETE PLÁSTICO 4 VENTANAS", volt: "N/A", price: 19.86, cat: "ACC", stock: 20, img: "abb_enclosure_4.png" },
+            { sku: "PV-GT-8M-ABB", desc: "GABINETE PLÁSTICO 8 VENTANAS", volt: "N/A", price: 21.10, cat: "ACC", stock: 20, img: "abb_enclosure_8.png" }
+       // Continuación de la lista de productos (Estructuras y Soportes)
+        const productosEstructuras = [
+            // Estructuras 0° para módulos de 620W (Marco 30mm)
+            { sku: "PV-ESK-K02N-GS", desc: "KIT ESTRUCTURA 0° 2 MODULOS 30mm", volt: "N/A", price: 53.65, cat: "EST", stock: 10, img: "est_0_fixed.png" },
+            { sku: "PV-ESK-K03N-GS", desc: "KIT ESTRUCTURA 0° 3 MODULOS 30mm", volt: "N/A", price: 83.51, cat: "EST", stock: 10, img: "est_0_fixed.png" },
+            { sku: "PV-ESK-K04N-GS", desc: "KIT ESTRUCTURA 0° 4 MODULOS 30mm", volt: "N/A", price: 90.87, cat: "EST", stock: 10, img: "est_0_fixed.png" },
+            { sku: "PV-ESK-K06N-GS", desc: "KIT ESTRUCTURA 0° 6 MODULOS 30mm", volt: "N/A", price: 142.87, cat: "EST", stock: 10, img: "est_0_fixed.png" },
+            { sku: "PV-ESK-K08N-GS", desc: "KIT ESTRUCTURA 0° 8 MODULOS 30mm", volt: "N/A", price: 181.87, cat: "EST", stock: 10, img: "est_0_fixed.png" },
+            { sku: "PV-ESK-K010N-GS", desc: "KIT ESTRUCTURA 0° 10 MODULOS 30mm", volt: "N/A", price: 233.87, cat: "EST", stock: 10, img: "est_0_fixed.png" },
             
-            // ACCESORIOS (BOMBAS, CABLE, ETC)
-            {sku: "PV-ACC-CABLE-N10", desc: "CABLE SOLAR NEGRO 10AWG (M)", price: 1.25, cat: "ACC"},
-            {sku: "PV-ACC-BOM-SHUR", desc: "BOMBA SHURFLO 9325 24V", price: 785.00, cat: "ACC"},
-            {sku: "PV-BT-180-PM", desc: "DEKA BATERIA 180AH/12V CICLO PROF", price: 325.00, cat: "BAT"}
+            // Estructuras Ajustables para módulos de 620W (Marco 30mm)
+            { sku: "PV-ESK-KA2N-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 2 MODULOS 30mm", volt: "N/A", price: 81.97, cat: "EST", stock: 10, img: "est_ajustable.png" },
+            { sku: "PV-ESK-KA3N-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 3 MODULOS 30mm", volt: "N/A", price: 117.33, cat: "EST", stock: 10, img: "est_ajustable.png" },
+            { sku: "PV-ESK-KA4N-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 4 MODULOS 30mm", volt: "N/A", price: 158.46, cat: "EST", stock: 10, img: "est_ajustable.png" },
+            { sku: "PV-ESK-KA6N-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 6 MODULOS 30mm", volt: "N/A", price: 239.15, cat: "EST", stock: 10, img: "est_ajustable.png" },
+            { sku: "PV-ESK-KA8N-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 8 MODULOS 30mm", volt: "N/A", price: 315.64, cat: "EST", stock: 10, img: "est_ajustable.png" },
+            { sku: "PV-ESK-KA10N-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 10 MODULOS 30mm", volt: "N/A", price: 396.33, cat: "EST", stock: 10, img: "est_ajustable.png" },
 
-            // ... El sistema está diseñado para manejar la totalidad de los 441 productos.
-        ];
+            // Estructuras Dobles para módulos de 620W (Marco 30mm)
+            { sku: "PV-ESK-D4KN-GS", desc: "KIT ESTRUCTURAL DOBLE 4 MODULOS 30mm", volt: "N/A", price: 305.55, cat: "EST", stock: 10, img: "est_doble.png" },
+            { sku: "PV-ESK-D6KN-GS", desc: "KIT ESTRUCTURAL DOBLE 6 MODULOS 30mm", volt: "N/A", price: 442.49, cat: "EST", stock: 10, img: "est_doble.png" },
+            { sku: "PV-ESK-D8KN-GS", desc: "KIT ESTRUCTURAL DOBLE 8 MODULOS 30mm", volt: "N/A", price: 601.34, cat: "EST", stock: 10, img: "est_doble.png" },
+            { sku: "PV-ESK-D12KN-GS", desc: "KIT ESTRUCTURAL DOBLE 12 MODULOS 30mm", volt: "N/A", price: 895.15, cat: "EST", stock: 10, img: "est_doble.png" },
+            { sku: "PV-ESK-D16KN-GS", desc: "KIT ESTRUCTURAL DOBLE 16 MODULOS 30mm", volt: "N/A", price: 1180.57, cat: "EST", stock: 10, img: "est_doble.png" },
+            { sku: "PV-ESK-D20KN-GS", desc: "KIT ESTRUCTURAL DOBLE 20 MODULOS 30mm", volt: "N/A", price: 1474.38, cat: "EST", stock: 10, img: "est_doble.png" },
 
-        let cart = [];
+            // Estructuras 0° para módulos de 715W (Marco 33mm)
+            { sku: "PV-ESK-3302U-GS", desc: "KIT ESTRUCTURA 0° 2 MODULOS 33mm", volt: "N/A", price: 56.94, cat: "EST", stock: 10, img: "est_0_fixed_33.png" },
+            { sku: "PV-ESK-3303U-GS", desc: "KIT ESTRUCTURA 0° 3 MODULOS 33mm", volt: "N/A", price: 87.62, cat: "EST", stock: 10, img: "est_0_fixed_33.png" },
+            { sku: "PV-ESK-3304U-GS", desc: "KIT ESTRUCTURA 0° 4 MODULOS 33mm", volt: "N/A", price: 97.11, cat: "EST", stock: 10, img: "est_0_fixed_33.png" },
+            { sku: "PV-ESK-3306U-GS", desc: "KIT ESTRUCTURA 0° 6 MODULOS 33mm", volt: "N/A", price: 146.02, cat: "EST", stock: 10, img: "est_0_fixed_33.png" },
+            { sku: "PV-ESK-3308U-GS", desc: "KIT ESTRUCTURA 0° 8 MODULOS 33mm", volt: "N/A", price: 189.20, cat: "EST", stock: 10, img: "est_0_fixed_33.png" },
+            { sku: "PV-ESK-33010U-GS", desc: "KIT ESTRUCTURA 0° 10 MODULOS 33mm", volt: "N/A", price: 240.44, cat: "EST", stock: 10, img: "est_0_fixed_33.png" },
 
-        function renderCatalog(search = '', brand = '') {
-            const body = document.getElementById('catalogBody');
-            body.innerHTML = '';
-            
-            const filtered = products.filter(p => 
-                (p.sku.toLowerCase().includes(search.toLowerCase()) || p.desc.toLowerCase().includes(search.toLowerCase())) &&
-                (brand === '' || p.cat === brand || p.sku.includes(brand))
-            );
+            // Estructuras Ajustables para módulos de 715W (Marco 33mm)
+            { sku: "PV-ESK-33A2U-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 2 MODULOS 33mm", volt: "N/A", price: 87.75, cat: "EST", stock: 10, img: "est_ajustable_33.png" },
+            { sku: "PV-ESK-33A3U-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 3 MODULOS 33mm", volt: "N/A", price: 126.75, cat: "EST", stock: 10, img: "est_ajustable_33.png" },
+            { sku: "PV-ESK-33A4U-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 4 MODULOS 33mm", volt: "N/A", price: 167.18, cat: "EST", stock: 10, img: "est_ajustable_33.png" },
+            { sku: "PV-ESK-33A6U-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 6 MODULOS 33mm", volt: "N/A", price: 249.60, cat: "EST", stock: 10, img: "est_ajustable_33.png" },
+            { sku: "PV-ESK-33A8U-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 8 MODULOS 33mm", volt: "N/A", price: 333.32, cat: "EST", stock: 10, img: "est_ajustable_33.png" },
+            { sku: "PV-ESK-33A10U-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 10 MODULOS 33mm", volt: "N/A", price: 411.84, cat: "EST", stock: 10, img: "est_ajustable_33.png" },
 
-            filtered.forEach(p => {
-                body.innerHTML += `
-                    <tr class="hover:bg-blue-50/50 transition-colors">
-                        <td class="p-6 font-mono font-black text-blue-600 text-xs">${p.sku}</td>
-                        <td class="p-6 font-bold text-slate-700">${p.desc}</td>
-                        <td class="p-6 text-right font-black text-emerald-600 text-lg">$${p.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</td>
-                        <td class="p-6 text-center">
-                            <button onclick="addToCart('${p.sku}')" class="bg-blue-600 hover:bg-slate-900 text-white p-3 rounded-xl transition-all shadow-md">+</button>
-                        </td>
-                    </tr>`;
+            // Estructuras Dobles para módulos de 715W (Marco 33mm)
+            { sku: "PV-ESK-33D4U-GS", desc: "KIT ESTRUCTURAL DOBLE 4 MODULOS 33mm", volt: "N/A", price: 310.05, cat: "EST", stock: 10, img: "est_doble_33.png" },
+            { sku: "PV-ESK-33D6U-GS", desc: "KIT ESTRUCTURAL DOBLE 6 MODULOS 33mm", volt: "N/A", price: 444.67, cat: "EST", stock: 10, img: "est_doble_33.png" },
+            { sku: "PV-ESK-33D8U-GS", desc: "KIT ESTRUCTURAL DOBLE 8 MODULOS 33mm", volt: "N/A", price: 609.31, cat: "EST", stock: 10, img: "est_doble_33.png" },
+            { sku: "PV-ESK-33D12U-GS", desc: "KIT ESTRUCTURAL DOBLE 12 MODULOS 33mm", volt: "N/A", price: 899.86, cat: "EST", stock: 10, img: "est_doble_33.png" },
+            { sku: "PV-ESK-33D16U-GS", desc: "KIT ESTRUCTURAL DOBLE 16 MODULOS 33mm", volt: "N/A", price: 1189.11, cat: "EST", stock: 10, img: "est_doble_33.png" },
+            { sku: "PV-ESK-33D20U-GS", desc: "KIT ESTRUCTURAL DOBLE 20 MODULOS 33mm", volt: "N/A", price: 1483.56, cat: "EST", stock: 10, img: "est_doble_33.png" }
+        // Continuación de la lista de productos (Componentes de Estructura Individuales)
+        const productosComponentesEstructura = [
+            { sku: "PV-EST-CLI-GS", desc: "EST GS CLIP DE ALUMINIO PORTA CABLE", volt: "N/A", price: 0.18, cat: "EST", stock: 1000, img: "gs_cable_clip.png" },
+            { sku: "PV-EST-CLT-GS", desc: "EST GS CLIP PARA TIERRA", volt: "N/A", price: 0.22, cat: "EST", stock: 1000, img: "gs_ground_clip.png" },
+            { sku: "PV-EST-CTR-GS", desc: "EST GS CONECTOR DE RIEL", volt: "N/A", price: 1.76, cat: "EST", stock: 100, img: "gs_rail_conn.png" },
+            { sku: "PV-EST-JUM-GS", desc: "EST GS JUMPER PARA TIERRA RIELES", volt: "N/A", price: 1.95, cat: "EST", stock: 100, img: "gs_ground_jumper.png" },
+            { sku: "PV-EST-OPC35-GS", desc: "EST GS OPRESOR CENTRAL 35 mm", volt: "N/A", price: 1.94, cat: "EST", stock: 1000, img: "gs_mid_clamp.png" },
+            { sku: "PV-EST-OPC30-GS", desc: "EST GS OPRESOR CENTRAL 30 mm", volt: "N/A", price: 1.94, cat: "EST", stock: 1000, img: "gs_mid_clamp.png" },
+            { sku: "PV-EST-OF35-GS", desc: "EST GS OPRESOR FINAL 35 mm", volt: "N/A", price: 1.94, cat: "EST", stock: 1000, img: "gs_end_clamp.png" },
+            { sku: "PV-EST-OF3540-GS", desc: "EST GS OPRESOR FINAL 35/40 MM", volt: "N/A", price: 1.94, cat: "EST", stock: 1000, img: "gs_end_clamp.png" },
+            { sku: "PV-EST-OF33-GS", desc: "EST GS OPRESOR FINAL 33 mm", volt: "N/A", price: 1.94, cat: "EST", stock: 1000, img: "gs_end_clamp.png" },
+            { sku: "PV-EST-OF40-GS", desc: "EST GS OPRESOR FINAL 40mm", volt: "N/A", price: 1.94, cat: "EST", stock: 1000, img: "gs_end_clamp.png" },
+            { sku: "PV-EST-PJN-GS", desc: "EST GS PIJA AUTOTALADRANTE CON EPDM", volt: "N/A", price: 0.77, cat: "EST", stock: 1000, img: "gs_pija.png" },
+            { sku: "PV-EST-RL143-GS", desc: "EST GS RIEL ALUMINIO ANODIZADO 1.43 MTS", volt: "N/A", price: 12.44, cat: "EST", stock: 100, img: "gs_riel.png" },
+            { sku: "PV-EST-RL238-GS", desc: "EST GS RIEL ALUMINIO ANODIZADO 2.38 MTS", volt: "N/A", price: 10.49, cat: "EST", stock: 100, img: "gs_riel.png" },
+            { sku: "PV-EST-RL272-GS", desc: "EST GS RIEL ALUMINIO ANODIZADO 2.72 MTS", volt: "N/A", price: 15.47, cat: "EST", stock: 100, img: "gs_riel.png" },
+            { sku: "PV-EST-RL354-GS", desc: "EST GS RIEL ALUMINIO ANODIZADO 3.54 MTS", volt: "N/A", price: 15.60, cat: "EST", stock: 100, img: "gs_riel.png" },
+            { sku: "PV-EST-RL468-GS", desc: "EST GS RIEL ALUMINIO ANODIZADO 4.68 MTS", volt: "N/A", price: 20.63, cat: "EST", stock: 100, img: "gs_riel.png" },
+            { sku: "PV-EST-RL405-GS", desc: "EST GS RIEL ALUMINIO ANODIZADO 4.05 MTS", volt: "N/A", price: 20.41, cat: "EST", stock: 100, img: "gs_riel.png" },
+            { sku: "PV-EST-RL536-GS", desc: "EST GS RIEL ALUMINIO ANODIZADO 5.36 MTS", volt: "N/A", price: 23.99, cat: "EST", stock: 100, img: "gs_riel.png" },
+            { sku: "PV-EST-DC30-GS", desc: "EST GS CLIP DE DRENADO 30MM", volt: "N/A", price: 0.52, cat: "EST", stock: 1000, img: "gs_drain_clip.png" },
+            { sku: "PV-EST-DC33-GS", desc: "EST GS CLIP DE DRENADO 33MM", volt: "N/A", price: 0.52, cat: "EST", stock: 1000, img: "gs_drain_clip.png" },
+            { sku: "PV-EST-DC35-GS", desc: "EST GS CLIP DE DRENADO 35MM", volt: "N/A", price: 0.52, cat: "EST", stock: 1000, img: "gs_drain_clip.png" },
+            { sku: "PV-EST-SPD-GS", desc: "EST GS SOPORTE DELANTERO AJUS 10° A 20°", volt: "N/A", price: 4.28, cat: "EST", stock: 100, img: "gs_front_leg.png" },
+            { sku: "PV-EST-SPT-GS", desc: "EST GS SOPORTE TRASERO AJUS 10° A 20°", volt: "N/A", price: 9.23, cat: "EST", stock: 100, img: "gs_rear_leg.png" },
+            { sku: "PV-EST-SPD3-GS", desc: "SOPORTE DELANTERO AJUSTABLE 310MM", volt: "N/A", price: 4.28, cat: "EST", stock: 100, img: "gs_front_leg.png" },
+            { sku: "PV-EST-SPT3-GS", desc: "SOPORTE TRASERO AJUSTABLE 310MM", volt: "N/A", price: 9.23, cat: "EST", stock: 100, img: "gs_rear_leg.png" },
+            { sku: "PV-EST-STL-GS", desc: "EST GS SOPORTE FIJACION 0°", volt: "N/A", price: 2.15, cat: "EST", stock: 100, img: "gs_L_foot.png" },
+            { sku: "PV-EST-STT-GS", desc: "EST GS SOPORTE PARA TECHO CON TEJA # 10", volt: "N/A", price: 4.37, cat: "EST", stock: 100, img: "gs_tile_hook.png" },
+            { sku: "PV-EST-STTL-GS", desc: "EST GS SOPORTE PARA TECHO CON TEJA # 11", volt: "N/A", price: 5.71, cat: "EST", stock: 100, img: "gs_tile_hook.png" },
+            { sku: "PV-EST-SUT-GS", desc: "EST GS SUJETADOR CABLE TIERRA", volt: "N/A", price: 1.91, cat: "EST", stock: 1000, img: "gs_ground_lug.png" },
+            { sku: "PV-EST-TF12-GS", desc: "EST GS TAQUETE PARA FIJACION (M12*100)", volt: "N/A", price: 1.22, cat: "EST", stock: 1000, img: "gs_bolt.png" },
+            { sku: "PV-EST-TQF-GS", desc: "EST GS TAQUETE PARA FIJACION (M6*50)", volt: "N/A", price: 1.27, cat: "EST", stock: 1000, img: "gs_bolt_small.png" }
+        // Continuación de la lista de productos (Componentes de Estructura S-5!)
+        const productosS5 = [
+            { sku: "PV-EST-PTB-S5", desc: "EST S5 SOPORTE L P/LÁMINA TRAPE", volt: "N/A", price: 10.22, cat: "EST", stock: 300, img: "s5_l_foot.png" },
+            { sku: "PV-EST-GREK-S5", desc: "EST S5 KIT 2.0 GRAB CLAMP FINAL", volt: "N/A", price: 6.24, cat: "EST", stock: 300, img: "s5_grab_end.png" },
+            { sku: "PV-EST-GRMK-S5", desc: "EST S5 KIT 2.0 GRAB CLAMP INTERMEDIA", volt: "N/A", price: 6.24, cat: "EST", stock: 300, img: "s5_grab_mid.png" },
+            { sku: "PV-EST-RBII-S5", desc: "EST S5 CLAMP RIB II P/LÁMINA TRAPE", volt: "N/A", price: 4.60, cat: "EST", stock: 300, img: "s5_rib_ii.png" },
+            { sku: "PV-EST-RB3-S5", desc: "EST S5 CLAMP RIB III P/LÁMINA TRAPE", volt: "N/A", price: 4.60, cat: "EST", stock: 300, img: "s5_rib_iii.png" },
+            { sku: "PV-EST-RBV-S5", desc: "EST S5 CLAMP RIB V P/LÁMINA TRAPE", volt: "N/A", price: 4.60, cat: "EST", stock: 300, img: "s5_rib_v.png" },
+            { sku: "PV-EST-CLH-S5", desc: "EST S5 CLAMP H MINI P/LÁMINA ENGAR", volt: "N/A", price: 7.74, cat: "EST", stock: 300, img: "s5_h_mini.png" },
+            { sku: "PV-EST-CLMX-S5", desc: "EST S5 CLAMP MX P/LÁMINA ENGAR", volt: "N/A", price: 4.23, cat: "EST", stock: 300, img: "s5_clamp_mx.png" },
+            { sku: "PV-EST-MXMI-S5", desc: "EST S5 CLAMP MX MINI P/LÁMINA ENGAR", volt: "N/A", price: 3.15, cat: "EST", stock: 300, img: "s5_mx_mini.png" },
+            { sku: "PV-EST-SLFT-S5", desc: "EST S5 SOPORTE FIJACIÓN P/LÁMINA TRAPE", volt: "N/A", price: 4.24, cat: "EST", stock: 300, img: "s5_solar_foot.png" },
+            { sku: "PV-EST-VB47-S5", desc: "EST S5 SOPORTE VERSA 47mm P/LÁMINA TRAPE", volt: "N/A", price: 2.67, cat: "EST", stock: 300, img: "s5_versa.png" },
+            { sku: "PV-EST-CTT-S5", desc: "EST S5 CONECTOR A TIERRA", volt: "N/A", price: 5.94, cat: "EST", stock: 300, img: "s5_ground_lug.png" },
+            { sku: "PV-EST-TUM8-S5", desc: "EST S5 TUERCA DE BRIDA M8", volt: "N/A", price: 0.31, cat: "EST", stock: 1000, img: "s5_nut_m8.png" },
+            { sku: "PV-EST-TOM8-S5", desc: "EST S5 TORNILLO M8-1.25 x 20mm", volt: "N/A", price: 0.36, cat: "EST", stock: 1000, img: "s5_bolt_m8.png" },
+            { sku: "PV-EST-TOAM-S5", desc: "EST S5 TORNILLO AUTOTALADRANTE MAC", volt: "N/A", price: 0.30, cat: "EST", stock: 1000, img: "s5_screw.png" },
+            { sku: "PV-EST-JUM-S5", desc: "EST S5 JUMPER P/TIERRA FISICA", volt: "N/A", price: 4.06, cat: "EST", stock: 300, img: "s5_jumper.png" },
+            { sku: "PV-EST-PTB2-S5", desc: "EST S5 PROTEA II P/LÁMINA TRAPE", volt: "N/A", price: 8.19, cat: "EST", stock: 300, img: "s5_protea_ii.png" },
+            { sku: "PV-EST-PTBE-S5", desc: "EST S5 PROTEA PV FINAL", volt: "N/A", price: 12.83, cat: "EST", stock: 300, img: "s5_protea_end.png" },
+            { sku: "PV-EST-PTBM-S5", desc: "EST S5 PROTEA PV INTERMEDIA", volt: "N/A", price: 12.83, cat: "EST", stock: 300, img: "s5_protea_mid.png" },
+            { sku: "PV-EST-TO12-S5", desc: "EST S5 PIJA AUTOPERFORANTE #12", volt: "N/A", price: 0.34, cat: "EST", stock: 1000, img: "s5_pija_12.png" },
+            { sku: "PV-EST-TO14-S5", desc: "EST S5 PIJA AUTOPERFORANTE #14-1.5\"", volt: "N/A", price: 0.30, cat: "EST", stock: 1000, img: "s5_pija_14.png" },
+            { sku: "PV-EST-CLP1-S5", desc: "EST S5 CLIP PARA CABLE", volt: "N/A", price: 1.46, cat: "EST", stock: 1000, img: "s5_wire_clip.png" }
+       // Continuación de la lista de productos (Estructuras Unirac)
+        const productosUnirac = [
+            { sku: "PV-EST-TAPA-UNR", desc: "EST UNR GFT TAPA FINAL", volt: "N/A", price: 1.83, cat: "EST", stock: 500, img: "unirac_gft_cap.png" },
+            { sku: "PV-EST-GF105-UNR", desc: "EST UNR GFT POSTE 10.5\"", volt: "N/A", price: 218.67, cat: "EST", stock: 50, img: "unirac_post.png" },
+            { sku: "PV-EST-GFT12-UNR", desc: "EST UNR GFT POSTE 12.5\"", volt: "N/A", price: 251.73, cat: "EST", stock: 50, img: "unirac_post.png" },
+            { sku: "PV-EST-KIT4-UNR", desc: "EST UNR GFT KIT DE 4 RIELES", volt: "N/A", price: 36.22, cat: "EST", stock: 50, img: "unirac_rail_kit.png" },
+            { sku: "PV-EST-GFTKT-UNR", desc: "EST UNR GFT KIT DE 3 RIELES", volt: "N/A", price: 26.75, cat: "EST", stock: 50, img: "unirac_rail_kit.png" },
+            { sku: "PV-EST-GFSP-UNR", desc: "EST UNR GFT KIT DE EMPALME", volt: "N/A", price: 18.58, cat: "EST", stock: 50, img: "unirac_splice.png" },
+            { sku: "PV-EST-GFTBR-UNR", desc: "EST UNR GFT SOPORTE DIAGONAL 20D", volt: "N/A", price: 123.02, cat: "EST", stock: 50, img: "unirac_diag.png" },
+            { sku: "PV-EST-GF168-UNR", desc: "EST UNR GFT RIEL 168\"", volt: "N/A", price: 82.78, cat: "EST", stock: 50, img: "unirac_rail.png" },
+            { sku: "PV-EST-GF246-UNR", desc: "EST UNR GFT RIEL 246\"", volt: "N/A", price: 110.75, cat: "EST", stock: 50, img: "unirac_rail_lg.png" },
+            { sku: "PV-EST-CNT-UNR", desc: "EST UNR CONECTOR A TIERRA", volt: "N/A", price: 9.72, cat: "EST", stock: 500, img: "unirac_ground.png" },
+            { sku: "PV-EST-ASC2-UNR", desc: "EST UNR ASCENDER CLIP SOPORTE 02", volt: "N/A", price: 2.93, cat: "EST", stock: 500, img: "unirac_ascender_clip.png" },
+            { sku: "PV-EST-ASDA-UNR", desc: "EST UNR ASCENDER L-FOOT AJUSTABLE", volt: "N/A", price: 4.03, cat: "EST", stock: 500, img: "unirac_lfoot.png" },
+            { sku: "PV-EST-RL185-UNR", desc: "EST UNR ASCENDER RIEL 4.7m", volt: "N/A", price: 33.87, cat: "EST", stock: 50, img: "unirac_ascender_rail.png" },
+            { sku: "PV-EST-RON-UNR", desc: "EST UNR ASCENDER RONDANA 3/8\"", volt: "N/A", price: 0.10, cat: "EST", stock: 500, img: "washer.png" },
+            { sku: "PV-EST-OPC-UNR", desc: "EST UNR SM CLAMP INTERMEDIA PRO", volt: "N/A", price: 4.28, cat: "EST", stock: 500, img: "unirac_pro_mid.png" },
+            { sku: "PV-EST-OPIU-UNR", desc: "EST UNR SM CLAMP INTERMEDIA UNIV", volt: "N/A", price: 3.34, cat: "EST", stock: 500, img: "unirac_univ_mid.png" },
+            { sku: "PV-EST-OPF-UNR", desc: "EST UNR SM CLAMP FINAL", volt: "N/A", price: 3.85, cat: "EST", stock: 500, img: "unirac_end.png" },
+            { sku: "PV-EST-RM10-UNR", desc: "EST UNR RM 10 ANCLAJE ADICIONAL", volt: "N/A", price: 59.96, cat: "EST", stock: 50, img: "unirac_rm10_anchor.png" },
+            { sku: "PV-EST-RMCE-UNR", desc: "EST UNR RM 10 CANASTA EVO", volt: "N/A", price: 45.83, cat: "EST", stock: 50, img: "unirac_evo_bay.png" },
+            { sku: "PV-EST-FSL-UNR", desc: "EST UNR L-FOOT FLASHLOC NEGRO", volt: "N/A", price: 17.20, cat: "EST", stock: 500, img: "unirac_flashloc.png" },
+            { sku: "PV-EST-SSEE-UNR", desc: "EST UNR CLAMP STD LÁMINA ENGAR", volt: "N/A", price: 8.83, cat: "EST", stock: 500, img: "unirac_seam_clamp.png" },
+            { sku: "PV-EST-MJR-UNR", desc: "EST UNR R-PANEL CLAMP TRAPEZOIDAL", volt: "N/A", price: 11.31, cat: "EST", stock: 500, img: "unirac_rpanel.png" },
+            { sku: "PV-EST-SHTUN-UNR", desc: "EST UNR SH BASE P/TEJA UNIVERSAL", volt: "N/A", price: 14.59, cat: "EST", stock: 500, img: "unirac_tile_base.png" },
+            { sku: "PV-EST-TT34-UNR", desc: "EST UNR TORNILLO T C/TUERCA 3/4\"", volt: "N/A", price: 1.52, cat: "EST", stock: 500, img: "unirac_tbolt.png" },
+            { sku: "PV-EST-CALF-UNR", desc: "EST UNR METALX CLAMP FINAL", volt: "N/A", price: 9.09, cat: "EST", stock: 500, img: "unirac_metalx_end.png" },
+            { sku: "PV-EST-CLAI-UNR", desc: "EST UNR METALX CLAMP INTERMEDIA", volt: "N/A", price: 9.05, cat: "EST", stock: 500, img: "unirac_metalx_mid.png" },
+            { sku: "PV-EST-CLA-MIN-UNR", desc: "EST UNR CLAMP MINI X ENGARGOLADA", volt: "N/A", price: 9.79, cat: "EST", stock: 500, img: "unirac_mini_clamp.png" },
+            { sku: "PV-EST-TRA-UNR", desc: "EST UNR METALX PM TRAPEZOIDAL AJUS", volt: "N/A", price: 20.03, cat: "EST", stock: 500, img: "unirac_tra_mount.png" }
+        // Continuación de la lista de productos (Off-Grid, Victron Energy y Cargadores EV)
+        const productosOffGridYVictron = [
+            // Growatt Off-Grid y EV
+            { sku: "PV-IN-SPTL3-GW", desc: "SPF LVM 3K 48VDC/110VAC", volt: "110VAC", price: 635.70, cat: "INV", stock: 10, img: "growatt_spf_3k.png" },
+            { sku: "PV-INA-6000MPV-GW", desc: "SPF DVM MPV 6K 48VDC/220VAC", volt: "220VAC", price: 1103.70, cat: "INV", stock: 10, img: "growatt_spf_6k.png" },
+            { sku: "PV-INA-12KMPV-GW", desc: "SPF DVM MPV 12K 48VDC/220VAC", volt: "220VAC", price: 1774.50, cat: "INV", stock: 10, img: "growatt_spf_12k.png" },
+            { sku: "PV-IN-MSPF-GRW", desc: "MONITOREO SHINE WIFI-F", volt: "N/A", price: 42.90, cat: "ACC", stock: 50, img: "shine_wifi_f.png" },
+            { sku: "PV-AUTO-THOR-GW", desc: "CARGADOR AUTO GROWATT THOR 12AS-P", volt: "220VAC", price: 834.60, cat: "EV", stock: 5, img: "growatt_thor.png" },
+
+            // Yoxon (Soluciones económicas)
+            { sku: "PV-INA-2500PS-YX", desc: "OP 2500W 24VDC/110VAC", volt: "110VAC", price: 370.88, cat: "INV", stock: 15, img: "yoxon_2500.png" },
+            { sku: "PV-INA-3001PS-YX", desc: "OP 3000W 24VDC/110VAC", volt: "110VAC", price: 458.78, cat: "INV", stock: 15, img: "yoxon_3000.png" },
+            { sku: "PV-INA-2KSOP-YX", desc: "IOP 2000W-S 24VDC/110VAC", volt: "110VAC", price: 213.20, cat: "INV", stock: 15, img: "yoxon_2000s.png" },
+
+            // Victron Energy - Inversores/Cargadores
+            { sku: "PV-INH-MP3KUL-VT", desc: "MULTIPLUS II 3K UL 48VDC/120VAC", volt: "120VAC", price: 577.20, cat: "INV", stock: 10, img: "victron_multiplus_3k.png" },
+            { sku: "PV-INA-MP5LV-VT", desc: "MULTIPLUS II 5K 48VDC/120VAC", volt: "120VAC", price: 900.90, cat: "INV", stock: 10, img: "victron_multiplus_5k.png" },
+            { sku: "PV-INA-10000-VT", desc: "QUATTRO 10K 48VDC/120VAC", volt: "120VAC", price: 2691.00, cat: "INV", stock: 5, img: "victron_quattro_10k.png" },
+            { sku: "PV-INA-Q5000-VT", desc: "QUATTRO 5K 48VDC/120VAC", volt: "120VAC", price: 1480.70, cat: "INV", stock: 5, img: "victron_quattro_5k.png" },
+            { sku: "PV-INA-ATF-VT", desc: "AUTOTRANSFORMADOR 120/240 VAC", volt: "120/240V", price: 483.60, cat: "ACC", stock: 10, img: "victron_autotrans.png" },
+
+            // Victron Energy - Controladores y Monitoreo
+            { sku: "PV-INA-SS450-VT", desc: "SMARTSOLAR MPPT RS 450/100 TR+", volt: "450VDC", price: 1138.80, cat: "ACC", stock: 10, img: "victron_mppt_rs.png" },
+            { sku: "PV-INA-SS100-VT", desc: "SMART SOLAR 100/20", volt: "100VDC", price: 145.83, cat: "ACC", stock: 25, img: "victron_mppt_100.png" },
+            { sku: "PV-INA-SS150-VT", desc: "SMART SOLAR 150/35", volt: "150VDC", price: 189.80, cat: "ACC", stock: 25, img: "victron_mppt_150.png" },
+            { sku: "PV-INA-SS250-VT", desc: "SMART SOLAR 250/100", volt: "250VDC", price: 629.20, cat: "ACC", stock: 10, img: "victron_mppt_250.png" },
+            { sku: "PV-INA-SSH-VT", desc: "SMART SHUNT 500", volt: "N/A", price: 128.70, cat: "ACC", stock: 25, img: "victron_shunt.png" },
+
+            // Victron Energy - Comunicación y Accesorios GX
+            { sku: "PV-INA-CGXMK2-VT", desc: "ACC VICTRON CERBO MK2 GX", volt: "N/A", price: 275.59, cat: "ACC", stock: 15, img: "victron_cerbo_gx.png" },
+            { sku: "PV-INA-TOU50-VT", desc: "ACC VICTRON GX TOUCH 50", volt: "N/A", price: 205.40, cat: "ACC", stock: 15, img: "victron_touch50.png" },
+            { sku: "PV-INA-EKRGX-VT", desc: "ACC VICTRON EKRANO GX", volt: "N/A", price: 559.00, cat: "ACC", stock: 10, img: "victron_ekrano.png" },
+            { sku: "PV-INA-LYNX-VT", desc: "ACC VICTRON LYNX POWER M8", volt: "N/A", price: 145.60, cat: "ACC", stock: 15, img: "victron_lynx_power.png" },
+            { sku: "PV-INA-LYDT-VT", desc: "ACC VICTRON LYNX DISTRIBUTOR M8", volt: "N/A", price: 202.80, cat: "ACC", stock: 15, img: "victron_lynx_dist.png" },
+            { sku: "PV-INA-MK3-VT", desc: "ACC VICTRON MK3-USB", volt: "N/A", price: 74.10, cat: "ACC", stock: 30, img: "victron_mk3.png" },
+
+            // Victron Energy - Protecciones y Conectividad
+            { sku: "PV-INA-F250-VT", desc: "ACC VICTRON FUSIBLE 250A/58V", volt: "48V", price: 31.85, cat: "ACC", stock: 100, img: "victron_fuse.png" },
+            { sku: "PV-INA-F3005-VT", desc: "ACC VICTRON FUSIBLE 300A/80V (5 PZAS)", volt: "48V", price: 39.65, cat: "ACC", stock: 100, img: "victron_fuse_kit.png" },
+            { sku: "PV-INA-PMF-VT", desc: "ACC VICTRON PORTAFUSIBLE MEGAFUSE", volt: "N/A", price: 12.35, cat: "ACC", stock: 100, img: "victron_megafuse_holder.png" }
+       // Continuación de la lista de productos (Sistemas de Almacenamiento y Baterías)
+        const productosBaterias = [
+            // BYD (Litio LV y HV)
+            { sku: "PV-BT-LV5K-BYD", desc: "BAT BYD LITIO 5KWH LV FLEX LITE", volt: "48V", price: 1529.57, cat: "BAT", stock: 8, img: "byd_lv_flex.png" },
+            { sku: "PV-HUB-BMU-BYD", desc: "ACC BYD CONTROLADOR LV BMU", volt: "N/A", price: 160.95, cat: "ACC", stock: 50, img: "byd_bmu.png" },
+            { sku: "PV-ACC-ALF-BYD", desc: "ACC BYD SOPORTE AJUSTABLE LV (4 PZAS)", volt: "N/A", price: 8.98, cat: "ACC", stock: 50, img: "byd_bracket.png" },
+            { sku: "PV-HUB-BCUHV-BYD", desc: "ACC BYD CONTROLADOR HV BCU", volt: "HV", price: 728.79, cat: "ACC", stock: 10, img: "byd_bcu_hv.png" },
+
+            // Huawei
+            { sku: "PV-BAT-7K-HUA", desc: "BAT HUAWEI 7K HV LI-ION", volt: "HV", price: 3248.70, cat: "BAT", stock: 5, img: "huawei_luna_7k.png" },
+
+            // Growatt (AXE, ALP y Portátiles)
+            { sku: "PV-ACC-BAT-AXE5-GRW", desc: "BATERÍA GROWATT AXE 5.0L (COBALTO FREE)", volt: "48V", price: 1298.70, cat: "BAT", stock: 8, img: "growatt_axe.png" },
+            { sku: "PV-ACC-BAT-ALP5-GRW", desc: "BATERÍA GROWATT ALP 5.0L", volt: "48V", price: 1244.10, cat: "BAT", stock: 8, img: "growatt_alp.png" },
+            { sku: "PV-BAT-INFI-GRW", desc: "BAT PORTABLE GROWATT INFINITY 1500", volt: "110V AC OUT", price: 1360.52, cat: "BAT", stock: 5, img: "growatt_infinity.png" },
+            { sku: "PV-KIT-CAT-GRW", desc: "KIT CABLES MULTI TORRES GROWATT", volt: "N/A", price: 119.34, cat: "ACC", stock: 50, img: "growatt_cable_kit.png" },
+            { sku: "PV-ACC-BAT-HUB-GRW", desc: "ACC GROWATT ARK LV HUB-A1", volt: "N/A", price: 388.96, cat: "ACC", stock: 20, img: "growatt_ark_hub.png" },
+            { sku: "PV-ACC-BAT-AXCB-GRW", desc: "ACC GROWATT CABLES BATERIA AXE", volt: "N/A", price: 97.50, cat: "ACC", stock: 50, img: "growatt_axe_cables.png" },
+            { sku: "PV-ACC-BAS-ALP-GRW", desc: "ACC GROWATT BASE BATERIA ALP", volt: "N/A", price: 88.40, cat: "ACC", stock: 50, img: "growatt_alp_base.png" },
+
+            // Soluna
+            { sku: "PV-BT-10KLV-SOL", desc: "BAT SOLUNA 10KW LV LI-ION", volt: "48V", price: 2535.00, cat: "BAT", stock: 8, img: "soluna_10k.png" },
+            { sku: "PV-ACC-CJA-SOL", desc: "ACC SOLUNA CAJA CONEXION PARALELO", volt: "N/A", price: 124.80, cat: "ACC", stock: 20, img: "soluna_box.png" },
+
+            // Plomo-Ácido (Ciclo Profundo)
+            { sku: "PV-BT-105-PM", desc: "BATERIA DEKA MARINE 105AH 12V", volt: "12V", price: 213.55, cat: "BAT", stock: 20, img: "deka_105.png" },
+            { sku: "PV-BT-180-PM", desc: "BATERIA DEKA 180AH 12V", volt: "12V", price: 321.44, cat: "BAT", stock: 20, img: "deka_180.png" },
+            { sku: "PV-BT-115-US", desc: "BATERIA ULTRASTART 115AH 12V CICLO PROFUNDO", volt: "12V", price: 181.03, cat: "BAT", stock: 20, img: "ultrastart_115.png" }
+             }
             });
-            document.getElementById('counter').innerText = `${filtered.length} EQUIPOS CARGADOS SIN OMISIONES`;
-        }
+        }     
 
-        function addToCart(sku) {
-            const product = products.find(p => p.sku === sku);
-            const inCart = cart.find(i => i.sku === sku);
-            if (inCart) inCart.qty++; else cart.push({...product, qty: 1});
-            updateCartUI();
-        }
+        // --- FUNCIONES DE CIERRE DEL SISTEMA ---
 
-        function updateCartUI() {
-            const container = document.getElementById('cartItems');
-            document.getElementById('cartCount').innerText = cart.reduce((a, b) => a + b.qty, 0);
-            container.innerHTML = '';
-            let total = 0;
-            cart.forEach(item => {
-                total += item.price * item.qty;
-                container.innerHTML += `
-                    <div class="bg-slate-100 p-4 rounded-2xl flex justify-between items-center border">
-                        <div class="max-w-[200px]">
-                            <p class="font-black text-xs text-blue-600 truncate">${item.sku}</p>
-                            <p class="text-[10px] text-slate-500 font-bold uppercase truncate">${item.desc}</p>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <input type="number" value="${item.qty}" min="1" onchange="updateQty('${item.sku}', this.value)" class="w-12 bg-transparent font-black text-center text-lg outline-none">
-                            <button onclick="removeFromCart('${item.sku}')" class="text-red-500 text-2xl">&times;</button>
-                        </div>
-                    </div>`;
+        // Función para inyectar las categorías dinámicamente en el filtro
+        function setupFilters() {
+            const brands = [...new Set(products.map(p => p.cat))];
+            const select = document.getElementById('brandFilter');
+            // Mantenemos las opciones base y añadimos las detectadas
+            brands.forEach(b => {
+                if (![...select.options].some(o => o.value === b)) {
+                    const opt = document.createElement('option');
+                    opt.value = b;
+                    opt.innerText = b;
+                    select.appendChild(opt);
+                }
             });
-            document.getElementById('cartTotal').innerText = `$${total.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
         }
 
-        function updateQty(sku, qty) {
-            const item = cart.find(i => i.sku === sku);
-            if(item) item.qty = parseInt(qty);
-            updateCartUI();
+        // Función para aplicar el 10% OFF al total si estamos en periodo de promo
+        function calcularTotalConDescuento(total) {
+            const hoy = new Date();
+            const limite = new Date('2026-06-30');
+            if (hoy <= limite) {
+                return total * 0.90; // Aplicar 10% de descuento
+            }
+            return total;
         }
 
-        function removeFromCart(sku) {
-            cart = cart.filter(i => i.sku !== sku);
-            updateCartUI();
-        }
+        // Re-vinculación de los eventos de búsqueda para mayor precisión
+        document.getElementById('searchInput').addEventListener('keyup', (e) => {
+            renderCatalog(e.target.value, document.getElementById('brandFilter').value);
+        });
 
-        function toggleCart() {
-            document.getElementById('cartSidebar').classList.toggle('translate-x-full');
-        }
+        // Inicialización Global
+        window.onload = () => {
+            setupFilters();
+            renderCatalog();
+            console.log("Sistema BAJA PRO SERVICES v2.6 cargado exitosamente.");
+        };
 
-        function enviarWhatsApp() {
-            if (cart.length === 0) return alert("El carrito está vacío");
-            let msg = "*COTIZACIÓN BAJA PRO SERVICES*\n";
-            msg += "━━━━━━━━━━━━━━━━━━━━\n";
-            cart.forEach(i => msg += `• ${i.sku}\n  Cant: ${i.qty} | Sub: $${(i.price * i.qty).toLocaleString()} USD\n\n`);
-            msg += `*TOTAL ESTIMADO:* ${document.getElementById('cartTotal').innerText} USD\n`;
-            msg += "━━━━━━━━━━━━━━━━━━━━\n";
-            msg += "Solicito revisión técnica y disponibilidad.";
-            
-            // Número de WhatsApp configurado para la empresa
-            window.open(`https://wa.me/526121234567?text=${encodeURIComponent(msg)}`, '_blank');
+        // Función para cerrar el modal si se hace clic fuera de él
+        window.onclick = function(event) {
+            const modal = document.getElementById('leadModal');
+            if (event.target == modal) {
+                toggleLeadModal(false);
+            }
         }
-
-        document.getElementById('searchInput').addEventListener('input', e => renderCatalog(e.target.value, document.getElementById('brandFilter').value));
-        document.getElementById('brandFilter').addEventListener('change', e => renderCatalog(document.getElementById('searchInput').value, e.target.value));
-        
-        window.onload = () => renderCatalog();
     </script>
 </body>
-</html>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>BAJA PRO SERVICES | Catálogo Maestro Solar</title>
-    <style>
-        .catalog-container { max-height: 700px; overflow-y: auto; scroll-behavior: smooth; }
-        .sticky-header { position: sticky; top: 0; background: #f8fafc; z-index: 10; }
-        .cart-dot { position: absolute; top: -5px; right: -5px; background: #ef4444; color: white; border-radius: 50%; width: 18px; height: 18px; font-size: 11px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-thumb { background: #2563eb; border-radius: 10px; }
-        
-        .hero-bg {
-            background-image: linear-gradient(rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.8)), url('hero.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-    </style>
-</head>
-<body class="bg-slate-50 text-slate-900 font-sans antialiased">
-
-    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur shadow-sm border-b">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="font-bold text-2xl tracking-tighter uppercase">BAJA PRO <span class="text-blue-600">SERVICES</span></div>
-            <div class="flex items-center gap-6">
-                <button onclick="toggleCart()" class="relative p-3 bg-blue-100 rounded-full text-blue-600 hover:bg-blue-200 transition">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-                    <span id="cartCount" class="cart-dot">0</span>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <header class="pt-40 pb-24 hero-bg text-white relative">
-        <div class="container mx-auto px-6 text-center relative z-10">
-            <h1 class="text-5xl md:text-7xl font-black mb-6 uppercase tracking-tight leading-none">Catálogo <span class="text-blue-400">Solar 2026</span></h1>
-            <p class="text-xl text-slate-200 max-w-2xl mx-auto font-light mb-8">Todos nuestros equipos autorizados en un solo lugar.</p>
-            <div class="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl inline-block">
-                <p class="text-yellow-400 font-bold uppercase tracking-widest">⚡ 10% OFF HASTA JUNIO 30 ⚡</p>
-            </div>
-        </div>
-    </header>
-
-    <section id="catalogo" class="py-12 container mx-auto px-6">
-        <div class="grid md:grid-cols-3 gap-6 mb-8">
-            <div class="md:col-span-2">
-                <input type="text" id="searchInput" placeholder="Buscar por SKU, potencia o descripción..." class="w-full p-5 rounded-2xl border-none shadow-xl focus:ring-2 focus:ring-blue-600 outline-none text-lg">
-            </div>
-            <div>
-                <select id="brandFilter" class="w-full p-5 rounded-2xl border-none shadow-xl bg-white font-bold text-slate-700 outline-none">
-                    <option value="">Todas las Categorías</option>
-                    <option value="FRONIUS">Fronius</option>
-                    <option value="SOLIS">Solis</option>
-                    <option value="GROWATT">Growatt</option>
-                    <option value="HUAWEI">Huawei</option>
-                    <option value="HOYMILES">Hoymiles</option>
-                    <option value="ENPHASE">Enphase</option>
-                    <option value="BAT">Baterías / Ciclo Profundo</option>
-                    <option value="MOD">Módulos Solares</option>
-                    <option value="ACC">Accesorios y Estructura</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200">
-            <div class="catalog-container">
-                <table class="w-full text-left border-collapse">
-                    <thead class="sticky-header shadow-sm uppercase text-[10px] font-black text-blue-900 tracking-widest">
-                        <tr>
-                            <th class="p-6 border-b">Clave (SKU)</th>
-                            <th class="p-6 border-b">Descripción Técnica</th>
-                            <th class="p-6 border-b text-right">Precio (USD)</th>
-                            <th class="p-6 border-b text-center">Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody id="catalogBody" class="divide-y divide-slate-100 text-sm">
-                        </tbody>
-                </table>
-            </div>
-            <div class="bg-blue-600 p-4 text-center text-white font-bold">
-                <p id="counter">Cargando base de datos...</p>
-            </div>
-        </div>
-    </section>
-
-    <aside id="cartSidebar" class="fixed right-0 top-0 h-full w-full md:w-[480px] bg-white shadow-2xl z-[60] transform translate-x-full transition-transform duration-500 flex flex-col">
-        <div class="p-6 bg-slate-900 text-white flex justify-between items-center">
-            <h2 class="text-2xl font-black uppercase tracking-tighter">Tu Cotización</h2>
-            <button onclick="toggleCart()" class="text-3xl">&times;</button>
-        </div>
-        <div id="cartItems" class="flex-grow overflow-y-auto p-6 space-y-4"></div>
-        <div class="p-8 border-t bg-slate-50 space-y-4">
-            <div class="flex justify-between items-center text-3xl font-black">
-                <span class="text-slate-400">TOTAL:</span>
-                <span id="cartTotal" class="text-blue-600">$0.00</span>
-            </div>
-            <button onclick="enviarWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white py-5 rounded-2xl font-black text-xl shadow-lg transition-all">
-                Enviar a WhatsApp
-            </button>
-        </div>
-    </aside>
-
-    <script>
-        // BASE DE DATOS COMPLETA (441 PRODUCTOS)
-        // Se incluyen categorías principales, accesorios y variaciones técnicas
-        const products = [
-            // FRONIUS
-            {sku: "PV-IN-38-FRP", desc: "PRIMO 3.8K 1F 240V", price: 1396.25, cat: "FRONIUS"},
-            {sku: "PV-IN-05-FRP", desc: "PRIMO 5K 1F 240V", price: 1492.50, cat: "FRONIUS"},
-            {sku: "PV-IN-06-FRP", desc: "PRIMO 6K 1F 240V", price: 1587.49, cat: "FRONIUS"},
-            {sku: "PV-IN-76-FRP", desc: "PRIMO 7.6K 1F 240V", price: 1924.99, cat: "FRONIUS"},
-            {sku: "PV-IN-82-FRP", desc: "PRIMO 8.2K 1F 240V", price: 2037.49, cat: "FRONIUS"},
-            {sku: "PV-IN-10-FRP", desc: "PRIMO 10K 1F 240V", price: 2721.25, cat: "FRONIUS"},
-            {sku: "PV-IN-GEN38-FRP", desc: "PRIMO GEN24 3.8K 1F 240V", price: 1654.40, cat: "FRONIUS"},
-            {sku: "PV-INH-GEN10P-FRP", desc: "PRIMO GEN24 PLUS 10K 1F 240V HIB", price: 4522.83, cat: "FRONIUS"},
-            {sku: "PV-IN-15-FRS", desc: "SYMO 15K 3F 480V", price: 3450.00, cat: "FRONIUS"},
-            {sku: "PV-IN-20-FRS", desc: "SYMO 20K 3F 480V", price: 3845.00, cat: "FRONIUS"},
-            
-            // SOLIS
-            {sku: "PV-IN-1S6-SL", desc: "SOLIS S6 1K 1F 110V CD", price: 293.75, cat: "SOLIS"},
-            {sku: "PV-IN-15S6-SL", desc: "SOLIS S6 1.5K 1F 110V CD", price: 318.75, cat: "SOLIS"},
-            {sku: "PV-IN-3S6-SL", desc: "SOLIS S6 3K 1F 220V CD", price: 456.25, cat: "SOLIS"},
-            {sku: "PV-INH-1P8KS6-SL", desc: "SOLIS S6 8K 1F 220V HIB BAT LV", price: 1994.49, cat: "SOLIS"},
-            {sku: "PV-INH-3P30KLV-SL", desc: "SOLIS S6 30K 3F 220V HIB BAT HV", price: 9595.59, cat: "SOLIS"},
-
-            // GROWATT
-            {sku: "PV-IN-TL3KX2-GW", desc: "GROWATT MIC 3K 1F 220V TL-X2", price: 314.38, cat: "GROWATT"},
-            {sku: "PV-IN-TL5KX2-GW", desc: "GROWATT MIC 5K 1F 220V TL-X2", price: 423.75, cat: "GROWATT"},
-            {sku: "PV-IN-HYB10-GW", desc: "GROWATT SPH 10K 1F 220V HIB", price: 2469.01, cat: "GROWATT"},
-            {sku: "PV-BT-APX5P-GRW", desc: "GROWATT BATERIA APX 5KWH LI-ION", price: 1885.00, cat: "BAT"},
-
-            // HOYMILES
-            {sku: "PV-IN-800ACC-HYM", desc: "HOYMILES HMS 800W 1F 110V C/ACC", price: 184.63, cat: "HOYMILES"},
-            {sku: "PV-IN-2KACC-HYM", desc: "HOYMILES HMS 2000W 1F 220V C/ACC", price: 240.00, cat: "HOYMILES"},
-
-            // PANELES
-            {sku: "PV-MOD-460-LON", desc: "LONGI SOLAR 460W MONO PERC", price: 135.00, cat: "MOD"},
-            {sku: "PV-MOD-550-SER", desc: "SERAPHIM 550W MONO PERC", price: 168.00, cat: "MOD"},
-            
-            // ACCESORIOS (BOMBAS, CABLE, ETC)
-            {sku: "PV-ACC-CABLE-N10", desc: "CABLE SOLAR NEGRO 10AWG (M)", price: 1.25, cat: "ACC"},
-            {sku: "PV-ACC-BOM-SHUR", desc: "BOMBA SHURFLO 9325 24V", price: 785.00, cat: "ACC"},
-            {sku: "PV-BT-180-PM", desc: "DEKA BATERIA 180AH/12V CICLO PROF", price: 325.00, cat: "BAT"}
-
-            // ... El sistema está diseñado para manejar la totalidad de los 441 productos.
-        ];
-
         let cart = [];
 
+        // --- RENDERIZADO DEL CATÁLOGO ---
         function renderCatalog(search = '', brand = '') {
             const body = document.getElementById('catalogBody');
             body.innerHTML = '';
             
             const filtered = products.filter(p => 
                 (p.sku.toLowerCase().includes(search.toLowerCase()) || p.desc.toLowerCase().includes(search.toLowerCase())) &&
-                (brand === '' || p.cat === brand || p.sku.includes(brand))
+                (brand === '' || p.cat === brand)
             );
 
             filtered.forEach(p => {
+                const stockColor = p.stock > 5 ? 'text-slate-500' : 'text-red-500 font-bold';
                 body.innerHTML += `
-                    <tr class="hover:bg-blue-50/50 transition-colors">
-                        <td class="p-6 font-mono font-black text-blue-600 text-xs">${p.sku}</td>
-                        <td class="p-6 font-bold text-slate-700">${p.desc}</td>
-                        <td class="p-6 text-right font-black text-emerald-600 text-lg">$${p.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</td>
-                        <td class="p-6 text-center">
-                            <button onclick="addToCart('${p.sku}')" class="bg-blue-600 hover:bg-slate-900 text-white p-3 rounded-xl transition-all shadow-md">+</button>
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4">
+                            <img src="${p.img}" alt="${p.cat}" class="w-12 h-12 object-contain rounded-lg border bg-white p-1">
+                        </td>
+                        <td class="p-4">
+                            <div class="font-mono font-black text-aqua text-xs">${p.sku}</div>
+                            <div class="text-sm font-bold text-slate-700">${p.desc}</div>
+                        </td>
+                        <td class="p-4 text-center">
+                            <span class="px-2 py-1 rounded-md bg-slate-100 text-[10px] font-black">${p.volt}</span>
+                        </td>
+                        <td class="p-4 text-center ${stockColor} text-xs">${p.stock} pza</td>
+                        <td class="p-4 text-right font-black text-slate-900 text-lg">$${p.price.toLocaleString('en-US', {minimumFractionDigits: 2})}</td>
+                        <td class="p-4 text-center">
+                            <button onclick="addToCart('${p.sku}')" class="bg-aqua text-slate-900 p-3 rounded-xl hover:scale-110 transition-transform shadow-md">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-width="3" stroke-linecap="round"/></svg>
+                            </button>
                         </td>
                     </tr>`;
             });
-            document.getElementById('counter').innerText = `${filtered.length} EQUIPOS CARGADOS SIN OMISIONES`;
+            document.getElementById('counter').innerText = `${filtered.length} EQUIPOS DISPONIBLES EN SISTEMA`;
         }
 
         function addToCart(sku) {
@@ -417,31 +642,43 @@
             updateCartUI();
         }
 
+        //// --- CONTINUACIÓN DE LÓGICA DE CARRITO Y LEAD MAGNET ---
+
         function updateCartUI() {
             const container = document.getElementById('cartItems');
-            document.getElementById('cartCount').innerText = cart.reduce((a, b) => a + b.qty, 0);
+            const countLabel = document.getElementById('cartCount');
+            const totalLabel = document.getElementById('cartTotal');
+            
+            countLabel.innerText = cart.reduce((a, b) => a + b.qty, 0);
             container.innerHTML = '';
+            
             let total = 0;
             cart.forEach(item => {
-                total += item.price * item.qty;
+                const subtotal = item.price * item.qty;
+                total += subtotal;
                 container.innerHTML += `
-                    <div class="bg-slate-100 p-4 rounded-2xl flex justify-between items-center border">
-                        <div class="max-w-[200px]">
-                            <p class="font-black text-xs text-blue-600 truncate">${item.sku}</p>
-                            <p class="text-[10px] text-slate-500 font-bold uppercase truncate">${item.desc}</p>
+                    <div class="bg-slate-50 p-4 rounded-2xl flex justify-between items-center border border-slate-200">
+                        <div class="max-w-[220px]">
+                            <p class="font-black text-[10px] text-aqua uppercase tracking-tighter">${item.sku}</p>
+                            <p class="text-xs font-bold text-slate-700 leading-tight">${item.desc}</p>
+                            <p class="text-[10px] text-slate-400 mt-1 italic">Unit: $${item.price.toLocaleString()}</p>
                         </div>
-                        <div class="flex items-center gap-4">
-                            <input type="number" value="${item.qty}" min="1" onchange="updateQty('${item.sku}', this.value)" class="w-12 bg-transparent font-black text-center text-lg outline-none">
-                            <button onclick="removeFromCart('${item.sku}')" class="text-red-500 text-2xl">&times;</button>
+                        <div class="flex items-center gap-3">
+                            <input type="number" value="${item.qty}" min="1" 
+                                onchange="updateQty('${item.sku}', this.value)" 
+                                class="w-10 bg-white border rounded-lg font-bold text-center text-sm p-1 outline-none focus:border-aqua">
+                            <button onclick="removeFromCart('${item.sku}')" class="text-red-400 hover:text-red-600 transition-colors">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/></svg>
+                            </button>
                         </div>
                     </div>`;
             });
-            document.getElementById('cartTotal').innerText = `$${total.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+            totalLabel.innerText = `$${total.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
         }
 
         function updateQty(sku, qty) {
             const item = cart.find(i => i.sku === sku);
-            if(item) item.qty = parseInt(qty);
+            if(item) item.qty = parseInt(qty) || 1;
             updateCartUI();
         }
 
@@ -454,22 +691,63 @@
             document.getElementById('cartSidebar').classList.toggle('translate-x-full');
         }
 
-        function enviarWhatsApp() {
-            if (cart.length === 0) return alert("El carrito está vacío");
-            let msg = "*COTIZACIÓN BAJA PRO SERVICES*\n";
-            msg += "━━━━━━━━━━━━━━━━━━━━\n";
-            cart.forEach(i => msg += `• ${i.sku}\n  Cant: ${i.qty} | Sub: $${(i.price * i.qty).toLocaleString()} USD\n\n`);
-            msg += `*TOTAL ESTIMADO:* ${document.getElementById('cartTotal').innerText} USD\n`;
-            msg += "━━━━━━━━━━━━━━━━━━━━\n";
-            msg += "Solicito revisión técnica y disponibilidad.";
-            
-            // Número de WhatsApp configurado para la empresa
-            window.open(`https://wa.me/526121234567?text=${encodeURIComponent(msg)}`, '_blank');
+        // --- GESTIÓN DE LEAD MAGNET Y ENVÍO ---
+
+        function toggleLeadModal(show) {
+            const modal = document.getElementById('leadModal');
+            if(show) modal.classList.remove('hidden'); else modal.classList.add('hidden');
         }
 
+        // Interceptamos el envío de WhatsApp para pedir datos primero
+        function enviarWhatsApp() {
+            if (cart.length === 0) return alert("El carrito está vacío. Añade equipos para cotizar.");
+            toggleLeadModal(true); // Abrir formulario obligatorio
+        }
+
+        document.getElementById('leadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('userName').value;
+            const tel = document.getElementById('userPhone').value;
+            const email = document.getElementById('userEmail').value;
+            
+            // Construcción del mensaje profesional para WhatsApp
+            let total = 0;
+            let msg = `*SOLICITUD DE COTIZACIÓN - BAJA PRO SERVICES*\n`;
+            msg += `━━━━━━━━━━━━━━━━━━━━\n`;
+            msg += `*DATOS DEL CLIENTE:*\n`;
+            msg += `👤 Nombre: ${nombre}\n`;
+            msg += `📱 WhatsApp: ${tel}\n`;
+            msg += `📧 Email: ${email}\n\n`;
+            msg += `*DETALLE DEL PEDIDO:*\n`;
+            
+            cart.forEach(i => {
+                const sub = i.price * i.qty;
+                total += sub;
+                msg += `• ${i.sku}\n`;
+                msg += `  ${i.desc}\n`;
+                msg += `  Cant: ${i.qty} x $${i.price.toLocaleString()} | Sub: $${sub.toLocaleString()} USD\n\n`;
+            });
+
+            msg += `━━━━━━━━━━━━━━━━━━━━\n`;
+            msg += `*TOTAL ESTIMADO:* $${total.toLocaleString()} USD\n`;
+            msg += `*VALIDEZ:* Precios sujetos a cambio sin previo aviso.\n`;
+            msg += `━━━━━━━━━━━━━━━━━━━━\n`;
+            msg += `Favor de confirmar disponibilidad de stock y costos de envío.`;
+
+            // Número de WhatsApp de la empresa (según instrucción)
+            const phoneEmpresa = "526122198325";
+            const waUrl = `https://wa.me/${phoneEmpresa}?text=${encodeURIComponent(msg)}`;
+            
+            window.open(waUrl, '_blank');
+            toggleLeadModal(false);
+        });
+
+        // Event Listeners para Filtros
         document.getElementById('searchInput').addEventListener('input', e => renderCatalog(e.target.value, document.getElementById('brandFilter').value));
         document.getElementById('brandFilter').addEventListener('change', e => renderCatalog(document.getElementById('searchInput').value, e.target.value));
         
+        // Inicialización
         window.onload = () => renderCatalog();
     </script>
 </body>
