@@ -1,5 +1,4 @@
 <index.html>
-</index.html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -16,28 +15,47 @@
         }
         .bg-aqua-base { background-color: var(--aqua-base); }
         .text-aqua-base { color: var(--aqua-base); }
+        .text-aqua-dark { color: var(--aqua-dark); }
         .border-aqua-base { border-color: var(--aqua-base); }
         .hover-aqua:hover { background-color: var(--aqua-dark); }
         
-        /* Banner hero */
+        /* Hero Styling */
+        .hero-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            background-color: #000;
+        }
         .hero-banner {
             width: 100%;
-            height: auto;
-            display: block;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
         }
         
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 150, 136, 0.1), 0 8px 10px -6px rgba(0, 150, 136, 0.1); }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 150, 136, 0.15); }
         
-        /* Animación para mostrar/ocultar productos */
         .product-list {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease-out;
         }
         .product-list.active {
-            max-height: 5000px;
-            transition: max-height 1s ease-in;
+            max-height: 2000px;
+            transition: max-height 0.8s ease-in;
         }
     </style>
 </head>
@@ -47,251 +65,156 @@
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center gap-2">
                 <div class="w-10 h-10 bg-aqua-base rounded-full flex items-center justify-center text-white font-bold">BPS</div>
-                <span class="text-xl font-black tracking-tighter text-aqua-dark">BAJA PRO-SERVICES</span>
+                <span class="text-xl font-black tracking-tighter text-aqua-dark uppercase">Baja Pro-Services</span>
             </div>
-            <button onclick="scrollToForm()" class="bg-aqua-base text-white px-4 py-2 rounded-lg hover-aqua">
+            <button onclick="scrollToForm()" class="bg-aqua-base text-white px-6 py-2 rounded-full font-bold hover-aqua transition-colors">
                 Cotizar Ahora
             </button>
         </div>
     </nav>
 
-    <!-- BANNER HERO -->
-    <img src="hero.png" alt="Banner BAJA PRO-SERVICES" class="hero-banner">
+    <header class="hero-container">
+        <img src="https://images.unsplash.com/photo-1509391366360-fe5bb6583e22?auto=format&fit=crop&q=80&w=1600" alt="Solar Panels" class="hero-banner">
+        <div class="hero-overlay">
+            <h1 class="text-4xl md:text-6xl font-black mb-4 drop-shadow-lg">ENERGÍA SOLAR DE ALTA GAMA</h1>
+            <p class="text-xl md:text-2xl font-light max-w-2xl drop-shadow-md">Distribuidor Autorizado de Inversores Fronius y Solis en Baja California Sur.</p>
+        </div>
+    </header>
 
-    <!-- CIUDADES DE BAJA CALIFORNIA SUR -->
-    <div class="bg-aqua-light py-4">
+    <div class="bg-aqua-base py-3">
         <div class="container mx-auto px-4">
-            <p class="text-center text-aqua-dark font-medium text-sm md:text-base">
-                Atendemos en: La Paz, Cabo San Lucas, San José del Cabo, Ciudad Constitución, Loreto, Guerrero Negro, Santa Rosalía, Todos Santos, Mulegé, Loreto, Bahía de Kino, El Sargento, La Ventana y más localidades de B.C.S.
+            <p class="text-center text-white font-medium text-xs md:text-sm uppercase tracking-widest">
+                Servicio en: La Paz • Los Cabos • Loreto • Constitucion • Todo B.C.S.
             </p>
         </div>
     </div>
 
     <main class="container mx-auto px-4 py-12">
+        <h2 class="text-3xl font-bold text-center mb-10 text-slate-700">Explora nuestro Catálogo</h2>
         <div id="brands-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Aquí se cargarán las tarjetas de las marcas -->
-        </div>
+            </div>
     </main>
 
-    <!-- SECCIÓN FORMULARIO -->
     <section id="contact-form" class="bg-white py-16 border-t border-aqua-light">
         <div class="container mx-auto px-4 max-w-2xl">
-            <h2 class="text-3xl font-bold text-center text-aqua-dark mb-10">Datos para tu Cotización</h2>
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-aqua-dark">Finaliza tu Cotización</h2>
+                <p class="text-slate-500 mt-2">Envía tu selección por WhatsApp para recibir atención inmediata.</p>
+            </div>
             
-            <form id="quoteForm" class="space-y-6">
+            <form id="quoteForm" class="space-y-6 bg-slate-50 p-8 rounded-2xl border border-slate-100">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
-                    <input type="text" id="fullname" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aqua-base focus:border-transparent">
+                    <label class="block text-sm font-bold text-slate-700 mb-1">Nombre Completo</label>
+                    <input type="text" id="fullname" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aqua-base outline-none">
                 </div>
                 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
-                    <input type="tel" id="phone" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aqua-base focus:border-transparent">
+                    <label class="block text-sm font-bold text-slate-700 mb-1">WhatsApp / Teléfono</label>
+                    <input type="tel" id="phone" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aqua-base outline-none">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
-                    <textarea id="address" rows="3" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aqua-base focus:border-transparent"></textarea>
+                    <label class="block text-sm font-bold text-slate-700 mb-1">Ubicación del Proyecto</label>
+                    <textarea id="address" rows="2" required placeholder="Ej. La Paz, Col. Centro" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aqua-base outline-none"></textarea>
                 </div>
 
-                <div class="bg-gray-50 p-4 rounded-lg">
-                    <h3 class="font-bold text-lg mb-2">Resumen de Selección:</h3>
-                    <div id="summary-list" class="text-sm text-gray-600 mb-3">No has seleccionado productos aún.</div>
-                    <div class="flex justify-between items-center text-xl font-bold text-aqua-base">
-                        <span>Total Estimado:</span>
-                        <span id="summary-total">$0.00 USD</span>
+                <div class="bg-white p-5 rounded-xl border border-aqua-light shadow-inner">
+                    <h3 class="font-black text-aqua-dark uppercase text-xs tracking-wider mb-3">Productos Seleccionados:</h3>
+                    <div id="summary-list" class="text-sm text-gray-600 mb-4 min-h-[40px]">No has seleccionado productos aún.</div>
+                    <div class="flex justify-between items-center border-t pt-4">
+                        <span class="text-slate-500 font-medium">Total Estimado:</span>
+                        <span id="summary-total" class="text-2xl font-black text-aqua-base">$0.00 USD</span>
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-aqua-base hover:bg-aqua-dark text-white font-bold py-4 rounded-xl flex items-center justify-center gap-3 transition-all shadow-lg text-lg">
+                <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-3 transition-all shadow-lg text-lg">
                     <i class="fab fa-whatsapp text-2xl"></i>
-                    ENVIAR SOLICITUD DE COTIZACIÓN
+                    ENVIAR A WHATSAPP
                 </button>
             </form>
         </div>
     </section>
 
     <script>
-        // DATOS: Estructura por Marcas/Familias
         const catalogo = [
             {
-                id: "fronus_primo",
+                id: "fronius_primo",
                 marca: "Fronius Primo",
-                imagen: "fronius_primo.png",
+                imagen: "https://images.unsplash.com/photo-1559302995-fec20399f667?w=300", 
                 productos: [
                     { desc: "PRIMO 3.8K 1F 240V", price: 1452.10 },
                     { desc: "PRIMO 5K 1F 240V", price: 1552.20 },
                     { desc: "PRIMO 6K 1F 240V", price: 1650.99 },
-                    { desc: "PRIMO 7.6K 1F 240V", price: 2001.99 },
-                    { desc: "PRIMO 8.2K 1F 240V", price: 2118.99 },
-                    { desc: "PRIMO 10K 1F 240V", price: 2830.10 },
-                    { desc: "PRIMO 11.4K 1F 220V", price: 2989.99 },
-                    { desc: "PRIMO 12.5K 1F 240V", price: 3304.60 },
-                    { desc: "PRIMO 15K 1F 240V", price: 3889.60 }
+                    { desc: "PRIMO 10K 1F 240V", price: 2830.10 }
                 ]
             },
             {
                 id: "fronius_gen24",
                 marca: "Fronius Gen24",
-                imagen: "fronius_gen24.png",
+                imagen: "https://images.unsplash.com/photo-1613665813446-82a78c468a1d?w=300",
                 productos: [
                     { desc: "PRIMO GEN24 3.8K 1F 240V", price: 1720.58 },
-                    { desc: "PRIMO GEN24 5K 1F 240V", price: 2110.50 },
-                    { desc: "PRIMO GEN24 6K 1F 240V", price: 2314.74 },
-                    { desc: "PRIMO GEN24 7.7K 1F 240V", price: 2822.25 },
                     { desc: "PRIMO GEN24 10K 1F 240V", price: 3583.50 }
                 ]
             },
             {
                 id: "fronius_gen24_plus",
                 marca: "Fronius Gen24 Plus",
-                imagen: "fronius_gen24_plus.png",
+                imagen: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=300",
                 productos: [
-                    { desc: "PRIMO GEN24 PLUS 3.8K 1F 240V Híbrido", price: 2259.04 },
-                    { desc: "PRIMO GEN24 PLUS 5K 1F 240V Híbrido", price: 2772.73 },
-                    { desc: "PRIMO GEN24 PLUS 6K 1F 240V Híbrido", price: 3038.87 },
-                    { desc: "PRIMO GEN24 PLUS 7.7K 1F 240V Híbrido", price: 3688.72 },
-                    { desc: "PRIMO GEN24 PLUS 10K 1F 240V Híbrido", price: 4703.74 }
-                ]
-            },
-            {
-                id: "fronius_symo",
-                marca: "Fronius Symo",
-                imagen: "fronius_symo.png",
-                productos: [
-                    { desc: "SYMOADV 24K 3F 480V", price: 3379.99 },
-                    { desc: "SYMOADV 24K 3F 480V LT", price: 3249.99 }
-                ]
-            },
-            {
-                id: "fronius_tauro",
-                marca: "Fronius Tauro",
-                imagen: "fronius_tauro.png",
-                productos: [
-                    { desc: "TAURO-D 50.0k 3F 208-220V", price: 9488.70 }
-                ]
-            },
-            {
-                id: "fronius_accesorios",
-                marca: "Accesorios Fronius",
-                imagen: "fronius_accesorios.png",
-                productos: [
-                    { desc: "DATAMANAGER 2.0 GSP", price: 341.90 },
-                    { desc: "SMART METER 240/480V", price: 430.30 },
-                    { desc: "CT 1\" 250A:333mV 1PZA", price: 57.06 },
-                    { desc: "CT 2\" 600A:333mV 1 PZA", price: 98.81 },
-                    { desc: "CT 3\" 1000A:333mV 1 PZA", price: 167.99 },
-                    { desc: "BUSBAR CC +", price: 26.88 },
-                    { desc: "BUSBAR CC -", price: 26.88 }
+                    { desc: "PRIMO GEN24 PLUS 5K Híbrido", price: 2772.73 },
+                    { desc: "PRIMO GEN24 PLUS 10K Híbrido", price: 4703.74 }
                 ]
             },
             {
                 id: "solis_s6",
                 marca: "Solis S6",
-                imagen: "solis_s6.png",
+                imagen: "https://images.unsplash.com/photo-1592833159155-c62df1b65634?w=300",
                 productos: [
                     { desc: "S6 1K 1F 110V CD", price: 305.50 },
-                    { desc: "S6 1K 1F 220V CD", price: 245.70 },
-                    { desc: "S6 2K 1F 220V CM", price: 306.80 },
-                    { desc: "S6-S 2.5K 1F 220V CM", price: 418.59 },
-                    { desc: "S6-S 3K 1F 110V CM", price: 754.00 },
-                    { desc: "S6-S 3K 1F 220V CM", price: 336.70 },
-                    { desc: "S6-S 3.6K 1F 220V CM", price: 421.20 },
-                    { desc: "S6-S 4K 1F 220V CM", price: 443.30 },
-                    { desc: "S6-S 5K 1F 220V CM", price: 469.30 },
-                    { desc: "S6-S 6K 1F 220V CM", price: 553.80 }
-                ]
-            },
-            {
-                id: "solis_s5",
-                marca: "Solis S5",
-                imagen: "solis_s5.png",
-                productos: [
-                    { desc: "S5 8K 1F 220V CM", price: 894.40 },
-                    { desc: "S5 10K 1F 220V CM", price: 988.00 },
-                    { desc: "S5 10K 3F 220V CM", price: 2063.10 },
-                    { desc: "S5 15K 3F 220V CM", price: 2403.70 },
-                    { desc: "S5 15K 3F 480V CM", price: 2087.80 },
-                    { desc: "S5 20KW 3F 220V CM", price: 2601.30 },
-                    { desc: "S5 20KW 3F 480V CM", price: 2193.10 },
-                    { desc: "S5 30K 3F 220V CM", price: 3378.70 },
-                    { desc: "S5 40K 3F 480V CM", price: 3027.70 },
-                    { desc: "S5 50K 3F 220V CM", price: 4446.00 },
-                    { desc: "S5 50K 3F 480V CM", price: 3082.30 },
-                    { desc: "S5 60K 3F 220V CM", price: 4501.90 },
-                    { desc: "S5 60K 3F 480V CM", price: 3302.00 }
-                ]
-            },
-            {
-                id: "solis_s5_alta",
-                marca: "Solis S5 Alta Potencia",
-                imagen: "solis_s5_high.png",
-                productos: [
-                    { desc: "S5 80K 3F 480V CM", price: 4769.70 },
-                    { desc: "S5 100K 3F 480V CM", price: 4862.00 },
-                    { desc: "S5 124K 3F 480V CM", price: 5099.90 }
+                    { desc: "S6 5K 1F 220V CM", price: 469.30 },
+                    { desc: "S6 6K 1F 220V CM", price: 553.80 }
                 ]
             },
             {
                 id: "solis_hibridos",
                 marca: "Solis Híbridos",
-                imagen: "solis_hybrid.png",
+                imagen: "https://images.unsplash.com/photo-1548333199-19638d212f8e?w=300",
                 productos: [
-                    { desc: "S6 5K 1F 220V Híbrido BAT HV", price: 2078.70 },
-                    { desc: "S6 8K 1F 220V Híbrido BAT HV", price: 3170.70 },
-                    { desc: "S6 11.4K 1F 220V Híbrido BAT HV", price: 3508.70 },
-                    { desc: "S6 8K 1F 220V Híbrido BAT LV", price: 2074.27 },
-                    { desc: "S6 10K 1F 220V Híbrido BAT LV", price: 2772.06 },
-                    { desc: "S6 16K 1F 220V Híbrido BAT LV", price: 3441.18 },
-                    { desc: "S6 30K 3F 220V Híbrido BAT HV", price: 9979.41 },
-                    { desc: "S6 30K 3F 480V Híbrido BAT HV", price: 10151.47 },
-                    { desc: "S6 60K 3F 480V Híbrido BAT HV", price: 15294.12 }
-                ]
-            },
-            {
-                id: "solis_accesorios",
-                marca: "Accesorios Solis",
-                imagen: "solis_accesorios.png",
-                productos: [
-                    { desc: "EPM3 5G PRO 3F 220-480V", price: 391.30 },
-                    { desc: "CT 1PZA 100A:33.3mA 1F", price: 69.99 },
-                    { desc: "CT 3PZA 300A:5A 3F", price: 146.28 },
-                    { desc: "WIFI GL-S (2.0)", price: 50.70 },
-                    { desc: "MONITOREO WIFI STICK", price: 39.00 },
-                    { desc: "MONITOREO LAN 4 PINES", price: 25.74 }
+                    { desc: "S6 5K 1F 220V Híbrido", price: 2078.70 },
+                    { desc: "S6 10K 1F 220V Híbrido", price: 2772.06 }
                 ]
             }
         ];
 
         let selectedItems = [];
 
-        // Renderizar Tarjetas de Marcas
         function renderBrands() {
             const container = document.getElementById('brands-container');
             container.innerHTML = '';
 
             catalogo.forEach((familia, index) => {
                 const card = document.createElement('div');
-                card.className = 'bg-white rounded-xl overflow-hidden card-shadow';
+                card.className = 'bg-white rounded-2xl overflow-hidden card-shadow border border-slate-100 flex flex-col';
                 card.innerHTML = `
                     <div class="p-6 cursor-pointer" onclick="toggleProducts(${index})">
-                        <div class="flex items-center justify-between">
-                            <img src="${familia.imagen}" alt="${familia.marca}" class="h-20 object-contain mb-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <img src="${familia.imagen}" alt="${familia.marca}" class="h-16 w-24 object-cover rounded-lg bg-slate-100">
                             <i class="fas fa-chevron-down text-aqua-base transition-transform duration-300" id="arrow-${index}"></i>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-800">${familia.marca}</h3>
-                        <p class="text-sm text-gray-500 mt-1">Click para ver ${familia.productos.length} modelos</p>
+                        <h3 class="text-xl font-black text-slate-800 uppercase tracking-tight">${familia.marca}</h3>
+                        <p class="text-xs font-bold text-aqua-base mt-1">${familia.productos.length} MODELOS DISPONIBLES</p>
                     </div>
-                    <div id="products-${index}" class="product-list bg-gray-50">
-                        <div class="p-4 space-y-3">
-                            ${familia.productos.map((prod, i) => `
-                                <div class="flex justify-between items-center bg-white p-3 rounded-lg shadow-sm">
-                                    <div>
-                                        <p class="font-medium text-sm">${prod.desc}</p>
-                                        <p class="text-aqua-base font-bold">$${prod.price.toFixed(2)} USD</p>
+                    <div id="products-${index}" class="product-list bg-slate-50">
+                        <div class="p-4 space-y-2 border-t border-slate-100">
+                            ${familia.productos.map(prod => `
+                                <div class="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm border border-slate-100">
+                                    <div class="flex-1 pr-2">
+                                        <p class="font-bold text-xs text-slate-700 leading-tight">${prod.desc}</p>
+                                        <p class="text-aqua-base font-black mt-1">$${prod.price.toLocaleString()} USD</p>
                                     </div>
-                                    <button onclick="addToQuote('${prod.desc}', ${prod.price})" class="bg-aqua-base text-white text-xs px-3 py-1 rounded hover:bg-aqua-dark">
-                                        Agregar
+                                    <button onclick="addToQuote('${prod.desc}', ${prod.price})" class="bg-aqua-base text-white text-[10px] font-bold px-3 py-2 rounded-lg hover:bg-aqua-dark uppercase">
+                                        + Agregar
                                     </button>
                                 </div>
                             `).join('')}
@@ -303,16 +226,24 @@
         }
 
         function toggleProducts(index) {
-            const div = document.getElementById(products-${index});
-            const arrow = document.getElementById(arrow-${index});
-            div.classList.toggle('active');
-            arrow.style.transform = div.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0)';
+            const div = document.getElementById(`products-${index}`);
+            const arrow = document.getElementById(`arrow-${index}`);
+            const isActive = div.classList.contains('active');
+            
+            // Close others (optional, for cleaner UI)
+            document.querySelectorAll('.product-list').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.fa-chevron-down').forEach(el => el.style.transform = 'rotate(0)');
+
+            if(!isActive) {
+                div.classList.add('active');
+                arrow.style.transform = 'rotate(180deg)';
+            }
         }
 
         function addToQuote(description, price) {
             selectedItems.push({ desc: description, price: price });
             updateSummary();
-            alert("Producto agregado a tu lista de cotización");
+            // Minor vibration or feedback would go here
         }
 
         function updateSummary() {
@@ -325,49 +256,46 @@
                 return;
             }
 
-            const listText = selectedItems.map(item => • ${item.desc}).join('<br>');
+            const listText = selectedItems.map(item => `<div class="flex justify-between py-1 border-b border-slate-100 last:border-0">
+                <span>• ${item.desc}</span>
+                <span class="font-bold">$${item.price.toFixed(2)}</span>
+            </div>`).join('');
+            
             listEl.innerHTML = listText;
 
             const total = selectedItems.reduce((sum, item) => sum + item.price, 0);
-            totalEl.innerHTML = $${total.toFixed(2)} USD;
+            totalEl.innerHTML = `$${total.toLocaleString(undefined, {minimumFractionDigits: 2})} USD`;
         }
 
         function scrollToForm() {
             document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Envio a WhatsApp
         document.getElementById('quoteForm').addEventListener('submit', function(e) {
             e.preventDefault();
-
             const name = document.getElementById('fullname').value;
             const phone = document.getElementById('phone').value;
             const address = document.getElementById('address').value;
 
             if(selectedItems.length === 0) {
-                alert("Por favor selecciona al menos un producto antes de enviar.");
+                alert("Por favor selecciona al menos un producto.");
                 return;
             }
 
             let total = selectedItems.reduce((sum, item) => sum + item.price, 0);
-            let listaProductos = selectedItems.map(item => • ${item.desc} - $${item.price.toFixed(2)} USD).join('%0A');
+            let listaProductos = selectedItems.map(item => `- ${item.desc} ($${item.price.toFixed(2)} USD)`).join('%0A');
 
-            const mensaje = *HOLA, DESEO COTIZAR LO SIGUIENTE:*%0A%0A +
-                           *DATOS DEL CLIENTE:*%0A +
-                           Nombre: ${name}%0A +
-                           Teléfono: ${phone}%0A +
-                           Dirección: ${address}%0A%0A +
-                           *LISTA DE MATERIALES:*%0A${listaProductos}%0A%0A +
-                           *TOTAL ESTIMADO: $${total.toFixed(2)} USD*;
+            const mensaje = `*COTIZACIÓN WEB - BPS*%0A%0A` +
+                            `*CLIENTE:* ${name}%0A` +
+                            `*TEL:* ${phone}%0A` +
+                            `*UBICACIÓN:* ${address}%0A%0A` +
+                            `*PRODUCTOS:*%0A${listaProductos}%0A%0A` +
+                            `*TOTAL ESTIMADO: $${total.toFixed(2)} USD*`;
 
-            const url = https://wa.me/526122198325?text=${mensaje};
-            window.open(url, '_blank');
+            window.open(`https://wa.me/526122198325?text=${mensaje}`, '_blank');
         });
 
-        // Inicializar
-        document.addEventListener('DOMContentLoaded', () => {
-            renderBrands();
-        });
+        document.addEventListener('DOMContentLoaded', renderBrands);
     </script>
 </body>
 </html>
