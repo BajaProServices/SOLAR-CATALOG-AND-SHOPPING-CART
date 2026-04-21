@@ -109,35 +109,66 @@
     </div>
 
     <script>
-        const i18n = {
-            es: {
-                cartL: "Carrito de Cotización",
-                totalL: "Total estimado:",
-                btnQ: "SOLICITAR COTIZACIÓN",
-                add: "Agregar al Carrito",
-                stock: "Disponible:",
-                volt: "Voltaje:",
-                empty: "Tu carrito está vacío",
-                all: "TODOS",
-                acc: "ACCESORIOS"
-            },
-            en: {
-                cartL: "Quotation Cart",
-                totalL: "Estimated Total:",
-                btnQ: "REQUEST QUOTATION",
-                add: "Add to Cart",
-                stock: "Stock:",
-                volt: "Voltage:",
-                empty: "Your cart is empty",
-                all: "ALL",
-                acc: "ACCESSORIES"
-            }
-        };
+    // Configuración de Idiomas
+    const i18n = {
+        es: {
+            cartL: "Carrito de Cotización",
+            totalL: "Total estimado:",
+            btnQ: "SOLICITAR COTIZACIÓN",
+            add: "Agregar",
+            stock: "Stock:",
+            volt: "Voltaje:",
+            empty: "Tu carrito está vacío",
+            all: "TODOS",
+            acc: "ACCESORIOS"
+        },
+        en: {
+            cartL: "Quotation Cart",
+            totalL: "Estimated Total:",
+            btnQ: "REQUEST QUOTATION",
+            add: "Add",
+            stock: "Stock:",
+            volt: "Voltage:",
+            empty: "Your cart is empty",
+            all: "ALL",
+            acc: "ACCESSORIES"
+        }
+    };
+
+    let currentLang = 'es';
+    let cart = [];
+
+    // Base de Datos de Productos (Sección Reparada)
+    const products = [
+        // FRONIUS
+        { sku: "PV-IN-38-FRP", desc: "PRIMO 3.8K 1F 240V", volt: "240V monofásico", price: 1452.10, cat: "INV", stock: 15, img: "fronius.png" },
+        { sku: "PV-IN-10-FRP", desc: "PRIMO 10K 1F 240V", volt: "240V monofásico", price: 2830.10, cat: "INV", stock: 15, img: "fronius.png" },
+        { sku: "PV-IN-24WA-FRS", desc: "SYMOADV 24K 3F 480V", volt: "480V trifásico", price: 3379.99, cat: "INV", stock: 15, img: "fronius.png" },
+        { sku: "PV-ACC-SMRT-FRS", desc: "ACC SMART METER 240/480V", volt: "N/A", price: 430.30, cat: "ACC", stock: 100, img: "fronius.png" },
+        
+        // SOLIS
+        { sku: "PV-IN-1S6-SL", desc: "S6 1K 1F 110V CD", volt: "110V monofasico", price: 305.50, cat: "INV", stock: 15, img: "solis.png" },
+        { sku: "PV-IN-5S6CM-SL", desc: "S6-S 5K 1F 220V CM", volt: "220V monofásico", price: 469.30, cat: "INV", stock: 15, img: "solis.png" },
+        { sku: "PV-INH-1P10KS6-SL", desc: "S6 10K 1F 220V Híbrido BAT LV", volt: "220V monofásico", price: 2772.06, cat: "INV", stock: 15, img: "solis.png" },
+        
+        // GROWATT
+        { sku: "PV-IN-TL5KX2-GW", desc: "MIN 5K 1F 220V TL-X2", volt: "220V monofásico", price: 440.70, cat: "INV", stock: 15, img: "growatt.png" },
+        { sku: "PV-IN-KTL3-150-GRW", desc: "MAX 150K 3F 480V KTL3", volt: "480V trifásico", price: 3781.70, cat: "INV", stock: 15, img: "growatt.png" },
+        { sku: "PV-IN-MSPX-GRW", desc: "ACC MONITOREO SHINE WIFI-X", volt: "N/A", price: 42.90, cat: "ACC", stock: 100, img: "shine.png" },
+        
+        // HUAWEI
+        { sku: "PV-IN-20K3P-HUA", desc: "SUN2000 20K 3F 220V", volt: "220V trifásico", price: 2415.40, cat: "INV", stock: 15, img: "huawei.png" },
+        { sku: "PV-INH-5K1P-HUA", desc: "SUN2000 5K 1F 220V Híbrido", volt: "220V monofásico", price: 570.70, cat: "INV", stock: 15, img: "huawei.png" },
+        
+        // HOYMILES
+        { sku: "PV-IN-2KACC-HYM", desc: "HMS 2000W 1F 220V C/ACC", volt: "220V monofásico", price: 249.60, cat: "INV", stock: 15, img: "hoymiles.png" },
+        { sku: "PV-IN-WFDTU-HYM", desc: "ACC MONITOREO HMS DTU LITE S", volt: "N/A", price: 123.50, cat: "ACC", stock: 100, img: "hoymiles.png" }
+    ];
 
         let currentLang = 'es';
         let cart = 
          const products = [
-            { sku: "PV-IN-38-FRP", desc: "PRIMO 3.8K 1F 240V", volt: "240V monofásico", price: 1452.10, cat: "INV", stock: 15, img: '<div><img src="img/fronius inversor.png"></div>' },
+            { sku: "PV-IN-38-FRP", desc: "PRIMO 3.8K 1F 240V", volt: "240V monofásico", price: 1452.10, cat: "INV", stock: 15, img: "fronius inversor.png"></div>' },
             { sku: "PV-IN-05-FRP", desc: "PRIMO 5K 1F 240V", volt: "240V monofásico", price: 1552.20, cat: "INV", stock: 15, img: '<div><img src="img/fronius inversor.png"></div>' },
             { sku: "PV-IN-06-FRP", desc: "PRIMO 6K 1F 240V", volt: "240V monofásico", price: 1650.99, cat: "INV", stock: 15, img: '<div><img src="img/Fronius inversor.png"></div>' },
             { sku: "PV-IN-76-FRP", desc: "PRIMO 7.6K 1F 240V", volt: "240V monofásico", price: 2001.99, cat: "INV", stock: 15, img: '<div><img src="img/fronius inversor.png"></div>' },
@@ -499,181 +530,129 @@
             { sku: "PV-BT-105-PM", desc: "BATERIA DEKA MARINE 105AH 12V", volt: "12V", price: 213.55, cat: "BAT", stock: 20, img: '<div><img src="img/deka_105.png"></div>' },
             { sku: "PV-BT-180-PM", desc: "BATERIA DEKA 180AH 12V", volt: "12V", price: 321.44, cat: "BAT", stock: 20, img: '<div><img src="img/deka_180.png"></div>' },
             { sku: "PV-BT-115-US", desc: "BATERIA ULTRASTART 115AH 12V CICLO PROFUNDO", volt: "12V", price: 181.03, cat: "BAT", stock: 20, img: '<div><img src="img/ultrastart_115.png"></div>' }
-        ];
+        // Función para renderizar los productos en el HTML
+    function renderProducts(filter = 'ALL') {
+        const grid = document.getElementById('product-grid');
+        grid.innerHTML = ''; // Limpiamos la cuadrícula
 
-        function initApp() {
-            renderTabs();
-            renderProducts('TODOS');
-            updateCartUI();
-        }
+        const filtered = products.filter(p => filter === 'ALL' || p.cat === filter);
 
-        function renderTabs() {
-            const categories = ['TODOS', ...new Set(products.map(p => p.cat))];
-            const container = document.getElementById('tabs-container');
-            container.innerHTML = categories.map(cat => `
-                <button onclick="filterProducts('${cat}')" 
-                        class="tab-btn px-6 py-4 transition-all hover:bg-aqua-accent" 
-                        data-cat="${cat}">
-                    ${cat === 'ACC' ? i18n[currentLang].acc : cat}
-                </button>
-            `).join('');
-            setActiveTab('TODOS');
-        }
-
-        function filterProducts(cat) {
-            renderProducts(cat);
-            setActiveTab(cat);
-        }
-
-        function setActiveTab(cat) {
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('tab-active');
-                if(btn.dataset.cat === cat) btn.classList.add('tab-active');
-            });
-        }
-
-        function renderProducts(filter = 'TODOS') {
-            const grid = document.getElementById('product-grid');
-            const filtered = filter === 'TODOS' ? products : products.filter(p => p.cat === filter);
-            
-            grid.innerHTML = filtered.map(p => `
-                <div class="bg-white rounded-2xl p-5 card-shadow flex flex-col justify-between product-card border border-aqua-light/30">
-                    <div>
-                        <div class="relative mb-4 overflow-hidden rounded-xl bg-aqua-light/20">
-                            <img src="${p.img}" alt="${p.desc}" class="w-full h-48 object-contain p-4 mix-blend-multiply" onerror="this.src='https://via.placeholder.com/300x300?text=Solar+Product'">
-                            <span class="absolute top-2 right-2 bg-aqua-base text-white text-[10px] px-2 py-1 rounded-full font-bold">
-                                ${p.cat}
-                            </span>
-                        </div>
-                        <h3 class="font-bold text-aqua-dark text-sm mb-1 h-10 overflow-hidden">${p.desc}</h3>
-                        <p class="text-slate-400 text-[10px] font-mono mb-2">SKU: ${p.sku}</p>
-                        <div class="flex justify-between items-end mb-4">
-                            <div>
-                                <p class="text-[10px] text-slate-500 uppercase font-bold">${i18n[currentLang].volt} ${p.volt}</p>
-                                <p class="text-2xl font-black text-aqua-base">$${p.price.toLocaleString()} <span class="text-xs font-normal">USD</span></p>
-                            </div>
-                            <p class="text-[10px] ${p.stock > 0 ? 'text-green-600' : 'text-red-500'} font-bold">
-                                ${i18n[currentLang].stock} ${p.stock}
-                            </p>
-                        </div>
-                    </div>
-                    <button onclick="addToCart('${p.sku}')" 
-                            class="w-full bg-aqua-base hover:bg-aqua-dark text-white font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 group">
-                        <i class="fas fa-cart-plus group-hover:scale-110 transition-transform"></i>
+        filtered.forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = `
+                <img src="${p.img}" alt="${p.desc}" onerror="this.src='placeholder.png'">
+                <div class="product-info">
+                    <span class="sku">${p.sku}</span>
+                    <h3>${p.desc}</h3>
+                    <p><strong>${i18n[currentLang].volt}</strong> ${p.volt}</p>
+                    <p><strong>${i18n[currentLang].stock}</strong> ${p.stock} units</p>
+                    <div class="price">$${p.price.toLocaleString()} USD</div>
+                    <button onclick="addToCart('${p.sku}')" class="btn-add">
                         ${i18n[currentLang].add}
                     </button>
                 </div>
-            `).join('');
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    // Cambio de Idioma
+    function setLanguage(lang) {
+        currentLang = lang;
+        // Actualizar etiquetas estáticas
+        document.getElementById('cart-title').innerText = i18n[lang].cartL;
+        document.getElementById('total-label').innerText = i18n[lang].totalL;
+        document.getElementById('btn-quote').innerText = i18n[lang].btnQ;
+        
+        // Re-renderizar productos y filtros
+        renderProducts();
+        updateFilterLabels();
+    }
+
+    function updateFilterLabels() {
+        // Actualiza los textos de los botones de filtro
+        document.querySelector('[onclick="renderProducts(\'ALL\')"]').innerText = i18n[currentLang].all;
+        document.querySelector('[onclick="renderProducts(\'INV\')"]').innerText = "INVERSORES";
+        document.querySelector('[onclick="renderProducts(\'ACC\')"]').innerText = i18n[currentLang].acc;
+    }
+
+    // Inicialización al cargar la página
+    window.onload = () => {
+        renderProducts();
+    };
+        // Agregar productos al carrito
+    function addToCart(sku) {
+        const product = products.find(p => p.sku === sku);
+        const itemInCart = cart.find(item => item.sku === sku);
+
+        if (itemInCart) {
+            itemInCart.quantity++;
+        } else {
+            cart.push({ ...product, quantity: 1 });
         }
+        updateCartUI();
+    }
 
-        function toggleCart() {
-            const sidebar = document.getElementById('cart-sidebar');
-            sidebar.classList.toggle('translate-x-full');
-        }
+    // Actualizar la vista del carrito
+    function updateCartUI() {
+        const cartItems = document.getElementById('cart-items');
+        const cartTotal = document.getElementById('cart-total');
+        cartItems.innerHTML = '';
+        let total = 0;
 
-        function addToCart(sku) {
-            const product = products.find(p => p.sku === sku);
-            const itemInCart = cart.find(item => item.sku === sku);
-
-            if (itemInCart) {
-                if (itemInCart.qty < product.stock) {
-                    itemInCart.qty++;
-                } else {
-                    alert(currentLang === 'es' ? "Stock máximo alcanzado" : "Maximum stock reached");
-                    return;
-                }
-            } else {
-                cart.push({ ...product, qty: 1 });
-            }
-            updateCartUI();
-            if (document.getElementById('cart-sidebar').classList.contains('translate-x-full')) {
-                toggleCart();
-            }
-        }
-
-        function updateCartUI() {
-            const container = document.getElementById('cart-items');
-            const totalDisplay = document.getElementById('cart-total');
-            const counter = document.getElementById('cart-counter');
-            
-            if (cart.length === 0) {
-                container.innerHTML = `<div class="text-center py-10 opacity-50"><i class="fas fa-box-open text-4xl mb-2"></i><p>${i18n[currentLang].empty}</p></div>`;
-                totalDisplay.innerText = "$0.00 USD";
-                counter.innerText = "0";
-                return;
-            }
-
-            let total = 0;
-            let totalItems = 0;
-
-            container.innerHTML = cart.map(item => {
-                const subtotal = item.price * item.qty;
-                total += subtotal;
-                totalItems += item.qty;
-                return `
-                    <div class="flex items-center gap-4 bg-aqua-light/10 p-3 rounded-xl border border-aqua-light/50">
-                        <img src="${item.img}" class="w-16 h-16 object-contain bg-white rounded-lg p-1" onerror="this.src='https://via.placeholder.com/100x100?text=Solar'">
-                        <div class="flex-grow">
-                            <h4 class="text-xs font-bold text-aqua-dark line-clamp-1">${item.desc}</h4>
-                            <p class="text-[10px] text-slate-400 font-mono">${item.sku}</p>
-                            <div class="flex items-center justify-between mt-2">
-                                <div class="flex items-center border border-aqua-base/30 rounded-lg bg-white overflow-hidden">
-                                    <button onclick="changeQty('${item.sku}', -1)" class="px-2 py-1 hover:bg-aqua-light text-aqua-dark">-</button>
-                                    <span class="px-3 text-xs font-bold">${item.qty}</span>
-                                    <button onclick="changeQty('${item.sku}', 1)" class="px-2 py-1 hover:bg-aqua-light text-aqua-dark">+</button>
-                                </div>
-                                <p class="text-sm font-black text-aqua-base">$${subtotal.toLocaleString()} <span class="text-[10px]">USD</span></p>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-
-            totalDisplay.innerText = `$${total.toLocaleString()} USD`;
-            counter.innerText = totalItems;
-        }
-
-        function changeQty(sku, delta) {
-            const item = cart.find(i => i.sku === sku);
-            const product = products.find(p => p.sku === sku);
-            
-            if (item) {
-                item.qty += delta;
-                if (item.qty <= 0) {
-                    cart = cart.filter(i => i.sku !== sku);
-                } else if (item.qty > product.stock) {
-                    item.qty = product.stock;
-                }
-            }
-            updateCartUI();
-        }
-
-        function changeLanguage(lang) {
-            currentLang = lang;
-            document.documentElement.lang = lang;
-            document.getElementById('cart-label').innerText = i18n[lang].cartL;
-            document.getElementById('total-label').innerText = i18n[lang].totalL;
-            document.getElementById('btn-quote-label').innerText = i18n[lang].btnQ;
-            renderTabs();
-            renderProducts();
-            updateCartUI();
-        }
-
-        function sendWhatsApp() {
-            if (cart.length === 0) return alert(i18n[currentLang].empty);
-            let total = 0;
-            let message = currentLang === 'es' ? "*SOLICITUD DE COTIZACIÓN - BAJA PRO-SERVICES*\n" : "*QUOTE REQUEST - BAJA PRO-SERVICES*\n";
-            message += "--------------------------------------\n";
+        if (cart.length === 0) {
+            cartItems.innerHTML = `<p class="empty-msg">${i18n[currentLang].empty}</p>`;
+        } else {
             cart.forEach(item => {
-                const subtotal = item.price * item.qty;
-                total += subtotal;
-                message += `📦 *SKU:* ${item.sku}\n📝 *Desc:* ${item.desc}\n🔹 *Cant:* ${item.qty} x $${item.price.toLocaleString()} USD\n💰 *Subtotal:* $${subtotal.toLocaleString()} USD\n--------------------------------------\n`;
+                total += item.price * item.quantity;
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `
+                    <span>${item.desc} (x${item.quantity})</span>
+                    <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                    <button onclick="removeFromCart('${item.sku}')" style="color:red; border:none; background:none; cursor:pointer;">✕</button>
+                `;
+                cartItems.appendChild(div);
             });
-            message += `\n*TOTAL GLOBAL:* $${total.toLocaleString()} USD`;
-            window.open(`https://wa.me/526122198325?text=${encodeURIComponent(message)}`, '_blank');
         }
 
-        document.addEventListener('DOMContentLoaded', initApp);
-    </script>
-</body>
-</html>
+        cartTotal.innerText = total.toLocaleString('en-US', { minimumFractionDigits: 2 });
+    }
+
+    // Eliminar productos del carrito
+    function removeFromCart(sku) {
+        cart = cart.filter(item => item.sku !== sku);
+        updateCartUI();
+    }
+
+    // Función principal: Enviar pedido a WhatsApp
+    function sendWhatsApp() {
+        if (cart.length === 0) {
+            alert(i18n[currentLang].empty);
+            return;
+        }
+
+        const phone = "5211234567890"; // ⬅️ REEMPLAZA CON TU NÚMERO (Incluye código de país)
+        let message = `*SOLICITUD DE COTIZACIÓN - BAJA PRO-SERVICES*\n`;
+        message += `--------------------------------------------\n`;
+        
+        cart.forEach(item => {
+            message += `• ${item.desc} | SKU: ${item.sku}\n`;
+            message += `  Cant: ${item.quantity} | Subtotal: $${(item.price * item.quantity).toFixed(2)} USD\n\n`;
+        });
+
+        const totalFinal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        message += `--------------------------------------------\n`;
+        message += `*TOTAL ESTIMADO: $${totalFinal.toLocaleString()} USD*\n`;
+        message += `_Nota: Precios sujetos a cambios sin previo aviso._`;
+
+        // Codificar para URL
+        const encodedMsg = encodeURIComponent(message);
+        window.open(`https://wa.me/${phone}?text=${encodedMsg}`, '_blank');
+    }
+</script>
+    </body></html>
+        ];
+
+        
