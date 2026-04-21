@@ -90,34 +90,53 @@
                 categoria: "Inversores Sol-Ark",
                 imagen: "8Kw_48V_SOL-ARK.png",
                 productos: [
-                    { desc: "Sol-Ark 8K-48V Híbrido", price: 6850, img: "8Kw_48V_SOL-ARK.png" },
-                    { desc: "Sol-Ark 12K-2P Híbrido", price: 7950, img: "12K2P-p-SOL-ARK.png" },
-                    { desc: "Sol-Ark 15K-48V/220VCA", price: 9200, img: "Sol-Ark_15Kw_48V-220VCA.png" },
-                    { desc: "Sol-Ark 30K-3P Industrial", price: 15800, img: "Sol-Ark_30Kw_3P.png" }
+                    { desc: "Sol-Ark 8K-48V Híbrido", "stock": 15, price: 6850, img: "8Kw_48V_SOL-ARK.png" },
+                    { desc: "Sol-Ark 12K-2P Híbrido", "stock": 15, price: 7950, img: "12K2P-p-SOL-ARK.png" },
+                    { desc: "Sol-Ark 15K-2P Hibrido", "stock": 15, price: 9200, img: "Sol-Ark_15Kw_48V-220VCA.png" },
+                    { desc: "Sol-Ark 30K-3P Hibrido Industrial", "stock": 15, price: 15800, img: "Sol-Ark_30Kw_3P.png" }
                 ]
-            },
-            {
-                categoria: "Inversores Growatt & Must",
-                imagen: "SPF6000TDVMG2-p.png",
+                      },
+                   }
+            {    
+                categoria:"Baterias LiFePO4"
+                imagen: "Bateria Pytes 48v 11.7 Kw.png",
+                productos: [ BYD (Litio LV y HV)
+            { desc: "BAT BYD LITIO 5KWH LV FLEX LITE", volt: "48V", price: 1529.57, , stock: 8, img: "byd_lv_flex.png" },
+            { desc: "ACC BYD CONTROLADOR LV BMU", volt: "N/A", price: 160.95, , stock: 50, img: "byd_bmu.png" },
+            { desc: "ACC BYD SOPORTE AJUSTABLE LV (4 PZAS)", volt: "N/A", price: 8.98, stock: 50, img: "byd_bracket.png" },
+            { desc: "ACC BYD CONTROLADOR HV BCU", volt: "HV", price: 728.79, stock: 10, img: "byd_bcu_hv.png" },
+            { desc: "BAT HUAWEI 7K HV LI-ION", volt: "HV", price: 3248.70, cat: "BAT", stock: 5, img: "huawei_luna_7k.png" },
+
+            // Growatt (AXE, ALP y Portátiles)
+            { desc: "BATERÍA GROWATT AXE 5.0L (COBALTO FREE)", volt: "48V", price: 1298.70, cat: "BAT", stock: 8, img: "growatt_axe.png" },
+            { desc: "BATERÍA GROWATT ALP 5.0L", volt: "48V", price: 1244.10, cat: "BAT", stock: 8, img: "growatt_alp.png" },
+            {desc: "BAT PORTABLE GROWATT INFINITY 1500", volt: "110V AC OUT", price: 1360.52, cat: "BAT", stock: 5, img: "growatt_infinity.png" },
+            {desc: "KIT CABLES MULTI TORRES GROWATT", volt: "N/A", price: 119.34, cat: "ACC", stock: 50, img: "growatt_cable_kit.png" },
+            { desc: "ACC GROWATT ARK LV HUB-A1", volt: "N/A", price: 388.96, cat: "ACC", stock: 20, img: "growatt_ark_hub.png" },
+            { desc: "ACC GROWATT CABLES BATERIA AXE", volt: "N/A", price: 97.50, cat: "ACC", stock: 50, img: "growatt_axe_cables.png" },
+            { desc: "ACC GROWATT BASE BATERIA ALP", volt: "N/A", price: 88.40, cat: "ACC", stock: 50, img: "growatt_alp_base.png" },
+
+            // Soluna
+            { sku: "PV-BT-10KLV-SOL", desc: "BAT SOLUNA 10KW LV LI-ION", volt: "48V", price: 2535.00, cat: "BAT", stock: 8, img: "soluna_10k.png" },
+            { sku: "PV-ACC-CJA-SOL", desc: "ACC SOLUNA CAJA CONEXION PARALELO", volt: "N/A", price: 124.80, cat: "ACC", stock: 20, img: "soluna_box.png" },
+
+                    { desc: "Pytes E-BOX 48100R 5.1Kw", "stock": 15, price: 1650, img: "EBOX48100R-p.png" },
+                    { desc: "Pytes 48V 11.7Kw High Cap", "stock": 15, price: 3450, img: "Bateria Pytes 48v 11.7 Kw.png" },
+                    { desc: "Must 48V 5.1Kw LiFePO4", "stock": 15, price: 1420, img: "Bateria-Must-48V-5.1-Kw-LiFePO4.png" },
+                    { desc: "epcom RES100 5Kw Wall", "stock": 15, price: 1550, img: "RES1005K-p.png" },
+                    { desc: "epcom RES200 10Kw Wall", "stock": 15, price: 2950, img: "RES20010K-p.png" },
+                    { desc: "Growatt AXE 5.0L Litio", "stock": 15, price: 1580, img: "AXE5.0LC1-p.png" }
+                ]
+            },   
+            {    
+                categoria:"Baterias Plomo-Ácido"
+                imagen: "Bateria Plomo-Acido.png",
                 productos: [
-                    { desc: "Growatt SPF 3000TL LVM-48P", price: 850, img: "SPF3000TLLVM48P-p.png" },
-                    { desc: "Growatt SPF 6000T DVM-G2", price: 1450, img: "SPF6000TDVMG2-p.png" },
-                    { desc: "Must 8Kw 48V/220VCA", price: 1100, img: "Must-8Kw-48V-220VCA.png" },
-                    { desc: "Lux Power 12Kw/15Kw Hybrid", price: 3800, img: "Lux_Power_12Kw_3LiFePO4-15Kw.png" }
-                ]
-            },
-            {
-                categoria: "Baterías de Litio 48V",
-                imagen: "EBOX48100R-p.png",
-                productos: [
-                    { desc: "Pytes E-BOX 48100R 5.1Kw", price: 1650, img: "EBOX48100R-p.png" },
-                    { desc: "Pytes 48V 11.7Kw High Cap", price: 3450, img: "Bateria Pytes 48v 11.7 Kw.png" },
-                    { desc: "Must 48V 5.1Kw LiFePO4", price: 1420, img: "Bateria-Must-48V-5.1-Kw-LiFePO4.png" },
-                    { desc: "epcom RES100 5Kw Wall", price: 1550, img: "RES1005K-p.png" },
-                    { desc: "epcom RES200 10Kw Wall", price: 2950, img: "RES20010K-p.png" },
-                    { desc: "Growatt AXE 5.0L Litio", price: 1580, img: "AXE5.0LC1-p.png" }
-                ]
-            },
+            { desc: "BATERIA DEKA MARINE 105AH 12V", volt: "12V", "stock": 15, price: 213.55, cat: "BAT", stock: 20, img: "deka_105.png" },
+            { sku: "PV-BT-180-PM", desc: "BATERIA DEKA 180AH 12V", volt: "12V", "stock": 15,  price: 321.44, cat: "BAT", stock: 20, img: "deka_180.png" },
+            { sku: "PV-BT-115-US", desc: "BATERIA ULTRASTART 115AH 12V CICLO PROFUNDO", volt: "12V", "stock": 15, price: 181.03, cat: "BAT", stock: 20, img: "ultrastart_115.png" }
+             }
+
             {
                 categoria: "Paneles y Kits Solares",
                 imagen: "LP210210M66NB700W-p.png",
