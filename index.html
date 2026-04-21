@@ -1,9 +1,9 @@
 <index.html>
-<html lang="es">
+    <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BAJA PRO-SERVICES | Catálogo Completo</title>
+    <title>BAJA PRO-SERVICES | Catálogo Profesional</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -13,6 +13,15 @@
         .product-list { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; }
         .product-list.active { max-height: 3000px; transition: max-height 1s ease-in; }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 150, 136, 0.15); }
+        
+        /* Estilo para el Hero limpio */
+        .hero-clean {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+            display: block;
+        }
     </style>
 </head>
 <body class="bg-slate-50 font-sans text-slate-800">
@@ -28,6 +37,18 @@
             </button>
         </div>
     </nav>
+
+    <header class="w-full bg-white overflow-hidden">
+        <img src="hero.png" alt="Baja Pro Services Hero" class="hero-clean">
+    </header>
+
+    <div class="bg-aqua-base py-3">
+        <div class="container mx-auto px-4">
+            <p class="text-center text-white font-medium text-xs md:text-sm uppercase tracking-widest">
+                La Paz • Los Cabos • Loreto • Constitucion • Mulegé
+            </p>
+        </div>
+    </div>
 
     <main class="container mx-auto px-4 py-12">
         <h2 class="text-3xl font-bold text-center mb-10 text-slate-700 uppercase tracking-tight">Equipos Disponibles</h2>
@@ -53,7 +74,7 @@
 
             <form id="quoteForm" class="space-y-4">
                 <input type="text" id="fullname" placeholder="Nombre Completo" required class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-aqua-base">
-                <input type="tel" id="phone" placeholder="WhatsApp (ej. 6121234567)" required class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-aqua-base">
+                <input type="tel" id="phone" placeholder="WhatsApp" required class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-aqua-base">
                 <input type="text" id="address" placeholder="Ciudad / Dirección de instalación" required class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-aqua-base">
                 
                 <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-3 transition-all shadow-lg text-lg">
@@ -188,10 +209,10 @@
             const items = cart.map(i => `- ${i.d} ($${i.p})`).join('%0A');
             
             const msg = `*NUEVA SOLICITUD - BAJA PRO-SERVICES*%0A%0A*CLIENTE:* ${n}%0A*TEL:* ${p}%0A*DIR:* ${a}%0A%0A*EQUIPOS:*%0A${items}%0A%0A*TOTAL: $${t} USD*`;
-            window.open(`https://wa.me/6122198325?text=${msg}`);
+            window.open(`https://wa.me/526122198325?text=${msg}`);
         });
 
         render();
     </script>
 </body>
-</html
+</html>
