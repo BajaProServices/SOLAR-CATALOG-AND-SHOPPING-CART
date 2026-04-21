@@ -3,133 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BAJA PRO-SERVICES | Solar Shop</title>
+    <title>BAJA PRO-SERVICES | Catálogo Completo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --aqua-light: #e0f2f1;
-            --aqua-base: #009688;
-            --aqua-dark: #00695c;
-            --aqua-accent: #26a69a;
-        }
+        :root { --aqua-base: #009688; --aqua-dark: #00695c; --aqua-light: #e0f2f1; }
         .bg-aqua-base { background-color: var(--aqua-base); }
         .text-aqua-base { color: var(--aqua-base); }
-        .text-aqua-dark { color: var(--aqua-dark); }
-        .border-aqua-base { border-color: var(--aqua-base); }
-        .hover-aqua:hover { background-color: var(--aqua-dark); }
-        
-        /* Hero Styling */
-        .hero-container {
-            position: relative;
-            width: 100%;
-            height: 400px;
-            overflow: hidden;
-            background-color: #000;
-        }
-        .hero-banner {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.7;
-        }
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            padding: 20px;
-        }
-        
-        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .product-list { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; }
+        .product-list.active { max-height: 3000px; transition: max-height 1s ease-in; }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 150, 136, 0.15); }
-        
-        .product-list {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out;
-        }
-        .product-list.active {
-            max-height: 2000px;
-            transition: max-height 0.8s ease-in;
-        }
     </style>
 </head>
 <body class="bg-slate-50 font-sans text-slate-800">
 
-    <nav class="bg-white sticky top-0 z-50 shadow-sm border-b border-aqua-light">
+    <nav class="bg-white sticky top-0 z-50 shadow-md border-b border-aqua-light">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center gap-2">
                 <div class="w-10 h-10 bg-aqua-base rounded-full flex items-center justify-center text-white font-bold">BPS</div>
                 <span class="text-xl font-black tracking-tighter text-aqua-dark uppercase">Baja Pro-Services</span>
             </div>
-            <button onclick="scrollToForm()" class="bg-aqua-base text-white px-6 py-2 rounded-full font-bold hover-aqua transition-colors">
-                Cotizar Ahora
+            <button onclick="scrollToForm()" class="bg-aqua-base text-white px-6 py-2 rounded-full font-bold hover:bg-teal-700 transition-all">
+                Ver Carrito <span id="cart-count" class="bg-white text-aqua-base px-2 rounded-full ml-1">0</span>
             </button>
         </div>
     </nav>
 
-    <header class="hero-container">
-        <img src="https://images.unsplash.com/photo-1509391366360-fe5bb6583e22?auto=format&fit=crop&q=80&w=1600" alt="Solar Panels" class="hero-banner">
-        <div class="hero-overlay">
-            <h1 class="text-4xl md:text-6xl font-black mb-4 drop-shadow-lg">ENERGÍA SOLAR DE ALTA GAMA</h1>
-            <p class="text-xl md:text-2xl font-light max-w-2xl drop-shadow-md">Distribuidor Autorizado de Inversores Fronius y Solis en Baja California Sur.</p>
-        </div>
-    </header>
-
-    <div class="bg-aqua-base py-3">
-        <div class="container mx-auto px-4">
-            <p class="text-center text-white font-medium text-xs md:text-sm uppercase tracking-widest">
-                Servicio en: La Paz • Los Cabos • Loreto • Constitucion • Todo B.C.S.
-            </p>
-        </div>
-    </div>
-
     <main class="container mx-auto px-4 py-12">
-        <h2 class="text-3xl font-bold text-center mb-10 text-slate-700">Explora nuestro Catálogo</h2>
+        <h2 class="text-3xl font-bold text-center mb-10 text-slate-700 uppercase tracking-tight">Equipos Disponibles</h2>
+        
         <div id="brands-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             </div>
     </main>
 
     <section id="contact-form" class="bg-white py-16 border-t border-aqua-light">
         <div class="container mx-auto px-4 max-w-2xl">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold text-aqua-dark">Finaliza tu Cotización</h2>
-                <p class="text-slate-500 mt-2">Envía tu selección por WhatsApp para recibir atención inmediata.</p>
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 mb-8 shadow-inner">
+                <h3 class="font-bold text-slate-700 mb-4 flex items-center gap-2 italic">
+                    <i class="fas fa-shopping-cart text-aqua-base"></i> RESUMEN DE COTIZACIÓN:
+                </h3>
+                <div id="summary-list" class="space-y-2 text-sm text-gray-600 mb-6">
+                    El carrito está vacío.
+                </div>
+                <div class="flex justify-between items-center border-t pt-4">
+                    <span class="text-lg font-bold text-slate-700">TOTAL GLOBAL:</span>
+                    <span id="summary-total" class="text-3xl font-black text-aqua-base">$0.00 USD</span>
+                </div>
             </div>
-            
-            <form id="quoteForm" class="space-y-6 bg-slate-50 p-8 rounded-2xl border border-slate-100">
-                <div>
-                    <label class="block text-sm font-bold text-slate-700 mb-1">Nombre Completo</label>
-                    <input type="text" id="fullname" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aqua-base outline-none">
-                </div>
+
+            <form id="quoteForm" class="space-y-4">
+                <input type="text" id="fullname" placeholder="Nombre Completo" required class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-aqua-base">
+                <input type="tel" id="phone" placeholder="WhatsApp (ej. 6121234567)" required class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-aqua-base">
+                <input type="text" id="address" placeholder="Ciudad / Dirección de instalación" required class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-aqua-base">
                 
-                <div>
-                    <label class="block text-sm font-bold text-slate-700 mb-1">WhatsApp / Teléfono</label>
-                    <input type="tel" id="phone" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aqua-base outline-none">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-bold text-slate-700 mb-1">Ubicación del Proyecto</label>
-                    <textarea id="address" rows="2" required placeholder="Ej. La Paz, Col. Centro" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aqua-base outline-none"></textarea>
-                </div>
-
-                <div class="bg-white p-5 rounded-xl border border-aqua-light shadow-inner">
-                    <h3 class="font-black text-aqua-dark uppercase text-xs tracking-wider mb-3">Productos Seleccionados:</h3>
-                    <div id="summary-list" class="text-sm text-gray-600 mb-4 min-h-[40px]">No has seleccionado productos aún.</div>
-                    <div class="flex justify-between items-center border-t pt-4">
-                        <span class="text-slate-500 font-medium">Total Estimado:</span>
-                        <span id="summary-total" class="text-2xl font-black text-aqua-base">$0.00 USD</span>
-                    </div>
-                </div>
-
                 <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-3 transition-all shadow-lg text-lg">
-                    <i class="fab fa-whatsapp text-2xl"></i>
-                    ENVIAR A WHATSAPP
+                    <i class="fab fa-whatsapp text-2xl"></i> ENVIAR AL WHATSAPP
                 </button>
             </form>
         </div>
@@ -138,164 +66,132 @@
     <script>
         const catalogo = [
             {
-                id: "fronius_primo",
-                marca: "Fronius Primo",
-                imagen: "https://images.unsplash.com/photo-1559302995-fec20399f667?w=300", 
+                categoria: "Inversores Sol-Ark",
+                imagen: "8Kw_48V_SOL-ARK.png",
                 productos: [
-                    { desc: "PRIMO 3.8K 1F 240V", price: 1452.10 },
-                    { desc: "PRIMO 5K 1F 240V", price: 1552.20 },
-                    { desc: "PRIMO 6K 1F 240V", price: 1650.99 },
-                    { desc: "PRIMO 10K 1F 240V", price: 2830.10 }
+                    { desc: "Sol-Ark 8K-48V Híbrido", price: 6850, img: "8Kw_48V_SOL-ARK.png" },
+                    { desc: "Sol-Ark 12K-2P Híbrido", price: 7950, img: "12K2P-p-SOL-ARK.png" },
+                    { desc: "Sol-Ark 15K-48V/220VCA", price: 9200, img: "Sol-Ark_15Kw_48V-220VCA.png" },
+                    { desc: "Sol-Ark 30K-3P Industrial", price: 15800, img: "Sol-Ark_30Kw_3P.png" }
                 ]
             },
             {
-                id: "fronius_gen24",
-                marca: "Fronius Gen24",
-                imagen: "https://images.unsplash.com/photo-1613665813446-82a78c468a1d?w=300",
+                categoria: "Inversores Growatt & Must",
+                imagen: "SPF6000TDVMG2-p.png",
                 productos: [
-                    { desc: "PRIMO GEN24 3.8K 1F 240V", price: 1720.58 },
-                    { desc: "PRIMO GEN24 10K 1F 240V", price: 3583.50 }
+                    { desc: "Growatt SPF 3000TL LVM-48P", price: 850, img: "SPF3000TLLVM48P-p.png" },
+                    { desc: "Growatt SPF 6000T DVM-G2", price: 1450, img: "SPF6000TDVMG2-p.png" },
+                    { desc: "Must 8Kw 48V/220VCA", price: 1100, img: "Must-8Kw-48V-220VCA.png" },
+                    { desc: "Lux Power 12Kw/15Kw Hybrid", price: 3800, img: "Lux_Power_12Kw_3LiFePO4-15Kw.png" }
                 ]
             },
             {
-                id: "fronius_gen24_plus",
-                marca: "Fronius Gen24 Plus",
-                imagen: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=300",
+                categoria: "Baterías de Litio 48V",
+                imagen: "EBOX48100R-p.png",
                 productos: [
-                    { desc: "PRIMO GEN24 PLUS 5K Híbrido", price: 2772.73 },
-                    { desc: "PRIMO GEN24 PLUS 10K Híbrido", price: 4703.74 }
+                    { desc: "Pytes E-BOX 48100R 5.1Kw", price: 1650, img: "EBOX48100R-p.png" },
+                    { desc: "Pytes 48V 11.7Kw High Cap", price: 3450, img: "Bateria Pytes 48v 11.7 Kw.png" },
+                    { desc: "Must 48V 5.1Kw LiFePO4", price: 1420, img: "Bateria-Must-48V-5.1-Kw-LiFePO4.png" },
+                    { desc: "epcom RES100 5Kw Wall", price: 1550, img: "RES1005K-p.png" },
+                    { desc: "epcom RES200 10Kw Wall", price: 2950, img: "RES20010K-p.png" },
+                    { desc: "Growatt AXE 5.0L Litio", price: 1580, img: "AXE5.0LC1-p.png" }
                 ]
             },
             {
-                id: "solis_s6",
-                marca: "Solis S6",
-                imagen: "https://images.unsplash.com/photo-1592833159155-c62df1b65634?w=300",
+                categoria: "Paneles y Kits Solares",
+                imagen: "LP210210M66NB700W-p.png",
                 productos: [
-                    { desc: "S6 1K 1F 110V CD", price: 305.50 },
-                    { desc: "S6 5K 1F 220V CM", price: 469.30 },
-                    { desc: "S6 6K 1F 220V CM", price: 553.80 }
-                ]
-            },
-            {
-                id: "solis_hibridos",
-                marca: "Solis Híbridos",
-                imagen: "https://images.unsplash.com/photo-1548333199-19638d212f8e?w=300",
-                productos: [
-                    { desc: "S6 5K 1F 220V Híbrido", price: 2078.70 },
-                    { desc: "S6 10K 1F 220V Híbrido", price: 2772.06 }
+                    { desc: "Panel Solar 700W Monocristalino", price: 285, img: "LP210210M66NB700W-p.png" },
+                    { desc: "Ektor EPL 450W Mono", price: 185, img: "EPL450M144-p.png" },
+                    { desc: "Ektor EPL 540W Mono", price: 215, img: "EPL540M144-p.png" },
+                    { desc: "KIT Hybrid 8K Sol-Ark + Paneles", price: 8900, img: "KITHYBRID8KSOL-h.jpg" },
+                    { desc: "KIT 8 Paneles Ektor con Estructura", price: 1850, img: "KIT8PVEKTOR8R-p.png" }
                 ]
             }
         ];
 
-        let selectedItems = [];
+        let cart = [];
 
-        function renderBrands() {
+        function render() {
             const container = document.getElementById('brands-container');
-            container.innerHTML = '';
-
-            catalogo.forEach((familia, index) => {
-                const card = document.createElement('div');
-                card.className = 'bg-white rounded-2xl overflow-hidden card-shadow border border-slate-100 flex flex-col';
-                card.innerHTML = `
-                    <div class="p-6 cursor-pointer" onclick="toggleProducts(${index})">
-                        <div class="flex items-center justify-between mb-4">
-                            <img src="${familia.imagen}" alt="${familia.marca}" class="h-16 w-24 object-cover rounded-lg bg-slate-100">
-                            <i class="fas fa-chevron-down text-aqua-base transition-transform duration-300" id="arrow-${index}"></i>
-                        </div>
-                        <h3 class="text-xl font-black text-slate-800 uppercase tracking-tight">${familia.marca}</h3>
-                        <p class="text-xs font-bold text-aqua-base mt-1">${familia.productos.length} MODELOS DISPONIBLES</p>
+            catalogo.forEach((cat, index) => {
+                const div = document.createElement('div');
+                div.className = 'bg-white rounded-2xl overflow-hidden card-shadow border border-slate-100 cursor-pointer';
+                div.innerHTML = `
+                    <div class="p-6" onclick="toggle(${index})">
+                        <img src="${cat.imagen}" class="h-32 w-full object-contain mb-4">
+                        <h3 class="text-xl font-black text-slate-800 uppercase">${cat.categoria}</h3>
+                        <p class="text-aqua-base font-bold text-xs mt-1">TOQUE PARA VER MODELOS</p>
                     </div>
-                    <div id="products-${index}" class="product-list bg-slate-50">
-                        <div class="p-4 space-y-2 border-t border-slate-100">
-                            ${familia.productos.map(prod => `
-                                <div class="flex justify-between items-center bg-white p-3 rounded-xl shadow-sm border border-slate-100">
-                                    <div class="flex-1 pr-2">
-                                        <p class="font-bold text-xs text-slate-700 leading-tight">${prod.desc}</p>
-                                        <p class="text-aqua-base font-black mt-1">$${prod.price.toLocaleString()} USD</p>
+                    <div id="cat-${index}" class="product-list bg-slate-50">
+                        <div class="p-4 space-y-3">
+                            ${cat.productos.map(p => `
+                                <div class="bg-white p-3 rounded-xl shadow-sm border flex items-center gap-3">
+                                    <img src="${p.img}" class="w-12 h-12 object-contain">
+                                    <div class="flex-1">
+                                        <p class="text-[11px] font-bold leading-tight">${p.desc}</p>
+                                        <p class="text-aqua-base font-black">$${p.price.toLocaleString()} USD</p>
                                     </div>
-                                    <button onclick="addToQuote('${prod.desc}', ${prod.price})" class="bg-aqua-base text-white text-[10px] font-bold px-3 py-2 rounded-lg hover:bg-aqua-dark uppercase">
-                                        + Agregar
-                                    </button>
+                                    <button onclick="add('${p.desc}', ${p.price})" class="bg-aqua-base text-white px-3 py-1 rounded-lg text-xs font-bold">+ Añadir</button>
                                 </div>
                             `).join('')}
                         </div>
                     </div>
                 `;
-                container.appendChild(card);
+                container.appendChild(div);
             });
         }
 
-        function toggleProducts(index) {
-            const div = document.getElementById(`products-${index}`);
-            const arrow = document.getElementById(`arrow-${index}`);
-            const isActive = div.classList.contains('active');
-            
-            // Close others (optional, for cleaner UI)
-            document.querySelectorAll('.product-list').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.fa-chevron-down').forEach(el => el.style.transform = 'rotate(0)');
+        function toggle(i) {
+            document.getElementById(`cat-${i}`).classList.toggle('active');
+        }
 
-            if(!isActive) {
-                div.classList.add('active');
-                arrow.style.transform = 'rotate(180deg)';
+        function add(d, p) {
+            cart.push({d, p});
+            update();
+        }
+
+        function update() {
+            const list = document.getElementById('summary-list');
+            const count = document.getElementById('cart-count');
+            count.innerText = cart.length;
+            
+            if(cart.length === 0) {
+                list.innerHTML = "El carrito está vacío.";
+            } else {
+                list.innerHTML = cart.map((item, i) => `
+                    <div class="flex justify-between border-b pb-1">
+                        <span>${item.d}</span>
+                        <div class="flex gap-2 font-bold">
+                            <span>$${item.p}</span>
+                            <button onclick="remove(${i})" class="text-red-500">×</button>
+                        </div>
+                    </div>
+                `).join('');
             }
+            const total = cart.reduce((s, i) => s + i.p, 0);
+            document.getElementById('summary-total').innerText = `$${total.toLocaleString()} USD`;
         }
 
-        function addToQuote(description, price) {
-            selectedItems.push({ desc: description, price: price });
-            updateSummary();
-            // Minor vibration or feedback would go here
-        }
+        function remove(i) { cart.splice(i, 1); update(); }
 
-        function updateSummary() {
-            const listEl = document.getElementById('summary-list');
-            const totalEl = document.getElementById('summary-total');
-            
-            if(selectedItems.length === 0) {
-                listEl.innerHTML = "No has seleccionado productos aún.";
-                totalEl.innerHTML = "$0.00 USD";
-                return;
-            }
+        function scrollToForm() { document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' }); }
 
-            const listText = selectedItems.map(item => `<div class="flex justify-between py-1 border-b border-slate-100 last:border-0">
-                <span>• ${item.desc}</span>
-                <span class="font-bold">$${item.price.toFixed(2)}</span>
-            </div>`).join('');
-            
-            listEl.innerHTML = listText;
-
-            const total = selectedItems.reduce((sum, item) => sum + item.price, 0);
-            totalEl.innerHTML = `$${total.toLocaleString(undefined, {minimumFractionDigits: 2})} USD`;
-        }
-
-        function scrollToForm() {
-            document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+        document.getElementById('quoteForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            const name = document.getElementById('fullname').value;
-            const phone = document.getElementById('phone').value;
-            const address = document.getElementById('address').value;
-
-            if(selectedItems.length === 0) {
-                alert("Por favor selecciona al menos un producto.");
-                return;
-            }
-
-            let total = selectedItems.reduce((sum, item) => sum + item.price, 0);
-            let listaProductos = selectedItems.map(item => `- ${item.desc} ($${item.price.toFixed(2)} USD)`).join('%0A');
-
-            const mensaje = `*COTIZACIÓN WEB - BPS*%0A%0A` +
-                            `*CLIENTE:* ${name}%0A` +
-                            `*TEL:* ${phone}%0A` +
-                            `*UBICACIÓN:* ${address}%0A%0A` +
-                            `*PRODUCTOS:*%0A${listaProductos}%0A%0A` +
-                            `*TOTAL ESTIMADO: $${total.toFixed(2)} USD*`;
-
-            window.open(`https://wa.me/526122198325?text=${mensaje}`, '_blank');
+            if(cart.length === 0) return alert("Añade productos primero");
+            
+            const n = document.getElementById('fullname').value;
+            const p = document.getElementById('phone').value;
+            const a = document.getElementById('address').value;
+            const t = cart.reduce((s, i) => s + i.p, 0);
+            const items = cart.map(i => `- ${i.d} ($${i.p})`).join('%0A');
+            
+            const msg = `*NUEVA SOLICITUD - BAJA PRO-SERVICES*%0A%0A*CLIENTE:* ${n}%0A*TEL:* ${p}%0A*DIR:* ${a}%0A%0A*EQUIPOS:*%0A${items}%0A%0A*TOTAL: $${t} USD*`;
+            window.open(`https://wa.me/6122198325?text=${msg}`);
         });
 
-        document.addEventListener('DOMContentLoaded', renderBrands);
+        render();
     </script>
 </body>
-</html>
+</html
