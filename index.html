@@ -237,30 +237,281 @@
     let cart = [];
 
     // 2. INVENTARIO UNIFICADO (Respetando nombres de tus archivos)
-    const products = [
-        // KITS (Basados en tus archivos)
-        { sku: "KIT-8P-VEK", desc: "Kit Solar 8 Paneles Vektor", volt: "220V", price: 2450.00, cat: "KITS", img: "KIT8PVEKTOR8R-p.png" },
-        { sku: "KIT-SA-8K", desc: "Kit Híbrido Sol-Ark 8K + Litio", volt: "120V/240V", price: 8200.00, cat: "KITS", img: "KITHYBRID8KSOL-h.ppg" },
-        { sku: "KIT-LP-12K", desc: "Sistema Lux Power 12K + 15kWh", volt: "240V", price: 12400.00, cat: "KITS", img: "Lux_Power_12Kw_3LiFePO4-15Kw.png" },
-        { sku: "KIT-SA-15K", desc: "Sistema Sol-Ark 15K + 20kWh", volt: "120V/240V", price: 15800.00, cat: "KITS", img: "Sol-Ark_15Kw_4LiFePO4_20Kw.png" },
+    const products = [ // Agrega este bloque dentro de tu array de "products"
+const extraInventory = [
+    // --- KITS PREMIUM (REFERENCIA) ---
+    { sku: "KIT-8P-VEK", desc: "Kit Solar 8 Paneles Vektor", volt: "220V", price: 2450.00, cat: "KITS", img: "KIT8PVEKTOR8R-p.png" },
+    { sku: "KIT-SA-8K", desc: "Kit Híbrido Sol-Ark 8K + Litio", volt: "120V/240V", price: 8200.00, cat: "KITS", img: "KITHYBRID8KSOL-h.jpg" },
+    { sku: "KIT-LP-12K", desc: "Sistema Lux Power 12K + 15kWh", volt: "240V", price: 12400.00, cat: "KITS", img: "Lux_Power_12Kw_3LiFePO4-15Kw.png" },
+    { sku: "KIT-SA-15K", desc: "Sistema Sol-Ark 15K + 20kWh", volt: "120V/240V", price: 15800.00, cat: "KITS", img: "Sol-Ark_15Kw_4LiFePO4_20Kw.png" },
 
-        // INVERSORES (Sol-Ark, Growatt, Must)
-        { sku: "SA-8K-48V", desc: "Sol-Ark 8K Híbrido Outdoor", volt: "48V / 240V", price: 3686.00, cat: "INV", img: "8Kw_48V_SOL-ARK.png" },
-        { sku: "SA-12K-P", desc: "Sol-Ark 12K Pre-Wired", volt: "120V/240V", price: 4704.00, cat: "INV", img: "12K2P-p-SOL-ARK.png" },
-        { sku: "SA-15K-220", desc: "Sol-Ark 15K Híbrido 220V", volt: "240V", price: 6850.00, cat: "INV", img: "Sol-Ark_15Kw_48V-220VCA.png" },
-        { sku: "SA-30K-3P", desc: "Sol-Ark 30K Trifásico 480V", volt: "480V 3P", price: 12900.00, cat: "INV", img: "Sol-Ark_30Kw_3P.png" },
-        { sku: "GW-SPF-3000", desc: "Growatt SPF 3000TL LVM", volt: "110V", price: 720.00, cat: "INV", img: "SPF3000TLLVMES-Growatt_48V_110v.png" },
-        { sku: "MU-8K-220", desc: "Inversor Must 8kW 48V", volt: "220V", price: 1150.00, cat: "INV", img: "Must-8Kw-48V-220VCA.png" },
+    // --- FRONIUS (PRIMO & SYMO) ---
+    { sku: "PV-IN-38-FRP", desc: "PRIMO 3.8K 1F 240V", volt: "240V monofásico", price: 1452.10, cat: "INV", img: "fronius inversor.png" },
+    { sku: "PV-IN-05-FRP", desc: "PRIMO 5K 1F 240V", volt: "240V monofásico", price: 1552.20, cat: "INV", img: "fronius inversor.png" },
+    { sku: "PV-IN-06-FRP", desc: "PRIMO 6K 1F 240V", volt: "240V monofásico", price: 1650.99, cat: "INV", img: "Fronius inversor.png" },
+    { sku: "PV-IN-76-FRP", desc: "PRIMO 7.6K 1F 240V", volt: "240V monofásico", price: 2001.99, cat: "INV", img: "fronius inversor.png" },
+    { sku: "PV-IN-82-FRP", desc: "PRIMO 8.2K 1F 240V", volt: "240V monofásico", price: 2118.99, cat: "INV", img: "fronius inversor.png" },
+    { sku: "PV-IN-10-FRP", desc: "PRIMO 10K 1F 240V", volt: "240V monofásico", price: 2830.10, cat: "INV", img: "fronius inversor.png" },
+    { sku: "PV-IN-114-FRP", desc: "PRIMO 11.4K 1F 220V", volt: "220V monofásico", price: 2989.99, cat: "INV", img: "fronius inversor.png" },
+    { sku: "PV-IN-125-FRP", desc: "PRIMO 12.5K 1F 240V", volt: "240V monofásico", price: 3304.60, cat: "INV", img: "fronius.png" },
+    { sku: "PV-IN-GEN38-FRP", desc: "PRIMO GEN24 3.8K 1F 240V", volt: "240V monofásico", price: 1720.58, cat: "INV", img: "fronius.png" },
+    { sku: "PV-INH-GEN10P-FRP", desc: "PRIMO GEN24 PLUS 10K Híbrido", volt: "240V monofásico", price: 4703.74, cat: "INV", img: "fronius.png" },
+    { sku: "PV-IN-24WA-FRS", desc: "SYMOADV 24K 3F 480V", volt: "480V trifásico", price: 3379.99, cat: "INV", img: "fronius.png" },
 
-        // BATERÍAS (Pytes, Must, Growatt)
-        { sku: "PY-EBOX", desc: "Batería Pytes E-BOX 5.1kWh", volt: "48V", price: 1083.00, cat: "BATT", img: "EBOX48100R-p.png" },
-        { sku: "PY-V5-11", desc: "Batería Pytes V5 11.7kWh", volt: "48V", price: 3923.00, cat: "BATT", img: "Bateria Pytes 48v 11.7 Kw.png" },
-        { sku: "MU-5.1-LI", desc: "Batería Must 5.1kWh LiFePO4", volt: "48V", price: 967.00, cat: "BATT", img: "Bateria-Must-48V-5.1-Kw-LiFePO4.png" },
-        { sku: "GW-AXE-5", desc: "Batería Growatt AXE 5.0L", volt: "48V", price: 1544.00, cat: "BATT", img: "AXE5.0LC1-p.png" },
+    // --- SOLIS (S5 & S6 SERIES) ---
+    { sku: "PV-IN-1S6-SL", desc: "S6 1K 1F 110V CD", volt: "110V monofasico", price: 305.50, cat: "INV", img: "solis.png" },
+    { sku: "PV-IN-3S6S2CM-SL", desc: "S6-S 3K 1F 110V CM", volt: "110V monofásico", price: 754.00, cat: "INV", img: "solis.png" },
+    { sku: "PV-IN-5S10K1FM-SL", desc: "S5 10K 1F 220V CM", volt: "220V monofásico", price: 988.00, cat: "INV", img: "solis.png" },
+    { sku: "PV-IN-5S20K3FM-SL", desc: "S5 20KW 3F 220V CM", volt: "220V trifásico", price: 2601.30, cat: "INV", img: "solis.png" },
+    { sku: "PV-IN-100KS5CM-SL", desc: "S5 100K 3F 480V CM", volt: "480V trifásico", price: 4862.00, cat: "INV", img: "solis.png" },
+    { sku: "PV-INH-1P8KS6-SL", desc: "S6 8K 1F 220V Híbrido BAT LV", volt: "220V monofásico", price: 2074.27, cat: "INV", img: "solis.png" },
+    { sku: "PV-INH-3P60KHV-SL", desc: "S6 60K 3F 480V Híbrido BAT HV", volt: "480V trifásico", price: 15294.12, cat: "INV", img: "solis.png" },
 
-        // PANELES
-        { sku: "PAN-700W", desc: "Panel 700W N-Type Bifacial", volt: "High Power", price: 210.00, cat: "PANELS", img: "LP210210M66NB700W-p.png" },
-        { sku: "PAN-540W", desc: "Panel EPL 540W Mono Perc", volt: "Standard", price: 165.00, cat: "PANELS", img: "EPL540M144-p.png" }
+    // --- GROWATT (MIC, MIN, MID & MAX) ---
+    { sku: "PV-IN-TL2KX2-GW", desc: "MIC 2K 1F 220V TL-X2", volt: "220V monofásico", price: 304.20, cat: "INV", img: "growatt.png" },
+    { sku: "PV-IN-TL5KX2-GW", desc: "MIN 5K 1F 220V TL-X2", volt: "220V monofásico", price: 440.70, cat: "INV", img: "growatt.png" },
+    { sku: "PV-IN-MID25-GW", desc: "MID 25K 3F 220V TL3-XL2", volt: "220V trifásico", price: 2061.80, cat: "INV", img: "growatt.png" },
+    { sku: "PV-IN-KTL3-150-GRW", desc: "MAX 150K 3F 480V KTL3", volt: "480V trifásico", price: 3781.70, cat: "INV", img: "growatt.png" },
+    { sku: "PV-IN-HYB10-GW", desc: "SPH 10K 1F 220V Híbrido", volt: "220V monofásico", price: 2567.77, cat: "INV", img: "growatt.png" },
+
+    // --- ACCESORIOS & MONITOREO ---
+    { sku: "PV-IN-MSPX-GRW", desc: "SHINE WIFI-X", volt: "N/A", price: 42.90, cat: "ACC", img: "shine.png" },
+    { sku: "PV-MON-SMR-GRW", desc: "SHINEMASTER", volt: "N/A", price: 422.50, cat: "ACC", img: "shinemaster.png" },
+    { sku: "PV-IN-DTM-FR", desc: "DATAMANAGER 2.0 GSP", volt: "N/A", price: 341.90, cat: "ACC", img: "fronius.png" },
+    { sku: "PV-ACC-SMRT-FRS", desc: "SMART METER 240/480V", volt: "N/A", price: 430.30, cat: "ACC", img: "fronius.png" }
+    // Continuación de la lista de productos (Huawei y Accesorios)
+        const productosHuawei = [
+            { sku: "PV-IN-20K3P-HUA", desc: "SUN2000 20K 3F 220V", volt: "220V trifásico", price: 2415.40, cat: "INV", stock: 15, img: '<div><img src="img/huawei.png"></div>' },
+            { sku: "PV-IN-50KLV-HUA", desc: "SUN2000 50K 3F 220V", volt: "220V trifásico", price: 5644.60, cat: "INV", stock: 15, img: '<div><img src="img/huawei.png"></div>' },
+            { sku: "PV-IN-50K3P-HUA", desc: "SUN2000 50K 3F 480V", volt: "480V trifásico", price: 3183.70, cat: "INV", stock: 15, img: '<div><img src="img/huawei.png"></div>' },
+            { sku: "PV-IN-80KLV-HUA", desc: "SUN2000 80K 3F 220V", volt: "220V trifásico", price: 5848.70, cat: "INV", stock: 15, img: '<div><img src="img/huawei.png"></div>' },
+            { sku: "PV-IN-150K3P-HUA", desc: "SUN2000 150K 3F 480V", volt: "480V trifásico", price: 8512.40, cat: "INV", stock: 15, img: '<div><img src="img/huawei.png"></div>' },
+            { sku: "PV-MON-SMTL-HUA", desc: "MONITOREO SMARTLOGGER 3000A", volt: "N/A", price: 648.70, cat: "ACC", stock: 100, img: '<div><img src="img/huawei_smartlogger.png"></div>' },
+            { sku: "PV-MON-ADA06-HUA", desc: "MONITOREO SDONGLE 4G 06", volt: "N/A", price: 169.00, cat: "ACC", stock: 100, img: '<div><img src="img/huawei.png"></div>' },
+            { sku: "PV-MON-05WL-HUA", desc: "MONITOREO SDONGLE 05 WLAN", volt: "N/A", price: 68.90, cat: "ACC", stock: 100, img: '<div><img src="img/huawei.png"></div>' },
+            { sku: "PV-INH-2K1P-HUA", desc: "SUN2000 2K 1F 220V Híbrido", volt: "220V monofásico", price: 447.20, cat: "INV", stock: 15, img: '<div><img src="img/huawei.png"></div>' },
+            { sku: "PV-INH-3K1P-HUA", desc: "SUN2000 3K 1F 220V Híbrido", volt: "220V monofásico", price: 497.55, cat: "INV", stock: 15, img: '<div><img src="img/huawei.png"></div>' },
+            { sku: "PV-INH-4K1P-HUA", desc: "SUN2000 4K 1F 220V Híbrido", volt: "220V monofásico", price: 508.30, cat: "INV", stock: 15, img: '<div><img src="img/huawei.png"></div>' },
+            { sku: "PV-INH-5K1P-HUA", desc: "SUN2000 5K 1F 220V Híbrido", volt: "220V monofásico", price: 570.70, cat: "INV", stock: 15, img: '<div><img src="img/huawei.png"></div>' },
+            { sku: "PV-INH-6K1P-HUA", desc: "SUN2000 6K 1F 220V Híbrido", volt: "220V monofásico", price: 638.30, cat: "INV", stock: 15, img: '<div><img src="img/huawei.png"></div>' },
+            { sku: "PV-INH-8K1P-HUA", desc: "SUN2000 8K 1F 220V", volt: "220V monofásico", price: 1016.60, cat: "INV", stock: 15, img: '<div><img src="img/huawei.png"></div>' },
+            { sku: "PV-INH-10K1P-HUA", desc: "SUN2000 10K 1F 220V", volt: "220V monofásico", price: 1125.80, cat: "INV", stock: 15, img: '<div><img src="img/huawei.png"></div>' },
+            { sku: "PV-ACC-DCDC-HUA", desc: "ACC CONVERTIDOR DC/DC", volt: "N/A", price: 1043.90, cat: "ACC", stock: 100, img: '<div><img src="img/huawei.png"></div>' },
+            { sku: "PV-ACC-DC10-HUA", desc: "ACC HUAWEI CONTROLADOR 10KW", volt: "N/A", price: 1335.89, cat: "ACC", stock: 100, img: '<div><img src="img/huawei.png"></div>' },
+            { sku: "PV-ACC-ATF-HUA", desc: "ACC ATF 5K 1F 60HZ 5 000 W", volt: "240V/120V monofásico", price: 412.10, cat: "ACC", stock: 100, img: '<div><img src="img/huawei.png"></div>' },
+            { sku: "PV-ACC-BOX-HUA", desc: "ACC BACKUP BOX BO", volt: "N/A", price: 520.00, cat: "ACC", stock: 100, img: '<div><img src="img/huawei.png"></div>' },
+            { sku: "PV-ACC-DT60-HUA", desc: "ACC METER DTSU666-HW/YDS60-80", volt: "N/A", price: 110.10, cat: "ACC", stock: 100, img: '<div><img src="img/huawei.png"></div>' },
+            { sku: "PV-ACC-CC3M-HUA", desc: "ACC CABLE ALIM 180A 2P 1TF 3M", volt: "N/A", price: 68.41, cat: "ACC", stock: 100, img: '<div><img src="img/huawei.png"></div>' },
+            { sku: "PV-ACC-OPT6-HUA", desc: "ACC OPTIMIZADOR 600W", volt: "N/A", price: 64.35, cat: "ACC", stock: 100, img: '<div><img src="img/huawei.png"></div>' }
+        ];
+
+        // Hoymiles: Microinversores y Accesorios
+        const productosHoymiles = [
+            { sku: "PV-IN-800ACC-HYM", desc: "HMS 800W 1F 110V C/ACC", volt: "110V monofásico", price: 192.01, cat: "INV", stock: 15, img: '<div><img src="img/hoymiles.png"></div>' },
+            { sku: "PV-IN-1KACC-HYM", desc: "HMS 1000W 1F 220V C/ACC", volt: "220V monofásico", price: 181.22, cat: "INV", stock: 15, img: '<div><img src="img/hoymiles.png"></div>' },
+            { sku: "PV-IN-1500HM-HYM", desc: "HM 1500W 1F 220V", volt: "220V monofásico", price: 169.17, cat: "INV", stock: 15, img: '<div><img src="img/hoymiles.png"></div>' },
+            { sku: "PV-IN-2KACC-HYM", desc: "HMS 2000W 1F 220V C/ACC", volt: "220V monofásico", price: 249.60, cat: "INV", stock: 15, img: '<div><img src="img/hoymiles.png"></div>' },
+            { sku: "PV-IN-2000-3P-HYM", desc: "HMT 2000W 3F 220V", volt: "220V trifásico", price: 370.42, cat: "INV", stock: 15, img: '<div><img src="img/hoymiles.png"></div>' },
+            { sku: "PV-IN-NECP-HYM", desc: "ACC ENDCAP P/CONECTOR HEMBRA", volt: "N/A", price: 3.39, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles.png"></div>' },
+            { sku: "PV-IN-ECCM-HYM", desc: "ACC ENDCAP P/CONECTOR MACHO", volt: "N/A", price: 3.39, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles.png"></div>' },
+            { sku: "PV-IN-ACCM-HYM", desc: "ACC CONECTOR MACHO AC", volt: "N/A", price: 10.24, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles.png"></div>' },
+            { sku: "PV-IN-ACC-HYM", desc: "ACC CONECTOR HEMBRA C.A.", volt: "N/A", price: 10.24, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles.png"></div>' },
+            { sku: "PV-IN-ECAP-HYM", desc: "ACC ENDCAP P/CABLE TRONCAL AC", volt: "N/A", price: 3.55, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles.png"></div>' },
+            { sku: "PV-IN-CTRAC-HYM", desc: "ACC CABLE TRONCAL AC 20T 10AWG", volt: "N/A", price: 22.54, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles.png"></div>' },
+            { sku: "PV-IN-CAPTO-HYM", desc: "ACC CAP P/PUERTO CABLE TRONCAL", volt: "N/A", price: 3.55, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles.png"></div>' },
+            { sku: "PV-DC-PTO-HYM", desc: "ACC HTA P/DESCONEXIÓN DE PUERTO", volt: "N/A", price: 3.55, cat: "ACC", stock: 100, img: '<div><img src="img/hoymile.png"></div>' },
+            { sku: "PV-DC-CONEC-HYM", desc: "ACC DESCONECTADOR DE CONECTOR", volt: "N/A", price: 3.55, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles.png"></div>' },
+            { sku: "PV-IN-WIFIPRO-HYM", desc: "ACC MONITOREO HMS DTU PRO S", volt: "N/A", price: 266.50, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles.png"></div>' },
+            { sku: "PV-IN-WFDTU-HYM", desc: "ACC MONITOREO HMS DTU LITE S", volt: "N/A", price: 123.50, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles.png"></div>' },
+            { sku: "PV-IN-MTDT-HYM", desc: "ACC MONITOREO MI GPRS", volt: "N/A", price: 194.99, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles.png"></div>' },
+            { sku: "PV-IN-DTU-HYM", desc: "ACC MONITOREO MI DTU W100", volt: "N/A", price: 102.70, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles.png"></div>' },
+            { sku: "PV-IN-ACDC-HYM", desc: "ACC HERRAMIENTA DESCONECTOR AC", volt: "N/A", price: 3.21, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles.png"></div>' },
+            { sku: "PV-IN-CCH-HYM", desc: "ACC CABLE CONECTOR HMS", volt: "N/A", price: 20.53, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles.png"></div>' },
+            { sku: "PV-IN-CCT-HYM", desc: "ACC CONECTOR P/CABLE TRONCAL HMS", volt: "N/A", price: 5.47, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles.png"></div>' },
+            { sku: "PV-IN-CON-HYM", desc: "ACC CONECTOR FINAL HMS", volt: "N/A", price: 4.10, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles_conn_final.png"></div>' },
+            { sku: "PV-IN-ECN-HYM", desc: "ACC EXTENSION DE CONECTOR HMS", volt: "N/A", price: 4.10, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles_ext_hms.png"></div>' },
+            { sku: "PV-IN-CTP-HYM", desc: "ACC TAPA FINAL HMS", volt: "N/A", price: 1.37, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles_tapa_hms.png"></div>' },
+            { sku: "PV-IN-LLD-HYM", desc: "ACC LLAVE DESCONEXIÓN HMS", volt: "N/A", price: 4.10, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles_llave_hms.png"></div>' },
+            { sku: "PV-IN-CC230-HYM", desc: "ACC HMT CABLE NA10-230", volt: "N/A", price: 29.06, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles_hmt_cable.png"></div>' },
+            { sku: "PV-IN-HER-3P-HYM", desc: "ACC HMT DESCONECTOR CABLE TRONCAL 3F", volt: "N/A", price: 5.82, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles_hmt_tool.png"></div>' },
+            { sku: "PV-IN-TCN-3P-HYM", desc: "ACC HMT CONECTOR CABLE TRONCAL 3F", volt: "N/A", price: 13.07, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles_hmt_conn.png"></div>' },
+            { sku: "PV-IN-EXT-3P-HYM", desc: "ACC HMT CONECTOR PARA EXTENSIÓN 3F", volt: "N/A", price: 5.82, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles_hmt_ext.png"></div>' },
+            { sku: "PV-ACC-DT60-HYM", desc: "ACC METER DTSU666 (CT-2 x 250A)", volt: "N/A", price: 208.00, cat: "ACC", stock: 100, img: '<div><img src="img/hoymiles_meter_dtsu.png"></div>' }
+        ];
+
+        // Growatt línea NEO y Accesorios
+        const productosGrowattNeo = [
+            { sku: "PV-IN-N2500-GRW", desc: "NEO-X2 2500W 1F 220V", volt: "220V monofásico", price: 271.70, cat: "INV", stock: 15, img: '<div><img src="img/growatt_neo_2500.png"></div>' },
+            { sku: "PV-ACC-CAP-GRW", desc: "ACC CAP CONECTOR AC", volt: "N/A", price: 2.99, cat: "ACC", stock: 100, img: '<div><img src="img/growatt_neo_cap.png"></div>' },
+            { sku: "PV-ACC-DESC-GRW", desc: "ACC DESCONECTOR MICRO-CONEC", volt: "N/A", price: 2.99, cat: "ACC", stock: 100, img: '<div><img src="img/growatt_neo_tool.png"></div>' },
+            { sku: "PV-ACC-SWL-GRW", desc: "ACC MONITOREO SHINE WIFI-X (NEO)", volt: "N/A", price: 42.90, cat: "ACC", stock: 100, img: '<div><img src="img/shine_wifi_x.png"></div>' }
+        ];
+
+        // Cableado, Conectores y Herramientas
+        const productosAccesoriosInstalacion = [
+            { sku: "PV-CB-04N-SLO", desc: "CABLE FV 4mm (12AWG) NEGRO 100 m", volt: "N/A", price: 75.40, cat: "ACC", stock: 500, img: '<div><img src="img/cable_fv_4n.png"></div>' },
+            { sku: "PV-CB-04R-SLO", desc: "CABLE FV 4mm (12AWG) ROJO 100 m", volt: "N/A", price: 75.40, cat: "ACC", stock: 500, img: '<div><img src="img/cable_fv_4r.png"></div>' },
+            { sku: "PV-CB-06N-SLO", desc: "CABLE FV 6mm (10AWG) NEGRO 100 m", volt: "N/A", price: 110.49, cat: "ACC", stock: 500, img: '<div><img src="img/cable_fv_6n.png"></div>' },
+            { sku: "PV-CB-06R-SLO", desc: "CABLE FV 6mm (10AWG) ROJO 100 m", volt: "N/A", price: 110.49, cat: "ACC", stock: 500, img: '<div><img src="img/cable_fv_6r.png"></div>' },
+            { sku: "PV-CB-06N1-SLO", desc: "CABLE FV 6mm (10AWG) NEGRO 1000 m", volt: "N/A", price: 1192.09, cat: "ACC", stock: 500, img: '<div><img src="img/cable_fv_6n_1000.png"></div>' },
+            { sku: "PV-CB-06R1-SLO", desc: "CABLE FV 6mm (10AWG) ROJO 1000 m", volt: "N/A", price: 1192.09, cat: "ACC", stock: 500, img: '<div><img src="img/cable_fv_6r_1000.png"></div>' },
+            { sku: "PV-CB-04N2-SLO", desc: "CABLE FV 4MM (12AWG) NEGRO 500M", volt: "N/A", price: 481.77, cat: "ACC", stock: 500, img: '<div><img src="img/cable_fv_4n_500.png"></div>' },
+            { sku: "PV-CB-04R2-SLO", desc: "CABLE FV 4MM (12AWG) ROJO 500M", volt: "N/A", price: 481.77, cat: "ACC", stock: 500, img: '<div><img src="img/cable_fv_4r_500.png"></div>' },
+            { sku: "PV-CB-06N2-SLO", desc: "CABLE FV 6MM (10AWG) NEGRO 500M", volt: "N/A", price: 642.36, cat: "ACC", stock: 500, img: '<div><img src="img/cable_fv_6n_500.png"></div>' },
+            { sku: "PV-CB-06R2-SLO", desc: "CABLE FV 6MM (10AWG) ROJO 500M", volt: "N/A", price: 642.36, cat: "ACC", stock: 500, img: '<div><img src="img/cable_fv_6r_500.png"></div>' },
+            { sku: "PV-CN-MC4M-MA", desc: "CONECTOR MC4 CAL. 4mm", volt: "N/A", price: 1.79, cat: "ACC", stock: 500, img: '<div><img src="img/mc4_4mm.png"></div>' },
+            { sku: "PV-CN-MC6M-MA", desc: "CONECTOR MC4 CAL. 6mm", volt: "N/A", price: 1.81, cat: "ACC", stock: 500, img: '<div><img src="img/mc4_6mm.png"></div>' },
+            { sku: "PV-CN-MCY-MA", desc: "CONECTOR TIPO Y PARA MC4 (PAR)", volt: "N/A", price: 3.89, cat: "ACC", stock: 500, img: '<div><img src="img/mc4_y_connector.png"></div>' },
+            { sku: "PV-IN-PZ-MC4", desc: "PINZAS PONCHADORAS Y HERRAMIENTA MC4", volt: "N/A", price: 102.70, cat: "TOOL", stock: 50, img: '<div><img src="img/crimping_tool_mc4.png"></div>' },
+            { sku: "PV-ACC-LR5-LNG", desc: "ACC LONGI CONECTOR DC LR5 PAR", volt: "N/A", price: 1.56, cat: "ACC", stock: 500, img: '<div><img src="img/longi_dc_connector.png"></div>' },
+            { sku: "PV-CB-6N1000-VIA", desc: "CABLE FV 6MM (10AWG) NEGRO 1000M VKN", volt: "N/A", price: 1774.12, cat: "ACC", stock: 500, img: '<div><img src="img/cable_vkn_6n.png"></div>' },
+            { sku: "PV-CB-6R1000-VIA", desc: "CABLE FV 6MM (10AWG) ROJO 1000M VKN", volt: "N/A", price: 1774.12, cat: "ACC", stock: 500, img: '<div><img src="img/cable_vkn_6r.png"></div>' }
+        ];
+
+        // Protecciones CD ZJBENY y Gabinetes
+        const productosProteccionesCD = [
+            { sku: "PV-IT-13ACD-BN", desc: "INTERRUPTOR 13A, 600VCD 2P, ZJBENY", volt: "600VCD", price: 12.19, cat: "PROT", stock: 100, img: '<div><img src="img/zjbeny_breaker.png"></div>' },
+            { sku: "PV-IT-16ACD-BN", desc: "INTERRUPTOR 16A, 600VCD 2P, ZJBENY", volt: "600VCD", price: 13.18, cat: "PROT", stock: 100, img: '<div><img src="img/zjbeny_breaker.png"></div>' },
+            { sku: "PV-IT-25A10-BN", desc: "INTERRUPTOR 25A, 1000VCD 2P, ZJBENY", volt: "1000VCD", price: 12.74, cat: "PROT", stock: 100, img: '<div><img src="img/zjbeny_breaker_1000.png"></div>' },
+            { sku: "PV-IT-25ACD-BN", desc: "INTERRUPTOR 25A, 600VCD 2P, ZJBENY", volt: "600VCD", price: 12.74, cat: "PROT", stock: 100, img: '<div><img src="img/zjbeny_breaker.png"></div>' },
+            { sku: "PV-IT-32ACD-BN", desc: "INTERRUPTOR 32A, 600VCD 2P, ZJBENY", volt: "600VCD", price: 13.18, cat: "PROT", stock: 100, img: '<div><img src="img/zjbeny_breaker.png"></div>' },
+            { sku: "PV-IT-40A600-BN", desc: "INTERRUPTOR 40A, 600VCD 2P, ZJBENY", volt: "600VCD", price: 21.70, cat: "PROT", stock: 100, img: '<div><img src="img/zjbeny_breaker.png"></div>' },
+            { sku: "PV-DC-4P32A-BN", desc: "DESCONECTOR 2/4 POLOS, 32A 1000V, ZJBENY", volt: "1000VCD", price: 33.97, cat: "PROT", stock: 100, img: '<div><img src="img/zjbeny_isolator.png"></div>' },
+            { sku: "PV-DC-4P40A-BN", desc: "DESCONECTOR 2/4 POLOS, 40A 1000V, ZJBENY", volt: "1000VCD", price: 38.48, cat: "PROT", stock: 100, img: '<div><img src="img/zjbeny_isolator.png"></div>' },
+            { sku: "PV-DC-4P50A-BN", desc: "DESCONECTOR 2/4 POLOS, 50A 1000V, ZJBENY", volt: "1000VCD", price: 42.46, cat: "PROT", stock: 100, img: '<div><img src="img/zjbeny_isolator.png"></div>' },
+            { sku: "PV-SP-2040A-BN", desc: "SUPRESOR PICOS, 2P 600VCD 20/40KA ZJBENY", volt: "600VCD", price: 28.60, cat: "PROT", stock: 100, img: '<div><img src="img/zjbeny_spd.png"></div>' },
+            { sku: "PV-SP-S3P-BN", desc: "SUPRESOR PICOS 3P 1000VCD 20/40KA ZJBENY", volt: "1000VCD", price: 36.87, cat: "PROT", stock: 100, img: '<div><img src="img/zjbeny_spd_1000.png"></div>' },
+            { sku: "PV-PF-12A-BN", desc: "PORTAFUSIBLE C/F, 12A 1000VCD, ZJBENY", volt: "1000VCD", price: 5.59, cat: "PROT", stock: 100, img: '<div><img src="img/zjbeny_fuseholder.png"></div>' },
+            { sku: "PV-PF-15A-BN", desc: "PORTAFUSIBLE C/F, 15A 1000VCD, ZJBENY", volt: "1000VCD", price: 5.59, cat: "PROT", stock: 100, img: '<div><img src="img/zjbeny_fuseholder.png"></div>' },
+            { sku: "PV-PF-20A-BN", desc: "PORTAFUSIBLE C/F, 20A 1000VCD, ZJBENY", volt: "1000VCD", price: 5.59, cat: "PROT", stock: 100, img: '<div><img src="img/zjbeny_fuseholder.png"></div>' },
+            { sku: "PV-PF-30A-BN", desc: "PORTAFUSIBLE C/F, 30A 1000VCD, ZJBENY", volt: "1000VCD", price: 5.59, cat: "PROT", stock: 100, img: '<div><img src="img/zjbeny_fuseholder.png"></div>' },
+            { sku: "PV-FB-12A-BN", desc: "FUSIBLE 12A 1000VCD, ZJBENY", volt: "1000VCD", price: 3.03, cat: "PROT", stock: 100, img: '<div><img src="img/zjbeny_fuse.png"></div>' },
+            { sku: "PV-FB-15A-BN", desc: "FUSIBLE 15A 1000VCD, ZJBENY", volt: "1000VCD", price: 3.37, cat: "PROT", stock: 100, img: '<div><img src="img/zjbeny_fuse.png"></div>' },
+            { sku: "PV-FB-20A-BN", desc: "FUSIBLE 20A 1000VCD, ZJBENY", volt: "1000VCD", price: 3.37, cat: "PROT", stock: 100, img: '<div><img src="img/zjbeny_fuse.png"></div>' },
+            { sku: "PV-FB-30A-BN", desc: "FUSIBLE 30A 1000VCD, ZJBENY", volt: "1000VCD", price: 3.37, cat: "PROT", stock: 100, img: '<div><img src="img/zjbeny_fuse.png"></div>' },
+            { sku: "PV-CB-1/1-BN", desc: "STRING BOX, 1 IN - 1 OUT, ZJBENY", volt: "CD", price: 148.68, cat: "ACC", stock: 20, img: '<div><img src="img/zjbeny_string_box.png"></div>' },
+            { sku: "PV-CB-2/2-BN", desc: "STRING BOX, 2 IN - 2 OUT, ZJBENY", volt: "CD", price: 245.78, cat: "ACC", stock: 20, img: '<div><img src="img/zjbeny_string_box_double.png"></div>' },
+            { sku: "PV-CB-02-BN", desc: "COMBINER BOX, 2 IN - 1 OUT, ZJBENY", volt: "CD", price: 161.33, cat: "ACC", stock: 20, img: '<div><img src="img/zjbeny_combiner_box.png"></div>' },
+            { sku: "PV-CB-04-BN", desc: "COMBINER BOX, 4 IN - 1 OUT, ZJBENY", volt: "CD", price: 212.28, cat: "ACC", stock: 20, img: '<div><img src="img/zjbeny_combiner_box_4.png"></div>' },
+            { sku: "PV-CB-61-BN", desc: "COMBINER BOX, 6 IN - 1 OUT, ZJBENY", volt: "CD", price: 393.11, cat: "ACC", stock: 20, img: '<div><img src="img/zjbeny_combiner_box_6.png"></div>' },
+            { sku: "PV-GT-4M-ABB", desc: "GABINETE PLÁSTICO 4 VENTANAS", volt: "N/A", price: 19.86, cat: "ACC", stock: 20, img: '<div><img src="img/abb_enclosure_4.png"></div>' },
+            { sku: "PV-GT-8M-ABB", desc: "GABINETE PLÁSTICO 8 VENTANAS", volt: "N/A", price: 21.10, cat: "ACC", stock: 20, img: '<div><img src="img/abb_enclosure_8.png"></div>' }
+        ];
+
+        // Estructuras y Soportes
+        const productosEstructuras = [
+            // Estructuras 0° para módulos de 620W (Marco 30mm)
+            { sku: "PV-ESK-K02N-GS", desc: "KIT ESTRUCTURA 0° 2 MODULOS 30mm", volt: "N/A", price: 53.65, cat: "EST", stock: 10, img: '<div><img src="img/est_0_fixed.png"></div>' },
+            { sku: "PV-ESK-K03N-GS", desc: "KIT ESTRUCTURA 0° 3 MODULOS 30mm", volt: "N/A", price: 83.51, cat: "EST", stock: 10, img: '<div><img src="img/est_0_fixed.png"></div>' },
+            { sku: "PV-ESK-K04N-GS", desc: "KIT ESTRUCTURA 0° 4 MODULOS 30mm", volt: "N/A", price: 90.87, cat: "EST", stock: 10, img: '<div><img src="img/est_0_fixed.png"></div>' },
+            { sku: "PV-ESK-K06N-GS", desc: "KIT ESTRUCTURA 0° 6 MODULOS 30mm", volt: "N/A", price: 142.87, cat: "EST", stock: 10, img: '<div><img src="img/est_0_fixed.png"></div>' },
+            { sku: "PV-ESK-K08N-GS", desc: "KIT ESTRUCTURA 0° 8 MODULOS 30mm", volt: "N/A", price: 181.87, cat: "EST", stock: 10, img: '<div><img src="img/est_0_fixed.png"></div>' },
+            { sku: "PV-ESK-K010N-GS", desc: "KIT ESTRUCTURA 0° 10 MODULOS 30mm", volt: "N/A", price: 233.87, cat: "EST", stock: 10, img: '<div><img src="img/est_0_fixed.png"></div>' },
+            
+            // Estructuras Ajustables para módulos de 620W (Marco 30mm)
+            { sku: "PV-ESK-KA2N-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 2 MODULOS 30mm", volt: "N/A", price: 81.97, cat: "EST", stock: 10, img: '<div><img src="img/est_ajustable.png"></div>' },
+            { sku: "PV-ESK-KA3N-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 3 MODULOS 30mm", volt: "N/A", price: 117.33, cat: "EST", stock: 10, img: '<div><img src="img/est_ajustable.png"></div>' },
+            { sku: "PV-ESK-KA4N-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 4 MODULOS 30mm", volt: "N/A", price: 158.46, cat: "EST", stock: 10, img: '<div><img src="img/est_ajustable.png"></div>' },
+            { sku: "PV-ESK-KA6N-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 6 MODULOS 30mm", volt: "N/A", price: 239.15, cat: "EST", stock: 10, img: '<div><img src="img/est_ajustable.png"></div>' },
+            { sku: "PV-ESK-KA8N-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 8 MODULOS 30mm", volt: "N/A", price: 315.64, cat: "EST", stock: 10, img: '<div><img src="img/est_ajustable.png"></div>' },
+            { sku: "PV-ESK-KA10N-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 10 MODULOS 30mm", volt: "N/A", price: 396.33, cat: "EST", stock: 10, img: '<div><img src="img/est_ajustable.png"></div>' },
+
+            // Estructuras Dobles para módulos de 620W (Marco 30mm)
+            { sku: "PV-ESK-D4KN-GS", desc: "KIT ESTRUCTURAL DOBLE 4 MODULOS 30mm", volt: "N/A", price: 305.55, cat: "EST", stock: 10, img: '<div><img src="img/est_doble.png"></div>' },
+            { sku: "PV-ESK-D6KN-GS", desc: "KIT ESTRUCTURAL DOBLE 6 MODULOS 30mm", volt: "N/A", price: 442.49, cat: "EST", stock: 10, img: '<div><img src="img/est_doble.png"></div>' },
+            { sku: "PV-ESK-D8KN-GS", desc: "KIT ESTRUCTURAL DOBLE 8 MODULOS 30mm", volt: "N/A", price: 601.34, cat: "EST", stock: 10, img: '<div><img src="img/est_doble.png"></div>' },
+            { sku: "PV-ESK-D12KN-GS", desc: "KIT ESTRUCTURAL DOBLE 12 MODULOS 30mm", volt: "N/A", price: 895.15, cat: "EST", stock: 10, img: '<div><img src="img/est_doble.png"></div>' },
+            { sku: "PV-ESK-D16KN-GS", desc: "KIT ESTRUCTURAL DOBLE 16 MODULOS 30mm", volt: "N/A", price: 1180.57, cat: "EST", stock: 10, img: '<div><img src="img/est_doble.png"></div>' },
+            { sku: "PV-ESK-D20KN-GS", desc: "KIT ESTRUCTURAL DOBLE 20 MODULOS 30mm", volt: "N/A", price: 1474.38, cat: "EST", stock: 10, img: '<div><img src="img/est_doble.png"></div>' },
+
+            // Estructuras 0° para módulos de 715W (Marco 33mm)
+            { sku: "PV-ESK-3302U-GS", desc: "KIT ESTRUCTURA 0° 2 MODULOS 33mm", volt: "N/A", price: 56.94, cat: "EST", stock: 10, img: '<div><img src="img/est_0_fixed_33.png"></div>' },
+            { sku: "PV-ESK-3303U-GS", desc: "KIT ESTRUCTURA 0° 3 MODULOS 33mm", volt: "N/A", price: 87.62, cat: "EST", stock: 10, img: '<div><img src="img/est_0_fixed_33.png"></div>' },
+            { sku: "PV-ESK-3304U-GS", desc: "KIT ESTRUCTURA 0° 4 MODULOS 33mm", volt: "N/A", price: 97.11, cat: "EST", stock: 10, img: '<div><img src="img/est_0_fixed_33.png"></div>' },
+            { sku: "PV-ESK-3306U-GS", desc: "KIT ESTRUCTURA 0° 6 MODULOS 33mm", volt: "N/A", price: 146.02, cat: "EST", stock: 10, img: '<div><img src="img/est_0_fixed_33.png"></div>' },
+            { sku: "PV-ESK-3308U-GS", desc: "KIT ESTRUCTURA 0° 8 MODULOS 33mm", volt: "N/A", price: 189.20, cat: "EST", stock: 10, img: '<div><img src="img/est_0_fixed_33.png"></div>' },
+            { sku: "PV-ESK-33010U-GS", desc: "KIT ESTRUCTURA 0° 10 MODULOS 33mm", volt: "N/A", price: 240.44, cat: "EST", stock: 10, img: '<div><img src="img/est_0_fixed_33.png"></div>' },
+
+            // Estructuras Ajustables para módulos de 715W (Marco 33mm)
+            { sku: "PV-ESK-33A2U-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 2 MODULOS 33mm", volt: "N/A", price: 87.75, cat: "EST", stock: 10, img: '<div><img src="img/est_ajustable_33.png"></div>' },
+            { sku: "PV-ESK-33A3U-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 3 MODULOS 33mm", volt: "N/A", price: 126.75, cat: "EST", stock: 10, img: '<div><img src="img/est_ajustable_33.png"></div>' }
+// --- NUEVAS CATEGORÍAS INTEGRADAS ---
+
+// 1. Estructuras GS (Kits y Componentes)
+const productosEstructuraGS = [
+    { sku: "PV-ESK-33A4U-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 4 MODULOS 33mm", volt: "N/A", price: 167.18, cat: "EST", stock: 10, img: '<div><img src="img/est_ajustable_33.png"></div>' },
+    { sku: "PV-ESK-33A6U-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 6 MODULOS 33mm", volt: "N/A", price: 249.60, cat: "EST", stock: 10, img: '<div><img src="img/est_ajustable_33.png"></div>' },
+    { sku: "PV-ESK-33A8U-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 8 MODULOS 33mm", volt: "N/A", price: 333.32, cat: "EST", stock: 10, img: '<div><img src="img/est_ajustable_33.png"></div>' },
+    { sku: "PV-ESK-33A10U-GS", desc: "KIT ESTRUCTURAL AJUSTABLE 10 MODULOS 33mm", volt: "N/A", price: 411.84, cat: "EST", stock: 10, img: '<div><img src="img/est_ajustable_33.png"></div>' },
+    { sku: "PV-ESK-33D4U-GS", desc: "KIT ESTRUCTURAL DOBLE 4 MODULOS 33mm", volt: "N/A", price: 310.05, cat: "EST", stock: 10, img: '<div><img src="img/est_doble_33.png"></div>' },
+    { sku: "PV-ESK-33D6U-GS", desc: "KIT ESTRUCTURAL DOBLE 6 MODULOS 33mm", volt: "N/A", price: 444.67, cat: "EST", stock: 10, img: '<div><img src="img/est_doble_33.png"></div>' },
+    { sku: "PV-ESK-33D8U-GS", desc: "KIT ESTRUCTURAL DOBLE 8 MODULOS 33mm", volt: "N/A", price: 609.31, cat: "EST", stock: 10, img: '<div><img src="img/est_doble_33.png"></div>' },
+    { sku: "PV-ESK-33D12U-GS", desc: "KIT ESTRUCTURAL DOBLE 12 MODULOS 33mm", volt: "N/A", price: 899.86, cat: "EST", stock: 10, img: '<div><img src="img/est_doble_33.png"></div>' },
+    { sku: "PV-ESK-33D16U-GS", desc: "KIT ESTRUCTURAL DOBLE 16 MODULOS 33mm", volt: "N/A", price: 1189.11, cat: "EST", stock: 10, img: '<div><img src="img/est_doble_33.png"></div>' },
+    { sku: "PV-ESK-33D20U-GS", desc: "KIT ESTRUCTURAL DOBLE 20 MODULOS 33mm", volt: "N/A", price: 1483.56, cat: "EST", stock: 10, img: '<div><img src="img/est_doble_33.png"></div>' },
+    
+    // Componentes Individuales GS
+    { sku: "PV-EST-CLI-GS", desc: "EST GS CLIP DE ALUMINIO PORTA CABLE", volt: "N/A", price: 0.18, cat: "EST", stock: 1000, img: '<div><img src="img/gs_cable_clip.png"></div>' },
+    { sku: "PV-EST-CLT-GS", desc: "EST GS CLIP PARA TIERRA", volt: "N/A", price: 0.22, cat: "EST", stock: 1000, img: '<div><img src="img/gs_ground_clip.png"></div>' },
+    { sku: "PV-EST-CTR-GS", desc: "EST GS CONECTOR DE RIEL", volt: "N/A", price: 1.76, cat: "EST", stock: 100, img: '<div><img src="img/gs_rail_conn.png"></div>' },
+    { sku: "PV-EST-JUM-GS", desc: "EST GS JUMPER PARA TIERRA RIELES", volt: "N/A", price: 1.95, cat: "EST", stock: 100, img: '<div><img src="img/gs_ground_jumper.png"></div>' },
+    { sku: "PV-EST-OPC35-GS", desc: "EST GS OPRESOR CENTRAL 35 mm", volt: "N/A", price: 1.94, cat: "EST", stock: 1000, img: '<div><img src="img/gs_mid_clamp.png"></div>' },
+    { sku: "PV-EST-RL468-GS", desc: "EST GS RIEL ALUMINIO ANODIZADO 4.68 MTS", volt: "N/A", price: 20.63, cat: "EST", stock: 100, img: '<div><img src="img/gs_riel.png"></div>' },
+    { sku: "PV-EST-SPD-GS", desc: "EST GS SOPORTE DELANTERO AJUS 10° A 20°", volt: "N/A", price: 4.28, cat: "EST", stock: 100, img: '<div><img src="img/gs_front_leg.png"></div>' },
+    { sku: "PV-EST-SPT-GS", desc: "EST GS SOPORTE TRASERO AJUS 10° A 20°", volt: "N/A", price: 9.23, cat: "EST", stock: 100, img: '<div><img src="img/gs_rear_leg.png"></div>' }
+];
+
+// 2. Estructuras S-5!
+const productosS5 = [
+    { sku: "PV-EST-PTB-S5", desc: "EST S5 SOPORTE L P/LÁMINA TRAPE", volt: "N/A", price: 10.22, cat: "EST", stock: 300, img: '<div><img src="img/s5_l_foot.png"></div>' },
+    { sku: "PV-EST-GREK-S5", desc: "EST S5 KIT 2.0 GRAB CLAMP FINAL", volt: "N/A", price: 6.24, cat: "EST", stock: 300, img: '<div><img src="img/s5_grab_end.png"></div>' },
+    { sku: "PV-EST-CLH-S5", desc: "EST S5 CLAMP H MINI P/LÁMINA ENGAR", volt: "N/A", price: 7.74, cat: "EST", stock: 300, img: '<div><img src="img/s5_h_mini.png"></div>' },
+    { sku: "PV-EST-VB47-S5", desc: "EST S5 SOPORTE VERSA 47mm P/LÁMINA TRAPE", volt: "N/A", price: 2.67, cat: "EST", stock: 300, img: '<div><img src="img/s5_versa.png"></div>' },
+    { sku: "PV-EST-PTB2-S5", desc: "EST S5 PROTEA II P/LÁMINA TRAPE", volt: "N/A", price: 8.19, cat: "EST", stock: 300, img: '<div><img src="img/s5_protea_ii.png"></div>' }
+];
+
+// 3. Estructuras Unirac
+const productosUnirac = [
+    { sku: "PV-EST-GF105-UNR", desc: "EST UNR GFT POSTE 10.5\"", volt: "N/A", price: 218.67, cat: "EST", stock: 50, img: '<div><img src="img/unirac_post.png"></div>' },
+    { sku: "PV-EST-GF168-UNR", desc: "EST UNR GFT RIEL 168\"", volt: "N/A", price: 82.78, cat: "EST", stock: 50, img: '<div><img src="img/unirac_rail.png"></div>' },
+    { sku: "PV-EST-FSL-UNR", desc: "EST UNR L-FOOT FLASHLOC NEGRO", volt: "N/A", price: 17.20, cat: "EST", stock: 500, img: '<div><img src="img/unirac_flashloc.png"></div>' },
+    { sku: "PV-EST-TRA-UNR", desc: "EST UNR METALX PM TRAPEZOIDAL AJUS", volt: "N/A", price: 20.03, cat: "EST", stock: 500, img: '<div><img src="img/unirac_tra_mount.png"></div>' }
+];
+
+// 4. Inversores Off-Grid, Victron y EV
+const productosEnergia = [
+    { sku: "PV-INA-6000MPV-GW", desc: "SPF DVM MPV 6K 48VDC/220VAC", volt: "220VAC", price: 1103.70, cat: "INV", stock: 10, img: '<div><img src="img/growatt_spf_6k.png"></div>' },
+    { sku: "PV-AUTO-THOR-GW", desc: "CARGADOR AUTO GROWATT THOR 12AS-P", volt: "220VAC", price: 834.60, cat: "EV", stock: 5, img: '<div><img src="img/growatt_thor.png"></div>' },
+    { sku: "PV-INH-MP3KUL-VT", desc: "MULTIPLUS II 3K UL 48VDC/120VAC", volt: "120VAC", price: 577.20, cat: "INV", stock: 10, img: '<div><img src="img/victron_multiplus_3k.png"></div>' },
+    { sku: "PV-INA-CGXMK2-VT", desc: "ACC VICTRON CERBO MK2 GX", volt: "N/A", price: 275.59, cat: "ACC", stock: 15, img: '<div><img src="img/victron_cerbo_gx.png"></div>' }
+];
+
+// 5. Baterías y Almacenamiento
+const productosBaterias = [
+    { sku: "PV-BT-LV5K-BYD", desc: "BAT BYD LITIO 5KWH LV FLEX LITE", volt: "48V", price: 1529.57, cat: "BAT", stock: 8, img: '<div><img src="img/byd_lv_flex.png"></div>' },
+    { sku: "PV-BAT-7K-HUA", desc: "BAT HUAWEI 7K HV LI-ION", volt: "HV", price: 3248.70, cat: "BAT", stock: 5, img: '<div><img src="img/huawei_luna_7k.png"></div>' },
+    { sku: "PV-ACC-BAT-AXE5-GRW", desc: "BATERÍA GROWATT AXE 5.0L (COBALTO FREE)", volt: "48V", price: 1298.70, cat: "BAT", stock: 8, img: '<div><img src="img/growatt_axe.png"></div>' },
+    { sku: "PV-BT-180-PM", desc: "BATERIA DEKA 180AH 12V", volt: "12V", price: 321.44, cat: "BAT", stock: 20, img: '<div><img src="img/deka_180.png"></div>' }
+];
+
+// --- INTEGRACIÓN FINAL AL SCRIPT ---
+
+// Concatenamos todos los arreglos en la base de datos principal de la página
+const catalogoCompleto = [
+    ...productosEstructuraGS,
+    ...productosS5,
+    ...productosUnirac,
+    ...productosEnergia,
+    ...productosBaterias
+    ...productosHuawei,
+    ...productosHoymiles,
+    ...productosGrowattNeo,
+    ...productosAccesoriosInstalacion,
+    ...productosProteccionesCD,
+    ...productosEstructuras
+];
+
+
     ];
 
     // 3. RENDERIZADO DINÁMICO
